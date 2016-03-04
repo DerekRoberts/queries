@@ -1,29 +1,32 @@
 /**
  * Query Title: Retro-PDC-001
- * Query Type:  Pyramid
+ * Query Type:  Pyramid/count
  * Description: Population Pyramid
  */
 function map( patient )
 {
-  // Store physician ID, via JSON key
-  var pid = patient.json.primary_care_provider_id;
+  // Physician ID, value type and time interval
+  var pid      = patient.json.primary_care_provider_id;
+  var type     = 'count';
+  var interval = 'TenYearRanges';
 
-  // Store gender (can't change) and index
-  var gdr = getGender( patient );
+  // Indexes
   var index_gdrs;
-  //
-  if( gdr.toString().toUpperCase() === "FEMALE" )
+  var index_ages;
+
+  // Store gender (can't change)
+  var gdr = getGender( patient );
+  if( gdr.toString().toUpperCase() === 'FEMALE' )
     index_gdrs = 0;
-  else if( gdr.toString().toUpperCase() === "MALE" )
+  else if( gdr.toString().toUpperCase() === 'MALE' )
     index_gdrs = 1;
   else
-    index_gdrs = 3;
+    index_gdrs = 2;
 
   // Constants
-  var all_gdrs =[ "Female", "Male", "Unspecified" ];
+  var all_gdrs =[ 'Female', 'Male', 'Unspecified' ];
   var all_ages =[ 'ZeroToNine', 'TenToNineteen', 'TwentyToTwentyNine', 'ThirtyToThirtyNine', 'FortyToFortyNine',
                   'FiftyToFiftyNine', 'SixtyToSixtyNine', 'SeventyToSeventyNine', 'SeventyToSeventyNine', 'NinetyToOneHundredAndOlder' ];
-  var interval = "TenYearRanges";
 
   // Start, end (now) and counter dates
   var start = new Date(2016, 2, 1);//Remember months are zero indexed
@@ -35,21 +38,18 @@ function map( patient )
   {
     // Array to emit from (by age range, then FEMALE/MALE/OTHER/UNDEF)
     var mask = [
-      [ 0, 0, 0, 0 ],
-      [ 0, 0, 0, 0 ],
-      [ 0, 0, 0, 0 ],
-      [ 0, 0, 0, 0 ],
-      [ 0, 0, 0, 0 ],
-      [ 0, 0, 0, 0 ],
-      [ 0, 0, 0, 0 ],
-      [ 0, 0, 0, 0 ],
-      [ 0, 0, 0, 0 ],
-      [ 0, 0, 0, 0 ],
-      [ 0, 0, 0, 0 ]
+      [ 0, 0, 0 ],
+      [ 0, 0, 0 ],
+      [ 0, 0, 0 ],
+      [ 0, 0, 0 ],
+      [ 0, 0, 0 ],
+      [ 0, 0, 0 ],
+      [ 0, 0, 0 ],
+      [ 0, 0, 0 ],
+      [ 0, 0, 0 ],
+      [ 0, 0, 0 ],
+      [ 0, 0, 0 ]
     ];
-
-    // Mask rows assigned by ageRange and columns by index_gdrs
-    var index_ages;
 
     // Store age and date at time i
     var i_age  = patient.age( i );
@@ -68,7 +68,7 @@ function map( patient )
       if( index_ages > 9 )
         index_ages = 9;
 
-      // Store in max
+      // Store in mask
       mask[ index_ages ][ index_gdrs ] = 1;
     }
 
@@ -78,14 +78,13 @@ function map( patient )
       for( var g = 0; g < all_gdrs.length; g++ )
       {
         emit(
-          '{ "'+ pid +'" : '+
-            '{ "' + all_gdrs[ g ] + '" : '+
-              '{ "' + interval + '" : ' +
-                '{ '+
-                  '"' + all_ages[ a ] + '" : 1 ' +
-                '}'+
-              '}'+
-            '}'+
+          '{ '+
+            '"doctor" : "' + pid           + '", ' +
+            '"date" : "'   + i_date        + '", ' +
+            '"type" : "'   + type          + '", ' +
+            '"gender" : "' + all_gdrs[ g ] + '", ' +
+            '"range" : "'  + interval      + '", ' +
+            '"age_r" : "'  + all_ages[ a ] + '" ' +
           '}',
           mask[ a ][ g ]
         );
