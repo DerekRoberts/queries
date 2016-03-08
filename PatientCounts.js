@@ -84,7 +84,8 @@ function map( patient )
             '"type" : "'   + type          + '", ' +
             '"gender" : "' + all_gdrs[ g ] + '", ' +
             '"range" : "'  + interval      + '", ' +
-            '"age_r" : "'  + all_ages[ a ] + '" ' +
+            '"age_r" : "'  + all_ages[ a ] + '", ' +
+            '"amcare_xml_path" : "ScoreCard.PatientCounts.'  + all_gdrs[ g ] + "." + interval + "." + age_r + '" ' +
           '}',
           mask[ a ][ g ]
         );
