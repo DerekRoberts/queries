@@ -5,18 +5,30 @@
  */
 function map(patient) {
   // Physician ID, value type and time interval
-  var pid  = patient.json.primary_care_provider_id;
-  var type = 'count';
-  var now  = new Date();
-  var date = new Date( now.getFullYear(), now.getMonth(), 1).getTime();
- 
+  var pid      = patient.json.primary_care_provider_id;
+  var title    = 'Test-001';
+  var category = 'ReportingCategories';
+  var now      = new Date();
+  var date     = new Date( now.getFullYear(), now.getMonth(), 1).getTime();
+
   emit(
     '{ '+
-      '"doctor" : "' + pid           + '", ' +
-      '"date" : "'   + date        + '", ' +
-      '"type" : "'   + type          + '" ' +
+      '"doctor" : "'   + pid      + '", ' +
+      '"title" : "'    + title    + '", ' +
+      '"date" : "'     + date     + '", ' +
+      '"category" : "' + category + '", ' +
+      '"result" : "denominator" ' +
+    '}',
+    2
+  );
+  emit(
+    '{ '+
+      '"doctor" : "'   + pid       + '", ' +
+      '"title" : "'    + title     + '", ' +
+      '"date" : "'     + date      + '", ' +
+      '"category" : "' + category  + '", ' +
+      '"result" : "numerator" '    +
     '}',
     1
   );
 }
-
