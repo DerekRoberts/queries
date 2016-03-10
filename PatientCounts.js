@@ -9,7 +9,6 @@ function map( patient )
   var pid        = patient.json.primary_care_provider_id;
   var title      = 'PatientCounts';
   var category   = 'TenYearRanges';
-  var open_ended = 'false';
 
   // Indexes
   var index_gdrs;
@@ -84,7 +83,6 @@ function map( patient )
             '"title" : "'      + title        + '", ' +
             '"date" : "'       + i_date       + '", ' +
             '"category" : "'   + category     + '", ' +
-            '"open_ended" : "' + open_ended   + '", ' +
             '"age_min" : "'    + age_min[ a ] + '", ' +
             '"age_max" : "'    + age_max[ a ] + '", ' +
             '"gender" : "'     + genders[ g ] + '"' +
