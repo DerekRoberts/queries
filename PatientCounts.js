@@ -25,8 +25,8 @@ function map( patient )
 
   // Constants
   var genders =[ 'Female', 'Male', 'Unspecified' ];
-  var age_min =[ '0', '10', '20', '30', '40', '50', '60', '70', '80', '90' ];
-  var age_max =[ '9', '19', '29', '39', '49', '59', '69', '79', '89', '120' ];
+  var age_min =[ '0', '10', '20', '30', '40', '50', '60', '70', '80',  '90', 'Unspecified' ];
+  var age_max =[ '9', '19', '29', '39', '49', '59', '69', '79', '89', '120', 'Unspecified' ];
 
   // Start, end (now) and counter dates
   var start = new Date( 2016, 2, 1 );//Remember months are zero indexed
@@ -48,16 +48,17 @@ function map( patient )
       [ 0, 0, 0 ],
       [ 0, 0, 0 ],
       [ 0, 0, 0 ],
+      [ 0, 0, 0 ],
       [ 0, 0, 0 ]
     ];
 
     // Store age and date at time i
-    var i_age  = patient.age( i );
-    var i_date = i.getTime();
+    var i_active = activePatient( patient, i );
+    var i_age    = patient.age( i );
+    var i_date   = i.getTime();
 
     // Add to mask if values check out
     if(
-      activePatient( patient, i )&&
       typeof i_age === 'number' &&
       i_age >= 0
     ){
@@ -69,7 +70,10 @@ function map( patient )
         index_ages = 9;
 
       // Store in mask
-      mask[ index_ages ][ index_gdrs ] = 1;
+      mask[ index_ages ][ index_gdrs ] = i_active;
+    }
+    else {
+      mask[ 10 ][ index_gdrs ] = i_active;
     }
 
     // Output mask, arranged by g=gender and a=age
