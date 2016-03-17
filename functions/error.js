@@ -9,6 +9,8 @@ function error( message ) {
 	emit(
 		"Error: "+
 		message,
-		-1000000000
+		-1
 	);
+
+	return false;
 }
