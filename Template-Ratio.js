@@ -1,16 +1,16 @@
 /**
- * Query Title: HDC-1921_HMG-CoA65+
+ * Query Title: HDC-...
  * Query Type:  Ratio
- * Initiative:  Polypharmacy
- * Description: This metric shows the percentage of active patients, 65 and
- *              over, on an active medication for an HMG-CoA reductase
- *              inhibitors (statins)
+ * Initiative:  ...
+ * Description: ...
+ *              ...
+ *              ...
  */
 function map( patient ){
 
   // Emit variables
   var pid       = patient.json.primary_care_provider_id,
-    title       = 'HDC-1921',
+    title       = 'HDC-...',
     category    = 'ReportingCategories'
     date        = 'Value not provided',
     denominator = 'Value not provided',
@@ -22,8 +22,8 @@ function map( patient ){
   for( ; i < end; i.setMonth( i.getMonth() + 1 ))
   {
     // Active patient? Age 65+?  Active statin?
-    denominator = activePatient( patient, i ) && ages.isMin( patient, i, 65 );
-    numerator   = denominator && medications.hasActiveStatin( patient, i );
+    denominator = activePatient( patient, i ) && ...;
+    numerator   = denominator && ...;
 
     // Emits
     date = i.getTime();

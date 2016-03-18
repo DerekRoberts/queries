@@ -5,7 +5,7 @@
 */
 
 // Defaults object
-var   defaults = defaults ||{};
+var   defaults = defaults       ||{};
 defaults.ages  = defaults.ages  ||{};
 defaults.dates = defaults.dates ||{};
 
@@ -14,7 +14,6 @@ defaults.dates.start = function(){
 	// Remember months are zero indexed
 	return new Date( 2016, 2, 1 );
 }
-
 defaults.dates.end = function(){
 	return new Date();
 }
@@ -23,7 +22,6 @@ defaults.dates.end = function(){
 defaults.ages.min = function(){
 	return 0;
 }
-
 defaults.ages.max = function(){
 	return 120;
 }
