@@ -1,5 +1,10 @@
 /**
  * Query Title: HDC-1921_HMG-CoA65+
+ * Query Type:  Ratio
+ * Initiative:  Polypharmacy
+ * Description: This metric shows the percentage of active patients, 65 and
+ *              over, on an active medication for an HMG-CoA reductase
+ *              inhibitors (statins)
  */
 function map( patient ){
 
@@ -8,37 +13,47 @@ function map( patient ){
   var title    = 'HDC-1921';
   var category = 'ReportingCategories';
   var type     = 'ratio';
-  var now      = new Date();
-  var date     = new Date( now.getFullYear(), now.getMonth(), 1).getTime();
 
-  // Active patient? Age 65+?  Active statin?
-  var active   = activePatient( patient );
-  var is_age   = isAge( patient, 65 );
-  var statin   = hasActiveStatin( patient );
+  // Denominator, numerator and other for loop variables
+  var i_age       = "Value not provided";
+  var i_date      = "Value not provided";
+  var denominator = "Value not provided";
+  var numerator   = "Value not provided";
 
-  // Assemble query
-  var denominator = active && is_age;
-  var numerator   = denominator && statin;
+  // Start, end (now) and counter dates for monthly results
+  var start = new Date( 2016, 2, 1 );//Remember months are zero indexed
+  var end   = new Date().getTime();
+  var i     = new Date( start.getTime() );
+  for( ; i.getTime() < end; i.setMonth( i.getMonth() + 1 ))
+  {
+    // Store age and date at time i
+    i_age  = patient.age( i );
+    i_date = i.getTime();
 
-  // Emits
-  emit(
-    '{ '+
-      '"doctor" : "'   + pid       + '", ' +
-      '"title" : "'    + title     + '", ' +
-      '"date" : "'     + date      + '", ' +
-      '"category" : "' + category  + '", ' +
-      '"result" : "denominator" ' +
-    '}',
-    denominator
-  );
-  emit(
-    '{ '+
-      '"doctor" : "'   + pid      + '", ' +
-      '"title" : "'    + title    + '", ' +
-      '"date" : "'     + date     + '", ' +
-      '"category" : "' + category + '", ' +
-      '"result" : "numerator" '  +
-    '}',
-    numerator
-  );
+    // Active patient? Age 65+?  Active statin?
+    denominator = activePatient( patient, i ) && ages.isMin( patient, i, 65 );
+    numerator   = denominator && medications.hasActiveStatin( patient, i );
+
+    // Emits
+    emit(
+      '{ ' +
+        '"doctor" : "'   + pid       + '", ' +
+        '"title" : "'    + title     + '", ' +
+        '"date" : "'     + i_date    + '", ' +
+        '"category" : "' + category  + '", ' +
+        '"result" : "denominator" ' +
+      '}',
+      denominator
+    );
+    emit(
+      '{ '+
+        '"doctor" : "'   + pid      + '", ' +
+        '"title" : "'    + title    + '", ' +
+        '"date" : "'     + i_date   + '", ' +
+        '"category" : "' + category + '", ' +
+        '"result" : "numerator" '  +
+      '}',
+      numerator
+    );
+  }
 }
