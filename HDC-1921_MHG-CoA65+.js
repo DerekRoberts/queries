@@ -1,5 +1,5 @@
 /**
- * Query Title: HDC-1921_HMG-CoA65+
+ * Query Title: HDC-1921
  * Query Type:  Ratio
  * Initiative:  Polypharmacy
  * Description: This metric shows the percentage of active patients, 65 and
@@ -20,7 +20,7 @@ function map( patient ){
     },
     // Active statin?
     numerator: function( patient, date, denominator ) {
-      return denominator && medications.hasActiveStatin( patient, date );
+      return denominator && dictionary.hasActiveStatin( patient, date );
     }
   };
   // Emit results based on query above
