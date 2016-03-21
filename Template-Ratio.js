@@ -6,46 +6,25 @@
  *              ...
  *              ...
  */
-function map( patient ){
+ function map( patient ){
 
-  // Emit variables
-  var pid       = patient.json.primary_care_provider_id,
-    title       = 'HDC-...',
-    category    = 'ReportingCategories'
-    date        = 'Value not provided',
-    denominator = 'Value not provided',
-    numerator   = 'Value not provided';
+   // Query logic
+   var query = {
 
-  // Start, end (now) and counter dates for monthly results
-  var i = defaults.dates.start();
-    end = defaults.dates.end();
-  for( ; i < end; i.setMonth( i.getMonth() + 1 ))
-  {
-    // Active patient? Age 65+?  Active statin?
-    denominator = activePatient( patient, i ) && ...;
-    numerator   = denominator && ...;
+     // Variables
+     thing1: ...,
+     thing2: ...,
+     thing3: ...
 
-    // Emits
-    date = i.getTime();
-    emit(
-      '{ ' +
-        '"doctor" : "'   + pid       + '", ' +
-        '"title" : "'    + title     + '", ' +
-        '"date" : "'     + date      + '", ' +
-        '"category" : "' + category  + '", ' +
-        '"result" : "denominator" '  +
-      '}',
-      denominator
-    );
-    emit(
-      '{ '+
-        '"doctor" : "'   + pid       + '", ' +
-        '"title" : "'    + title     + '", ' +
-        '"date" : "'     + date      + '", ' +
-        '"category" : "' + category  + '", ' +
-        '"result" : "numerator" '    +
-      '}',
-      numerator
-    );
-  }
-}
+     // Active patient? Thing?
+     denominator: function( patient, date ){
+       return activePatient( patient, date ) && <library>.<function>( patient, date, this.thing1 );
+     },
+     // Other things?
+     numerator: function( patient, date, denominator ) {
+       return denominator && <library>.<function>( patient, date, this.thing2, this.thing3 );
+     }
+   };
+   // Emit results based on query above
+   emitter.ratio( patient, query );
+ }
