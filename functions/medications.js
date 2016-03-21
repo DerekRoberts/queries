@@ -1,7 +1,5 @@
 /*
-* Handles medication function, so far just hasActiveStatin
-* - Uses the definition of a statin provided in isStatin().
-* - Uses the definition of a an active medication defined in isActiveMed
+* Basic medication functions.  Dictionary-like functions are in dictionary.js.
 *
 * @param pt {object} - the patient API object.
 *
@@ -79,7 +77,7 @@ medications.isActiveMed = function( med, referenceTime ){
   else {
     return false;
   }
-}
+};
 
 medications.hasActiveMed = function( patient, med, doseLim, doseMin, doseMax ){
   // Check input
@@ -137,17 +135,4 @@ medications.hasActiveMed = function( patient, med, doseLim, doseMin, doseMax ){
   }
 
   return false;
-}
-
-medications.hasActiveStatin = function( patient ){
-  /*
-  var code1 = "^C10BAA";
-  var code2 = "^C10BX";
-  var codes3 = "^C10BA";
-  */
-  var code = "^C10(AA|BX|BA).*";
-  var doseMin = doseMin || 0;
-  var doseMax = doseMax || Number.POSITIVE_INFINITY;
-
-  return this.hasActiveMed( patient, code, false, doseMin, doseMax );
-}
+};
