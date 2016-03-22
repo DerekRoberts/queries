@@ -11,8 +11,9 @@ function map( patient ){
   // Query logic
   var query = {
 
-    // Minimum age
-    minAge: 65,
+    // Med codes and age restraints
+    code   : dictionary.codes.dihydropyridineCalciumChannelBLocker,
+    minAge : 65,
 
     // Active patient? Age?
     denominator: function( patient, date ){
@@ -20,7 +21,7 @@ function map( patient ){
     },
     // Active statin?
     numerator: function( patient, date, denominator ) {
-      return denominator && dictionary.hasActiveDihydropyridineCalciumChannelBLocker( patient, date );
+      return denominator && medications.hasActiveMed( patient, date, this.code );
     }
   };
   // Emit results based on query above
