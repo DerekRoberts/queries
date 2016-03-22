@@ -79,10 +79,11 @@ medications.isActiveMed = function( med, referenceTime ){
   }
 };
 
-medications.hasActiveMed = function( patient, med, doseLim, doseMin, doseMax ){
+medications.hasActiveMed = function( patient, date, med, doseLim, doseMin, doseMax ){
   // Check input
   if(
     patient === undefined || patient === null ||
+    date    === undefined || date    === null ||
     med     === undefined || med     === null ||
     doseLim === undefined || doseLim === null ||
     doseMin === undefined || doseMin === null ||
@@ -109,7 +110,7 @@ medications.hasActiveMed = function( patient, med, doseLim, doseMin, doseMax ){
       m.json.codes.whoATC !== undefined &&
       m.json.codes.whoATC.length > 0;
 
-      return medications.isActiveMed(m) && atcCoded;
+      return medications.isActiveMed( m, date ) && atcCoded;
     }
   );
 
