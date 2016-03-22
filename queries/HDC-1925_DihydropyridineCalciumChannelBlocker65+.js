@@ -12,7 +12,7 @@ function map( patient ){
   var query = {
 
     // Med codes and age restraints
-    code   : dictionary.codes.dihydropyridineCalciumChannelBLocker,
+    code   : dictionary.meds.dihydropyridineCalciumChannelBLocker,
     minAge : 65,
 
     // Active patient? Age?

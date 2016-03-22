@@ -11,7 +11,7 @@ function map( patient ){
   var query = {
 
     // Med codes and age restraints
-    code   : dictionary.codes.biguanide,
+    code   : dictionary.meds.biguanide,
     minAge : 65,
 
     // Active patient? Age?

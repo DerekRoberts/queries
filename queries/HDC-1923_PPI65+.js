@@ -11,7 +11,7 @@ function map( patient ){
   var query = {
 
     // Med codes and age restraints
-    code   : dictionary.codes.PPI,
+    code   : dictionary.meds.PPI,
     minAge : 65,
 
     // Active patient? Age?

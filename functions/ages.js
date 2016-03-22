@@ -34,12 +34,12 @@ ages.isRange = function( patient, atDate, ageMin, ageMax ){
 
 // Call isRange, use default for ageMin
 ages.isMax = function( patient, atDate, ageMax ){
-	var ageMin = defaults.ages.min();
+	var ageMin = dictionary.defaults.ages.min;
 	return this.isRange( patient, atDate, ageMin, ageMax );
 };
 
 // Call isRange, use default for ageMax
 ages.isMin = function( patient, atDate, ageMin ){
-	var ageMax = defaults.ages.max();
+	var ageMax = dictionary.defaults.ages.max;
 	return this.isRange( patient, atDate, ageMin, ageMax );
 };

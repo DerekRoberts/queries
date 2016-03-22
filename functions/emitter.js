@@ -10,8 +10,8 @@ emitter.ratio = function( patient, query ){
 	  };
 
 	// Counter (date) variables
-	var i = defaults.dates.start(),
-		end = defaults.dates.end();
+	var i = dictionary.defaults.dates.start(),
+		end = dictionary.defaults.dates.end();
 	for( ; i < end; i.setMonth( i.getMonth() + 1 ))
 	{
 		denominator = query.denominator( patient, i );

@@ -12,7 +12,7 @@ function map( patient ){
   var query = {
 
     // Med codes and age restraints
-    code   : dictionary.codes.angeotensin2Antagonist,
+    code   : dictionary.meds.angeotensin2Antagonist,
     minAge : 65,
 
     // Active patient? Age?
