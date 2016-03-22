@@ -8,6 +8,11 @@
 */
 
 var medications = medications ||{};
+medications.hasActiveMed = function( patient, date, code ){
+  var doseMin = doseMin || 0,
+    doseMax   = doseMax || Number.POSITIVE_INFINITY;
+  return medications.hasActiveMedRange( patient, date, code, false, doseMin, doseMax );
+};
 
 medications.isActiveMed = function( med, referenceTime ){
   //check for valid input, if invalid then we can't operate on the medication, return false.
@@ -79,7 +84,7 @@ medications.isActiveMed = function( med, referenceTime ){
   }
 };
 
-medications.hasActiveMed = function( patient, date, med, doseLim, doseMin, doseMax ){
+medications.hasActiveMedRange = function( patient, date, med, doseLim, doseMin, doseMax ){
   // Check input
   if(
     patient === undefined || patient === null ||
@@ -89,7 +94,7 @@ medications.hasActiveMed = function( patient, date, med, doseLim, doseMin, doseM
     doseMin === undefined || doseMin === null ||
     doseMax === undefined || doseMax === null
   ){
-    return error( "hasActiveMed input" );
+    return error( "hasActiveMedRange input" );
   }
 
   // Get patient medication list
