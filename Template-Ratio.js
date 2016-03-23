@@ -18,7 +18,7 @@
 
      // Active patient? Thing?
      denominator: function( patient, date ){
-       return activePatient( patient, date ) && <library>.<function>( patient, date, this.thing1 );
+       return profile.active( patient, date ) && <library>.<function>( patient, date, this.thing1 );
      },
      // Other things?
      numerator: function( patient, date, denominator ) {

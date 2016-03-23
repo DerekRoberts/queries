@@ -1,7 +1,7 @@
 /**
  * Query Title: HDC-1921
  * Query Type:  Pyramid/count
- * Description: Population Pyramid
+ * Description: Population profile
  */
 function map( patient )
 {
@@ -15,7 +15,7 @@ function map( patient )
   var index_ages;
 
   // Store gender (can't change)
-  var gdr = getGender( patient );
+  var gdr = profile.gender( patient );
   if( gdr.toString().toUpperCase() === 'FEMALE' )
     index_gdrs = 0;
   else if( gdr.toString().toUpperCase() === 'MALE' )
@@ -53,7 +53,7 @@ function map( patient )
     ];
 
     // Store age and date at time i
-    var i_active = activePatient( patient, i );
+    var i_active = profile.active( patient, i );
     var i_age    = patient.age( i );
     var i_date   = i.getTime();
 
