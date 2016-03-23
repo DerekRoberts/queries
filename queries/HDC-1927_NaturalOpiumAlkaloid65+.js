@@ -16,7 +16,7 @@ function map( patient ){
 
     // Active patient? Age?
     denominator: function( patient, date ){
-      return activePatient( patient, date ) && ages.isMin( patient, date, this.minAge );
+      return profile.active( patient, date ) && profile.ages.isMin( patient, date, this.minAge );
     },
     // Active statin?
     numerator: function( patient, date, denominator ) {

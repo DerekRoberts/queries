@@ -12,12 +12,12 @@ function map( patient ){
   var query = {
 
     // Med codes and age restraints
-    code   : dictionary.meds.dihydropyridineCalciumChannelBLocker,
+    code   : dictionary.meds.dihydropyridineCalciumChannelBlocker,
     minAge : 65,
 
     // Active patient? Age?
     denominator: function( patient, date ){
-      return activePatient( patient, date ) && ages.isMin( patient, date, this.minAge );
+      return profile.active( patient, date ) && profile.ages.isMin( patient, date, this.minAge );
     },
     // Active statin?
     numerator: function( patient, date, denominator ) {
