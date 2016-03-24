@@ -5,37 +5,41 @@
  */
 function map( patient )
 {
-  // Physician ID, value type and time interval
-  var pid        = patient.json.primary_care_provider_id;
-  var title      = 'PatientCounts';
-  var category   = 'TenYearRanges';
+  // Physician ID, category type and other emit fields
+  var jsonEmit = {
+    doctor      : patient.json.primary_care_provider_id,
+    category    : 'TenYearRanges',
+    date        : 'Value not provided',
+    agesMin     : 'Value not provided',
+    agesMax     : 'Value not provided'
+  };
 
-  // Indexes
-  var index_gdrs;
-  var index_ages;
+  // Constants and index variables
+  var genders =[ 'Female', 'Male', 'Unspecified' ],
+    agesMin   =[ '0', '10', '20', '30', '40', '50', '60', '70', '80',  '90', 'UN' ],
+    agesMax   =[ '9', '19', '29', '39', '49', '59', '69', '79', '89', '120', 'UN' ],
+    ageOpts   = agesMin.length - 1,
+    indexGdrs,
+    indexAges,
+    retroAge;
 
   // Store gender (can't change)
-  var gdr = profile.gender( patient );
-  if( gdr.toString().toUpperCase() === 'FEMALE' )
-    index_gdrs = 0;
-  else if( gdr.toString().toUpperCase() === 'MALE' )
-    index_gdrs = 1;
-  else
-    index_gdrs = 2;
+  switch( profile.gender( patient ).toString().toUpperCase() ){
+    case 'FEMALE':
+      indexGdrs = 0;
+      break;
+    case 'MALE' :
+      indexGdrs = 1;
+      break;
+    default:
+      indexGdrs = 2;
+      break;
+  }
 
-  // Constants
-  var genders =[ 'Female', 'Male', 'Unspecified' ];
-  var age_min =[ '0', '10', '20', '30', '40', '50', '60', '70', '80',  '90', 'Unspecified' ];
-  var age_max =[ '9', '19', '29', '39', '49', '59', '69', '79', '89', '120', 'Unspecified' ];
-
-  // Start, end (now) and counter dates
-  var start = new Date( 2016, 2, 1 );//Remember months are zero indexed
-  var end   = new Date().getTime();
-  var i     = new Date( start.getTime() );
-  //
   // Monthly results
-  for( ; i.getTime() < end; i.setMonth( i.getMonth() + 1 ))
-  {
+  var i = dictionary.defaults.dates.start(),
+    end = dictionary.defaults.dates.end();
+  for( ; i < end; i.setMonth( i.getMonth() + 1 )){
     // Array to emit from (by age range, then F/M/UN)
     var mask = [
       [ 0, 0, 0 ],
@@ -52,47 +56,35 @@ function map( patient )
       [ 0, 0, 0 ]
     ];
 
-    // Store age and date at time i
-    var i_active = profile.active( patient, i );
-    var i_age    = patient.age( i );
-    var i_date   = i.getTime();
+    // Store age at time i
+    retroAge = patient.age( i );
 
-    // Add to mask if values check out
-    if(
-      typeof i_age === 'number' &&
-      i_age >= 0
-    ){
-      // Divide age by ten and round down to get age range
-      index_ages = Math.floor( i_age / 10 );
-
-      // Cap off ranges at 90+
-      if( index_ages > 9 )
-        index_ages = 9;
-
+    // Add current patients to mask
+    if( profile.active( patient, i )){
+      if( typeof retroAge === 'number' && retroAge >= 0 ){
+        // Divide age by ranges, caping off 90+, but...
+        indexAges = Math.floor( retroAge / ageOpts );
+        if( indexAges > ageOpts )
+          indexAges = ageOpts - 1;
+      }
+      else {
+        // ...reserve the final spot for unspecified age
+        indexAges = ageOpts;
+      }
       // Store in mask
-      mask[ index_ages ][ index_gdrs ] = i_active;
-    }
-    else {
-      mask[ 10 ][ index_gdrs ] = i_active;
+      mask[ indexAges ][ indexGdrs ] = 1;
     }
 
     // Output mask, arranged by g=gender and a=age
-    for( var a = 0; a < age_min.length; a++ )
+    for( var a = 0; a < agesMin.length; a++ )
     {
       for( var g = 0; g < genders.length; g++ )
       {
-        emit(
-          '{ '+
-            '"doctor" : "'     + pid          + '", ' +
-            '"title" : "'      + title        + '", ' +
-            '"date" : "'       + i_date       + '", ' +
-            '"category" : "'   + category     + '", ' +
-            '"age_min" : "'    + age_min[ a ] + '", ' +
-            '"age_max" : "'    + age_max[ a ] + '", ' +
-            '"gender" : "'     + genders[ g ] + '"' +
-          '}',
-          mask[ a ][ g ]
-        );
+        jsonEmit.date = i.getTime();
+        jsonEmit.agesMin = agesMin[ a ];
+        jsonEmit.agesMax = agesMax[ a ];
+        jsonEmit.gender = genders[ g ];
+        emit( JSON.stringify(jsonEmit), mask[ a ][ g ]);
       }
     }
   }
