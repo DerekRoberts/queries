@@ -1,10 +1,9 @@
 /**
- * Query Title: HDC-1925
+ * Query Title: HDC-1930
  * Query Type:  Ratio
- * Initiative:  Polypharmacy
- * Description: This metric shows the percentage of active patients, 65 and
- *              over, have an active medication for a dihydropyridine calcium
- *              channel blocker.
+ * Initiative:  Med Use
+ * Description: This metric shows the percentage of active patients, 65 and over,
+ *              have an active medication for a thiazide, excluding combinations.
  */
 function map( patient ){
 
@@ -12,7 +11,7 @@ function map( patient ){
   var query = {
 
     // Med codes and age restraints
-    code   : dictionary.meds.dihydropyridineCalciumChannelBlocker,
+    code   : dictionary.meds.thiazide,
     minAge : 65,
 
     // Active patient? Age?

@@ -1,10 +1,10 @@
 /**
- * Query Title: HDC-1928
+ * Query Title: HDC-1921
  * Query Type:  Ratio
- * Initiative:  Polypharmacy
+ * Initiative:  Med Use
  * Description: This metric shows the percentage of active patients, 65 and
- *              over, have an active medication for an angiotensin 2 antagonist,
- *              excluding combinations.
+ *              over, on an active medication for an HMG-CoA reductase
+ *              inhibitors (statins)
  */
 function map( patient ){
 
@@ -12,7 +12,7 @@ function map( patient ){
   var query = {
 
     // Med codes and age restraints
-    code   : dictionary.meds.angeotensin2Antagonist,
+    code   : dictionary.meds.statin,
     minAge : 65,
 
     // Active patient? Age?

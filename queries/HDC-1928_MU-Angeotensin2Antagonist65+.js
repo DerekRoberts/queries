@@ -1,9 +1,10 @@
 /**
- * Query Title: HDC-1923
+ * Query Title: HDC-1928
  * Query Type:  Ratio
- * Initiative:  Polypharmacy
- * Description: This metric shows the percentage of active patients, 65 and over,
- *              has an active medication for a proton a pump inhibitor (PPI).
+ * Initiative:  Med Use
+ * Description: This metric shows the percentage of active patients, 65 and
+ *              over, have an active medication for an angiotensin 2 antagonist,
+ *              excluding combinations.
  */
 function map( patient ){
 
@@ -11,7 +12,7 @@ function map( patient ){
   var query = {
 
     // Med codes and age restraints
-    code   : dictionary.meds.PPI,
+    code   : dictionary.meds.angeotensin2Antagonist,
     minAge : 65,
 
     // Active patient? Age?

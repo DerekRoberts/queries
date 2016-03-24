@@ -43,7 +43,7 @@ dictionary.conditions = dictionary.conditions ||{
     ICD9     : "^250.*"
   },
   hepatitisC : {
-    ICD9     : "^070.41|^070.44|^070.51|^070.54|^070.70|^070.71*"
+    ICD9     : "^070.4[14]|^070.5[14]|^070.7[01]"
   },
   hypertension : {
     ICD9     : "^493.*",

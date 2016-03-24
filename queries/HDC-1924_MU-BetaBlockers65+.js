@@ -1,9 +1,9 @@
 /**
- * Query Title: HDC-1930
+ * Query Title: HDC-1924
  * Query Type:  Ratio
- * Initiative:  Polypharmacy
+ * Initiative:  Med Use
  * Description: This metric shows the percentage of active patients, 65 and over,
- *              have an active medication for a thiazide, excluding combinations.
+ *              have an active medication for a selective beta-blocking agent.
  */
 function map( patient ){
 
@@ -11,7 +11,7 @@ function map( patient ){
   var query = {
 
     // Med codes and age restraints
-    code   : dictionary.meds.thiazide,
+    code   : dictionary.meds.betaBlocker,
     minAge : 65,
 
     // Active patient? Age?

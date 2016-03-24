@@ -1,10 +1,9 @@
 /**
- * Query Title: HDC-1921
+ * Query Title: HDC-1929
  * Query Type:  Ratio
- * Initiative:  Polypharmacy
+ * Initiative:  Med Use
  * Description: This metric shows the percentage of active patients, 65 and
- *              over, on an active medication for an HMG-CoA reductase
- *              inhibitors (statins)
+ *              over, have an active medication for a biguanide.
  */
 function map( patient ){
 
@@ -12,7 +11,7 @@ function map( patient ){
   var query = {
 
     // Med codes and age restraints
-    code   : dictionary.meds.statin,
+    code   : dictionary.meds.biguanide,
     minAge : 65,
 
     // Active patient? Age?

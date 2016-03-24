@@ -1,9 +1,10 @@
 /**
- * Query Title: HDC-1929
+ * Query Title: HDC-1922
  * Query Type:  Ratio
- * Initiative:  Polypharmacy
+ * Initiative:  Med Use
  * Description: This metric shows the percentage of active patients, 65 and
- *              over, have an active medication for a biguanide.
+ *              over, on an active medication for angiotensin converting enzyme
+ *              (ACE) inhibitors, excluding combinations.
  */
 function map( patient ){
 
@@ -11,7 +12,7 @@ function map( patient ){
   var query = {
 
     // Med codes and age restraints
-    code   : dictionary.meds.biguanide,
+    code   : dictionary.meds.aceInhibitor,
     minAge : 65,
 
     // Active patient? Age?

@@ -1,7 +1,7 @@
 /**
  * Query Title: HDC-1926
  * Query Type:  Ratio
- * Initiative:  Polypharmacy
+ * Initiative:  Med Use
  * Description: This metric shows the percentage of active patients, 65 and
  *              over, have an active medication for a thyroid hormone.
  */
