@@ -130,7 +130,7 @@ profile.ages.isRange = function( patient, atDate, ageMin, ageMax ){
 		ageMin === undefined || ageMin === null ||
 		ageMax === undefined || ageMax === null
 	){
-		return error( "isAgeRange input" );
+		return emitter.error( "isAgeRange input" );
 	}
 
 	var ageNow = patient.age( atDate );
@@ -138,7 +138,7 @@ profile.ages.isRange = function( patient, atDate, ageMin, ageMax ){
 		ageNow === undefined || ageNow === null ||
 		typeof ageNow != 'number'
 	){
-		return error( "patient.age" );
+		return emitter.error( "patient.age" );
 	}
 	else {
 		return (( ageMin <= ageNow )&&( ageNow <= ageMax ));
@@ -162,7 +162,7 @@ profile.ages.isRange = function( patient, atDate, ageMin, ageMax ){
 		ageMin === undefined || ageMin === null ||
 		ageMax === undefined || ageMax === null
 	){
-		return error( "isAgeRange input" );
+		return emitter.error( "isAgeRange input" );
 	}
 
 	var ageNow = patient.age( atDate );
@@ -170,7 +170,7 @@ profile.ages.isRange = function( patient, atDate, ageMin, ageMax ){
 		ageNow === undefined || ageNow === null ||
 		typeof ageNow != 'number'
 	){
-		return error( "patient.age" );
+		return emitter.error( "patient.age" );
 	}
 	else {
 		return (( ageMin <= ageNow )&&( ageNow <= ageMax ));

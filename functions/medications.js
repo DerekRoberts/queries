@@ -94,7 +94,7 @@ medications.hasActiveMedRange = function( patient, date, med, doseLim, doseMin, 
     doseMin === undefined || doseMin === null ||
     doseMax === undefined || doseMax === null
   ){
-    return error( "hasActiveMedRange input" );
+    return emitter.error( "hasActiveMedRange input" );
   }
 
   // Get patient medication list
