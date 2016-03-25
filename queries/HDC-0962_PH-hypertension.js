@@ -10,11 +10,8 @@ function map( patient ){
   var query = {
 
     // Variables
-    ageMin      : 20,
-    condSystem1 : "ICD9",
-    condRegex1  : dictionary.conditions.hypertension.ICD9,
-    condSystem2 : "SNOMEDCT",
-    condRegex2  : dictionary.conditions.hypertension.SNOMEDCT,
+    ageMin  : 20,
+    codeSet : dictionary.conditions.hypertension,
 
     // Active patient? Thing?
     denominator: function( patient, date ){
@@ -22,9 +19,7 @@ function map( patient ){
     },
     // Other things?
     numerator: function( patient, date, denominator ) {
-      return denominator &&
-        conditions.hasRegex( patient, this.condSystem1, this.condRegex1 ) &&
-        conditions.hasRegex( patient, this.condSystem2, this.condRegex2 );
+      return denominator && conditions.hasRegex( patient, this.codeSet );
     }
   };
   // Emit results based on query above

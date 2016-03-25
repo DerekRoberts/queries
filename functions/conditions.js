@@ -8,34 +8,37 @@
 */
 
 var conditions = conditions ||{};
-conditions.hasRegex = function( patient, system, regex ){
-
-  // Check for input and conditions
-  var conds = patient.json.conditions;
+conditions.hasRegex = function( patient, codeSet ){
+  // Check input
   if(
-    patient      !== undefined || patient      !== null ||
-    patient.json !== undefined || patient.json !== null ||
-    system       !== undefined || system       !== null ||
-    regex        !== undefined || regex        !== null ||
-    conds        !== undefined || conds        !== null ||
-    conds.length !== 0
+    patient        !== undefined || patient      !== null ||
+    patient.json   !== undefined || patient.json !== null ||
+    codeSet        !== undefined || codeSet      !== null ||
+    codeSet.length !== 0
   ){
-    // Look for ICD9 codes
-    var i = 0,
-        l = conds.length;
-    for( ; i < l ; i++ ){
-      if(
-        conds[ i ] &&
-        conds[ i ].codes &&
-        conds[ i ].codes[ system ] &&
-        conds[ i ].codes[ system ].length > 0
-      ){
-        // Check if any codes match regex
-        var j = 0,
-            m = conds[ i ].codes[ system ].length;
-        for( ; j < m ; j++ ){
-          if( conds[ i ].codes[ system ][ j ].match( regex )){
-            return true;
+    // Indexes and patient conditions array
+    var i, j, l, m,
+    ptConditions = patient.json.conditions;
+
+    // Code sets stored as { system : regex }
+    for( var system in codeSet ){
+      var regex  = codeSet[ system ];
+
+      // Look for ICD9 or SNOMEDCT codes
+      l = ptConditions.length;
+      for( i = 0; i < l ; i++ ){
+        if(
+          ptConditions[ i ] &&
+          ptConditions[ i ].codes &&
+          ptConditions[ i ].codes[ system ] &&
+          ptConditions[ i ].codes[ system ].length > 0
+        ){
+          // Check if any codes match regex
+          m = ptConditions[ i ].codes[ system ].length;
+          for( j = 0; j < m ; j++ ){
+            if( ptConditions[ i ].codes[ system ][ j ].match( regex )){
+              return true;
+            }
           }
         }
       }
