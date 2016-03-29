@@ -9,6 +9,8 @@
 */
 
 var dictionary = dictionary ||{};
+
+// http://www.whocc.no/atc_ddd_index
 dictionary.meds = dictionary.meds ||{
   aceInhibitor                         : "^C09A.*",
   angeotensin2Antagonist               : "^C09CA.*",
