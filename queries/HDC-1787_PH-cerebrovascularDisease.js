@@ -10,7 +10,7 @@ function map( patient ){
   var query = {
 
     // Variables
-    codeSet : dictionary.conditions.cerebrovascularDisease,
+    codeSet : dictionary.conditions.osteoartitis,
 
     // Active patient? Thing?
     denominator: function( patient, date ){

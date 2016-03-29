@@ -1,8 +1,8 @@
 /**
-* Query Title: HDC-1786
+* Query Title: HDC-1788
 * Query Type:  Ratio
 * Initiative:  Population Health
-* Description: Percentage with ischemic heart disease (coronary artery disease)
+* Description: Percentage with osteoarthritis
 */
 function map( patient ){
 
@@ -10,7 +10,7 @@ function map( patient ){
   var query = {
 
     // Variables
-    codeSet : dictionary.conditions.ischemicHeartDisease,
+    codeSet : dictionary.conditions.osteoartitis,
 
     // Active patient? Thing?
     denominator: function( patient, date ){
