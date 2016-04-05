@@ -7,62 +7,65 @@ var utils = utils || {};
 // Defined with no names arguments, it is expectany any number of arguments can
 // be passed
 utils.isUndefined = function() {
-	for(var i = 0; i < arguments.length; i++) {
-		if(arguments[i] == undefined){
-			// at least one of the arguments is undefined
-			return true;
-		} 
+    for (var i = 0; i < arguments.length; i++) {
+	if (arguments[i] == undefined) {
+	    // at least one of the arguments is undefined
+	    return true;
 	}
-	
-	// No argument were undefined
-	return false;
+    }
+
+    // No argument were undefined
+    return false;
 }
 
 // Returns true if any arguments passed are undefined or null
-// Defined with no names arguments, it is expecting any any number of arguments can
+// Defined with no names arguments, it is expecting any any number of arguments
+// can
 // be passed
 utils.isUndefinedOrNull = function() {
-	for(var i = 0; i < arguments.length; i++) {
-		if((arguments[i] == undefined) || (arguments[i] == null)) {
-			// at least one of the arguments is undefined or null
-			return true;
-		} 
+    for (var i = 0; i < arguments.length; i++) {
+	if ((arguments[i] == undefined) || (arguments[i] == null)) {
+	    // at least one of the arguments is undefined or null
+	    return true;
 	}
-	
-	// No argument were undefined or null
-	return false;
+    }
+
+    // No argument were undefined or null
+    return false;
 }
 
 // Returns whether the code passed matches any of the values in the codeset
 // passed
 utils.matchCodeSet = function(code, codeSet) {
-    if(utils.isUndefinedOrNull(code, codeSet) || (codeSet.length == 0)) {
+    if (utils.isUndefinedOrNull(code, codeSet) || (codeSet.length == 0)) {
 	// Code or codeset is undefined or empty, no match possible
 	return false;
     }
-    for(var codeSetIndex = 0; codeSetIndex < codeSet.length; codeSetIndex++ ) {
-	if(!utils.isUndefinedOrNull(codeSet[codeSetIndex].codeEquals) 
-		&& (utils.isUndefinedOrNull(codeSet[codeSetIndex].codeEquals.length > 0))) {
+    for (var codeSetIndex = 0; codeSetIndex < codeSet.length; codeSetIndex++) {
+	if (!utils.isUndefinedOrNull(codeSet[codeSetIndex].codeEquals)
+		&& (utils
+			.isUndefinedOrNull(codeSet[codeSetIndex].codeEquals.length > 0))) {
 	    // CodeSet entry has a equality definition
-	    if(code === codeSet[codeSetIndex].codeEquals) {
+	    if (code === codeSet[codeSetIndex].codeEquals) {
 		// we have a match
 		return true;
 	    }
 	}
 
-	if(!utils.isUndefinedOrNull(codeSet[codeSetIndex].codeBeginsWith) 
-		&& (utils.isUndefinedOrNull(codeSet[codeSetIndex].codeBeginsWith.length > 0))) {
+	if (!utils.isUndefinedOrNull(codeSet[codeSetIndex].codeBeginsWith)
+		&& (utils
+			.isUndefinedOrNull(codeSet[codeSetIndex].codeBeginsWith.length > 0))) {
 	    // CodeSet entry has a begins with definition
-	    if(code.startsWith(codeSet[codeSetIndex].codeBeginsWith)) {
+	    if (code.startsWith(codeSet[codeSetIndex].codeBeginsWith)) {
 		// we have a match
 		return true;
 	    }
 	}
     }
-    
+
     // No match was found
     return false;
-    
+
 }
 
 /**
@@ -146,7 +149,7 @@ utils.warning = function(message, errorContainer) {
  * 
  * @return false - function intended to be called as a return
  */
-utils.error = function(message, errorContainer) {
+utils.info = function(message, errorContainer) {
     if (utils.isUndefinedOrNull(errorContainer)) {
 	// We do not have a proper error container in which to store the error
 	// Emit string and conspicuous number
@@ -159,4 +162,45 @@ utils.error = function(message, errorContainer) {
     }
 };
 
+utils.emitErrorContainer = function(errorContainer, level) {
+    // Determine effective error level
+    var levelNumber;
+    if(utils.isUndefinedOrNull(level)) {
+	// Default to all
+	levelNumber = 3;
+    } else if(typeof level == "number") {
+	// Use level number passed within range of [0, 3]
+	levelNumber = Math.max(0, Math.min(3, level));
+    } else if(level.toLowerCase().trim() == "error") {
+	levelNumber = 1;
+    } else if(level.toLowerCase().trim() == "warning") {
+	levelNumber = 2;
+    } else if(level.toLowerCase().trim() == "info") {
+	levelNumber = 3;
+    }
+    
+    var errorEmit = {};
+    var doEmit = false;
+    // Add any Error messages
+    if (errorContainer.error && (levelNumber >= 1)) {
+	doEmit = true;
+	errorEmit.errorMessages = errorContainer.errorMessages;
+    }
+
+    // Add any Warning messages
+    if (errorContainer.warning && (levelNumber >= 2)) {
+	doEmit = true;
+	errorEmit.warningMessages = errorContainer.warningMessages;
+    }
+    // Add any Error messages
+    if (errorContainer.info && (levelNumber >= 3)) {
+	doEmit = true;
+	errorEmit.infoMessages = errorContainer.infoMessages;
+    }
+
+    if (doEmit) {
+	emit(JSON.stringify(errorEmit), 1);
+    }
+
+}
 

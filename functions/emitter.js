@@ -55,6 +55,8 @@ emitter.ratio = function(patient, query) {
 	    numerator = false;
 	}
 
+	
+	
 	jsonEmit.date = i.getTime().toString();
 	jsonEmit.result = "denominator";
 	emit(JSON.stringify(jsonEmit), denominator);
@@ -64,6 +66,8 @@ emitter.ratio = function(patient, query) {
 
 	jsonEmit.result = "invalid";
 	emit(JSON.stringify(jsonEmit), errorContainer.invalid);
+	
+	utils.emitErrorContainer(errorContainer);
     }
 };
 
