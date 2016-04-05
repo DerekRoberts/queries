@@ -64,3 +64,99 @@ utils.matchCodeSet = function(code, codeSet) {
     return false;
     
 }
+
+/**
+ * Mark current patient as being excluded from the query due to invalid data.
+ * This is also recorded as an Error-level problem
+ * 
+ * @param message -
+ *                message to store with query results
+ * @param errorContainer -
+ *                ErrorContainer object to store error in
+ * 
+ * @return false - function intended to be called as a return
+ */
+utils.invalid = function(message, errorContainer) {
+    if (utils.isUndefinedOrNull(errorContainer)) {
+	// We do not have a proper error container in which to store the error
+	// Emit string and conspicuous number
+	emit("Invalid: " + message, -1);
+	return false;
+    } else {
+	// Ensure invalid and error flags are set
+	errorContainer.invalid = true;
+	errorContainer.error = true;
+	errorContainer.errorMessages.push(message);
+    }
+};
+
+/**
+ * Record an Error-level problem
+ * 
+ * @param message -
+ *                message to store with query results
+ * @param errorContainer -
+ *                ErrorContainer object to store error in
+ * 
+ * @return false - function intended to be called as a return
+ */
+utils.error = function(message, errorContainer) {
+    if (utils.isUndefinedOrNull(errorContainer)) {
+	// We do not have a proper error container in which to store the error
+	// Emit string and conspicuous number
+	emit("Error: " + message, -1);
+	return false;
+    } else {
+	// Ensure error flag is set
+	errorContainer.error = true;
+	errorContainer.errorMessages.push(message);
+    }
+};
+
+/**
+ * Record an Warning-level problem
+ * 
+ * @param message -
+ *                message to store with query results
+ * @param errorContainer -
+ *                ErrorContainer object to store warning in
+ * 
+ * @return false - function intended to be called as a return
+ */
+utils.warning = function(message, errorContainer) {
+    if (utils.isUndefinedOrNull(errorContainer)) {
+	// We do not have a proper error container in which to store the error
+	// Emit string and conspicuous number
+	emit("Warning: " + message, -1);
+	return false;
+    } else {
+	// Ensure warning flag is set
+	errorContainer.warning = true;
+	errorContainer.warningMessages.push(message);
+    }
+};
+
+/**
+ * Record an Information-level event
+ * 
+ * @param message -
+ *                message to store with query results
+ * @param errorContainer -
+ *                ErrorContainer object to store information message in
+ * 
+ * @return false - function intended to be called as a return
+ */
+utils.error = function(message, errorContainer) {
+    if (utils.isUndefinedOrNull(errorContainer)) {
+	// We do not have a proper error container in which to store the error
+	// Emit string and conspicuous number
+	emit("Info: " + message, -1);
+	return false;
+    } else {
+	// Ensure info flag is set
+	errorContainer.info = true;
+	errorContainer.infoMessages.push(message);
+    }
+};
+
+
