@@ -1,11 +1,6 @@
 /*
-* Dictionary-like functions.
-*   Used primarily for regex matching medications.
-*
-* @param pt {object} - the patient API object.
-*
-* @return - true if the patient has an active statin medication
-*               false otherwise.
+* Dictionary
+*   JavaScript objects for medications, conditions and default values.
 */
 
 var dictionary = dictionary ||{};
@@ -286,7 +281,6 @@ dictionary.conditions = dictionary.conditions ||{
   },
   myocardialInfarction : {
     ICD9     : [
-      //"^41[012].*|^429.8"
       { codeEquals: "412",        description: "OLD MYOCARDIAL INFARCTION" },
       { codeBeginsWith: "410.",   description: "MYOCARDIAL, POSTERIOR AND SUBENDOCARDIAL INFARCTIONS ..." },
       { codeBeginsWith: "411.",   description: "INFARCTIONS AND OTHER CORONARY CONDITIONS ..." },
@@ -306,7 +300,6 @@ dictionary.conditions = dictionary.conditions ||{
     ICD9     : [
       { codeBeginsWith: "715.", description: "OSTEOARTHRITIS ..." }
     ]
-    //"^715.*"
   },
   painBackLower : {
     ICD9     : [
