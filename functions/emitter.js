@@ -67,7 +67,7 @@ emitter.ratio = function(patient, query) {
 	jsonEmit.result = "invalid";
 	emit(JSON.stringify(jsonEmit), errorContainer.invalid);
 	
-	utils.emitErrorContainer(errorContainer);
+	utils.emitErrorContainer(errorContainer, jsonEmit.doctor);
     }
 };
 

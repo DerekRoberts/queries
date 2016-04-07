@@ -3,9 +3,13 @@
  */
 var utils = utils || {};
 
-// Returns true if any arguments passed are undefined
-// Defined with no names arguments, it is expectany any number of arguments can
-// be passed
+/**
+ * Returns true if any arguments passed are undefined Defined with no named
+ * arguments, it is expect any any number of arguments can be passed
+ * 
+ * @return true if any arguments passed are undefined Defined with no named
+ *         arguments, it is expect any any number of arguments can be passed
+ */
 utils.isUndefined = function() {
     for (var i = 0; i < arguments.length; i++) {
 	if (arguments[i] == undefined) {
@@ -16,12 +20,16 @@ utils.isUndefined = function() {
 
     // No argument were undefined
     return false;
-}
+};
 
-// Returns true if any arguments passed are undefined or null
-// Defined with no names arguments, it is expecting any any number of arguments
-// can
-// be passed
+/**
+ * Returns true if any arguments passed are undefined or null Defined with no
+ * names arguments, it is expecting any any number of arguments can be passed
+ * 
+ * @return true if any arguments passed are undefined or null Defined with no
+ *         names arguments, it is expecting any any number of arguments can be
+ *         passed
+ */
 utils.isUndefinedOrNull = function() {
     for (var i = 0; i < arguments.length; i++) {
 	if ((arguments[i] == undefined) || (arguments[i] == null)) {
@@ -32,33 +40,53 @@ utils.isUndefinedOrNull = function() {
 
     // No argument were undefined or null
     return false;
-}
+};
 
-// Returns whether the code passed matches any of the values in the codeset
-// passed
-utils.matchCodeSet = function(code, codeSet) {
-    if (utils.isUndefinedOrNull(code, codeSet) || (codeSet.length == 0)) {
-	// Code or codeset is undefined or empty, no match possible
-	return false;
+/**
+ * Returns whether the code passed matches any of the values in the codeset
+ * passed.
+ * 
+ * @param codes
+ *                array of Codes to be examined
+ * @param codeSet
+ *                CodeSet to compare codes to
+ * @param errorContainer
+ *                ErrorContainer to use for storing any errors or output
+ * 
+ * @return whether the code passed matches any of the values in the codeset
+ *         passed.
+ */
+utils.matchCodeSet = function(codes, codeSet, errorContainer) {
+    if (utils.isUndefinedOrNull(codes, codeSet) || (codes.length == 0)
+	    || (codeSet.length == 0)) {
+	// codes or codeset is undefined or empty, no match possible
+	return utils.error(
+		"Undefined or empty codeset passed into utils.matchCodeSet",
+		errorContainer);
     }
-    for (var codeSetIndex = 0; codeSetIndex < codeSet.length; codeSetIndex++) {
-	if (!utils.isUndefinedOrNull(codeSet[codeSetIndex].codeEquals)
-		&& (utils
-			.isUndefinedOrNull(codeSet[codeSetIndex].codeEquals.length > 0))) {
-	    // CodeSet entry has a equality definition
-	    if (code === codeSet[codeSetIndex].codeEquals) {
-		// we have a match
-		return true;
-	    }
-	}
 
-	if (!utils.isUndefinedOrNull(codeSet[codeSetIndex].codeBeginsWith)
-		&& (utils
-			.isUndefinedOrNull(codeSet[codeSetIndex].codeBeginsWith.length > 0))) {
-	    // CodeSet entry has a begins with definition
-	    if (code.startsWith(codeSet[codeSetIndex].codeBeginsWith)) {
-		// we have a match
-		return true;
+    // Check each code against all entries in codeset
+    var code;
+    for (var codeIndex = 0; codeIndex < codes.length; codeIndex++) {
+	code = codes[codeIndex];
+
+	for (var codeSetIndex = 0; codeSetIndex < codeSet.length; codeSetIndex++) {
+	    if (!utils.isUndefinedOrNull(codeSet[codeSetIndex].codeEquals)
+		    && (codeSet[codeSetIndex].codeEquals.length > 0)) {
+		// CodeSet entry has a equality definition
+		if (code === codeSet[codeSetIndex].codeEquals) {
+		    // we have a match
+		    return true;
+		}
+	    }
+
+	    if (!utils.isUndefinedOrNull(codeSet[codeSetIndex].codeBeginsWith)
+		    && (codeSet[codeSetIndex].codeBeginsWith.length > 0)) {
+		// CodeSet entry has a begins with definition
+		if (code.startsWith(codeSet[codeSetIndex].codeBeginsWith)) {
+		    // we have a match
+		    return true;
+		}
 	    }
 	}
     }
@@ -66,7 +94,7 @@ utils.matchCodeSet = function(code, codeSet) {
     // No match was found
     return false;
 
-}
+};
 
 /**
  * Mark current patient as being excluded from the query due to invalid data.
@@ -162,45 +190,127 @@ utils.info = function(message, errorContainer) {
     }
 };
 
-utils.emitErrorContainer = function(errorContainer, level) {
+/**
+ * Emit the contents of the error container passed based on the other parameters
+ * 
+ * @param errorContainer
+ *                ErrorContainer to emit
+ * @param doctorKey
+ *                Unique key for doctor so that output from multiple doctors
+ *                will not be combined via reduction. Defaults to null which
+ *                allows results to be combined via reduction.
+ * @param level
+ *                The level of output to emit. "info", "warning", or "error".
+ *                Higher levels will result in more output. Defaults to "info"
+ *                if not specified which will emit all information available
+ * @param combineMultiples
+ *                If true, multiple instances of the same message will be
+ *                combined and only displayed once
+ */
+utils.emitErrorContainer = function(errorContainer, doctorKey, level,
+	combineMultiples) {
+    if (utils.isUndefinedOrNull(doctorKey)) {
+	// default to null which allows results to be combined via reduction.
+	doctorKey = null;
+    }
+
+    
     // Determine effective error level
     var levelNumber;
-    if(utils.isUndefinedOrNull(level)) {
+    if (utils.isUndefinedOrNull(level)) {
 	// Default to all
 	levelNumber = 3;
-    } else if(typeof level == "number") {
+    } else if (typeof level == "number") {
 	// Use level number passed within range of [0, 3]
 	levelNumber = Math.max(0, Math.min(3, level));
-    } else if(level.toLowerCase().trim() == "error") {
+    } else if (level.toLowerCase().trim() == "error") {
 	levelNumber = 1;
-    } else if(level.toLowerCase().trim() == "warning") {
+    } else if (level.toLowerCase().trim() == "warning") {
 	levelNumber = 2;
-    } else if(level.toLowerCase().trim() == "info") {
+    } else if (level.toLowerCase().trim() == "info") {
 	levelNumber = 3;
     }
-    
+
+    if (utils.isUndefinedOrNull(combineMultiples)) {
+	// default to true
+	combineMultiples = true;
+    }
+
     var errorEmit = {};
+    
+    if(doctorKey != null) {
+	// Add doctor value to prevent combining of multiple doctors via reduction
+	errorEmit.doctor = doctorKey;
+    }
+    
     var doEmit = false;
     // Add any Error messages
     if (errorContainer.error && (levelNumber >= 1)) {
 	doEmit = true;
-	errorEmit.errorMessages = errorContainer.errorMessages;
+	if (!combineMultiples) {
+	    // Output count for clarity as different counts will not reduce
+	    // anyways
+	    errorEmit.errorMessagesCount = errorContainer.errorMessages.length;
+	}
+	errorEmit.errorMessages = utils.buildMessagesOutput(
+		errorContainer.errorMessages, combineMultiples)
     }
 
     // Add any Warning messages
     if (errorContainer.warning && (levelNumber >= 2)) {
 	doEmit = true;
-	errorEmit.warningMessages = errorContainer.warningMessages;
+	if (!combineMultiples) {
+	    // Output count for clarity as different counts will not reduce
+	    // anyways
+	    errorEmit.warningMessagesCount = errorContainer.warningMessages.length;
+	}
+	errorEmit.warningMessages = utils.buildMessagesOutput(
+		errorContainer.warningMessages, combineMultiples);
     }
-    // Add any Error messages
+    // Add any Informational messages
     if (errorContainer.info && (levelNumber >= 3)) {
 	doEmit = true;
-	errorEmit.infoMessages = errorContainer.infoMessages;
+	if (!combineMultiples) {
+	    // Output count for clarity as different counts will not reduce
+	    // anyways
+	    errorEmit.infoMessagesCount = errorContainer.infoMessages.length;
+	}
+	errorEmit.infoMessages = utils.buildMessagesOutput(
+		errorContainer.infoMessages, combineMultiples);
     }
 
     if (doEmit) {
 	emit(JSON.stringify(errorEmit), 1);
     }
 
-}
+};
 
+/**
+ * Build and return array to output for the messages passed
+ * 
+ * @param messages
+ *                Messages to be output
+ * @param combineMultiples
+ *                if true, combine multiple instances of the same message
+ * 
+ * @return Array of messages prepared for output via emit inside hQuery
+ */
+utils.buildMessagesOutput = function(messages, combineMultiples) {
+    var output = [];
+    var items;
+    if (combineMultiples) {
+	// Create items as a Set so that multiples are combined
+	items = new Set(messages);
+    } else {
+	items = messages;
+    }
+
+    // Replace any characters that are not letters with underscores to ensure we
+    // don't break hQuery
+    // and push to output array so it displays nicely
+    items.forEach(function(value) {
+	output.push(value.replace(/[^a-zA-Z\s]/g, "_"));
+    });
+
+    return output;
+};

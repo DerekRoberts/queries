@@ -5,46 +5,76 @@
 
 var medications = medications || {};
 
-// Returns whether the patient passed as the medication defined by medInfo on
-// the date passed
-medications.hasActiveMed = function(patient, date, medInfo) {
+/**
+ * Returns whether the patient passed has the medication defined by medInfo on
+ * the date passed
+ * 
+ * @param patient
+ *                hQuery patient object
+ * @param date
+ *                Effective date for which data should be examined
+ * @param medInfo
+ *                Medication Information object from dictionary that defines the
+ *                medication for which to search
+ * @param errorContainer
+ *                ErrorContainer to use for storing any errors or output
+ */
+medications.hasActiveMed = function(patient, date, medInfo, errorContainer) {
     // Check for dose in default range
     var doseMin = dictionary.defaults.doses.min, doseMax = dictionary.defaults.doses.max;
     return medications.hasActiveMedRange(patient, date, medInfo, doseMin,
-	    doseMax);
+	    doseMax, errorContainer);
 };
 
-// Returns whether the patient passed has the medication defined by Medifo
-// on the date passed with a dose in the range passed
+/**
+ * Returns whether the patient passed has the medication defined by medInfo on
+ * the date passed with a dose in the range passed
+ * 
+ * @param patient
+ *                hQuery patient object
+ * @param date
+ *                Effective date for which data should be examined
+ * @param medInfo
+ *                Medication Information object from dictionary that defines the
+ *                medication for which to search
+ * @param doseMin
+ *                Minimum valid dose
+ * @param doseMax
+ *                Maximum valid dose
+ * @param errorContainer
+ *                ErrorContainer to use for storing any errors or output
+ */
 medications.hasActiveMedRange = function(patient, date, medInfo, doseMin,
-	doseMax) {
+	doseMax, errorContainer) {
     // Check input
     if (utils.isUndefinedOrNull(patient, date, medInfo, doseMin, doseMax)) {
-	return emitter.error("hasActiveMedRange received invalid input");
+	return utils.invalid(
+		"Invalid data passed to medications hasActiveMedRange",
+		errorContainer);
     }
 
     // Get patient medication list
     var meds = patient.medications();
 
     if (utils.isUndefinedOrNull(meds) || (meds.length === 0)) {
-	return false;
+	return utils.invalid("Patient has no meds", errorContainer);
     }
 
     // Filter meds list to those that match one of the codes defined for the
     // med. Implemented as a filter so that all meds will be checked and any
     // data issues found
     var matchingActiveMeds = meds.filter(function(med) {
-	if (medications.isCodeMatch(med, medInfo)
-		&& medications.isActiveMed(med, date)
-		&& medications.isDoseInRange(med, doseMin, doseMax)) {
+	if (medications.isCodeMatch(med, medInfo, errorContainer)
+		&& medications.isActiveMed(med, date, errorContainer)
+		&& medications.isDoseInRange(med, doseMin, doseMax,
+			errorContainer)) {
 	    // Med is a code match, active for the date being examined, and has
 	    // a dose in the required range.
 	    return true;
 	} else {
 	    // Med either is not a code match, is not active for the date being
-	    // examined,
-	    // or does not have a valid dose in the required range and is
-	    // therefore not a match
+	    // examined, or does not have a valid dose in the required range and
+	    // is therefore not a match
 	    return false;
 	}
     });
@@ -59,9 +89,20 @@ medications.hasActiveMedRange = function(patient, date, medInfo, doseMin,
     }
 };
 
-// Returns whether the medication entry passed is a match for any of the codes
-// defined in medInfo
-medications.isCodeMatch = function(med, medInfo) {
+/**
+ * Returns whether the medication entry passed is a match for any of the codes
+ * defined in medInfo
+ * 
+ * @param med
+ *                single medication entry from hQuery patient object
+ * @param medInfo
+ *                Medication Information object from dictionary that defines the
+ *                medication for which to search
+ * @param errorContainer
+ *                ErrorContainer to use for storing any errors or output
+ * 
+ */
+medications.isCodeMatch = function(med, medInfo, errorContainer) {
     // Check if it matches one of the codes defined in medInfo
 
     // TODO: do we want to manually do a match for each codeset or sync
@@ -74,7 +115,8 @@ medications.isCodeMatch = function(med, medInfo) {
 	// and at least one ATC code for the med being examined
 	// Compare ATC codes
 
-	if (utils.matchCodeSet(med.json.codes.whoATC, medInfo.ATC)) {
+	if (utils.matchCodeSet(med.json.codes.whoATC, medInfo.ATC,
+		errorContainer)) {
 	    // we have a match
 	    return true;
 	}
@@ -88,10 +130,21 @@ medications.isCodeMatch = function(med, medInfo) {
 
 }
 
-// Examines the medication entry passed and returns whether it contains a valid
-// dose in the range
-// dosemin =< med dose <= doseMax
-medications.isDoseInRange = function(med, doseMin, doseMax) {
+/**
+ * Examines the medication entry passed and returns whether it contains a valid
+ * dose in the range dosemin =< med dose <= doseMax
+ * 
+ * @param med
+ *                single medication entry from hQuery patient object
+ * @param doseMin
+ *                Minimum valid dose
+ * @param doseMax
+ *                Maximum valid dose
+ * @param errorContainer
+ *                ErrorContainer to use for storing any errors or output
+ * 
+ */
+medications.isDoseInRange = function(med, doseMin, doseMax, errorContainer) {
     // check if there is a dose defined
     if (!utils.isUndefinedOrNull(med.json.values)
 	    && (med.json.values.length > 0)
@@ -108,8 +161,18 @@ medications.isDoseInRange = function(med, doseMin, doseMax) {
     }
 }
 
-// Returns whether the medication entry passed is active on the date passed
-medications.isActiveMed = function(med, date) {
+/**
+ * Returns whether the medication entry passed is active on the date passed
+ * 
+ * @param med
+ *                single medication entry from hQuery patient object
+ * @param date
+ *                Effective date for which data should be examined
+ * @param errorContainer
+ *                ErrorContainer to use for storing any errors or output
+ * 
+ */
+medications.isActiveMed = function(med, date, errorContainer) {
     // check for valid input, if invalid then we can't operate on the
     // medication, return false.
     if (utils.isUndefinedOrNull(med, med.json)) {
@@ -125,7 +188,7 @@ medications.isActiveMed = function(med, date) {
     var dateSeconds = Math.floor(date.getTime() / 1000);
 
     // check if the status of the medication is defined
-    if (!utils.isUndefinedOrNull(med.json.statusOfMedication, 
+    if (!utils.isUndefinedOrNull(med.json.statusOfMedication,
 	    med.json.statusOfMedication.value)) {
 	if (med.json.statusOfMedication.value === 'active') {
 	    // if the medication is marked as active, we just return true.
@@ -134,12 +197,13 @@ medications.isActiveMed = function(med, date) {
 	    // check if medication was active on date
 	    var startMed = med.json.start_time;
 	    var stopMed = med.json.end_time;
-	    var lengthExtended = (stop - start) * 1.2; // get the amount of
+	    var lengthExtended = (stopMed - startMed) * 1.2; // get the
+	    // amount of
 	    // padding required
 
 	    // Check if date is within standard range
 	    if ((utils.isUndefinedOrNull(startMed) || startMed < date)
-		    && (utils.isUndefinedOrNull(endMed) || date < endMed)) {
+		    && (utils.isUndefinedOrNull(stopMed) || date < stopMed)) {
 		return true;
 	    } else if (
 	    // Check if date is within extended range
@@ -161,4 +225,3 @@ medications.isActiveMed = function(med, date) {
     }
 
 };
-
