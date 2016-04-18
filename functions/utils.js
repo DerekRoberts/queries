@@ -309,7 +309,7 @@ utils.buildMessagesOutput = function(messages, combineMultiples) {
     // don't break hQuery
     // and push to output array so it displays nicely
     items.forEach(function(value) {
-	output.push(value.replace(/[^a-zA-Z\s]/g, "_"));
+	output.push(value.replace(/[^a-zA-Z\s0-9]/g, "_"));
     });
 
     return output;
