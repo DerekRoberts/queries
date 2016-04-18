@@ -1,6 +1,13 @@
 # This repo only #
 ##################
 
+# Eclipse Files #
+#################
+.project
+.settings/
+.tern-project
+
+
 *.env
 *.json
 *.xml
