@@ -120,7 +120,8 @@ medications.isCodeMatch = function(med, medInfo, errorContainer) {
 	    // we have a match
 	    return true;
 	}
-    }
+    } 
+   
 
     // TODO add other codeset checks
 
@@ -202,14 +203,14 @@ medications.isActiveMed = function(med, date, errorContainer) {
 	    // padding required
 
 	    // Check if date is within standard range
-	    if ((utils.isUndefinedOrNull(startMed) || startMed < date)
-		    && (utils.isUndefinedOrNull(stopMed) || date < stopMed)) {
+	    if ((utils.isUndefinedOrNull(startMed) || startMed < dateSeconds)
+		    && (utils.isUndefinedOrNull(stopMed) || dateSeconds < stopMed)) {
 		return true;
 	    } else if (
 	    // Check if date is within extended range
-	    !utils.isUndefinedOrNull(startMed) && (startMed < date)
+	    !utils.isUndefinedOrNull(startMed) && (startMed < dateSeconds)
 		    && !utils.isUndefinedOrNull(lengthExtended)
-		    && (date < startMed + lengthExtended)) {
+		    && (dateSeconds < startMed + lengthExtended)) {
 		return true;
 	    } else {
 		return false;
