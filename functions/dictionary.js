@@ -3,7 +3,7 @@
 *   JavaScript objects for medications, conditions and default values.
 */
 
-var dictionary = dictionary ||{};
+var dictionary = dictionary || {};
 
 // http://www.whocc.no/atc_ddd_index
 dictionary.meds = dictionary.meds || {
@@ -90,7 +90,7 @@ dictionary.conditions = dictionary.conditions ||{
       { codeBeginsWith: "434.", description: "CEREBRAL THROMBOSIS" },
       { codeBeginsWith: "436",  description: "ACUTE BUT ILL-DEFINED CEREBROVASCULAR DISEASE" },
       { codeBeginsWith: "437.", description: "..." },
-      { codeBeginsWith: "438.", description: "..." },
+      { codeBeginsWith: "438.", description: "..." }
     ]
   },
   chronicKidneyDisease : {
@@ -105,7 +105,7 @@ dictionary.conditions = dictionary.conditions ||{
   },
   COPD : {
     ICD9     : [
-      { codeEquals:     "496",  description: "CHRONIC AIRWAY OBSTRUCTION NOT ELSEWHERE CLASSIFIED" }
+      { codeEquals:     "496",  description: "CHRONIC AIRWAY OBSTRUCTION NOT ELSEWHERE CLASSIFIED" },
       { codeBeginsWith: "491.", description: "BRONCHITIS ..." },
       { codeBeginsWith: "492.", description: "EMPHYSEMA ..." },
       { codeBeginsWith: "494.", description: "BRONCHIECTASIS ..." }
@@ -276,7 +276,7 @@ dictionary.conditions = dictionary.conditions ||{
       { codeBeginsWith: "309.", description: "ADJUSTMENT DISORDERS AND OTHERS ..." },
       { codeBeginsWith: "314.", description: "ADD, ADHD AND OTHERS ..." },
       // NOTE: Insomnia code includes more than just insomnia (coma and other vegetative states)
-      { codeBeginsWith: "780.", description: "ADD, ADHD AND OTHERS ..." },
+      { codeBeginsWith: "780.", description: "ADD, ADHD AND OTHERS ..." }
     ]
   },
   myocardialInfarction : {
@@ -291,7 +291,7 @@ dictionary.conditions = dictionary.conditions ||{
     ICD9     : [
       // NOTE: Shouldn't this be 278.?
       { codeEquals: "^298.0", description: "DEPRESSIVE TYPE PSYCHOSIS" }
-    ]
+    ],
     SNOMEDCT : [
       { codeEquals: "414916001", description: "Obesity" }
     ]
@@ -348,7 +348,7 @@ dictionary.defaults = dictionary.defaults ||{
   dates: {
     start : function(){
       // Remember months are zero indexed!
-      return new Date( 2016, 2, 1 );
+      return new Date( 2016, 3, 1 );
     },
     end   : function(){
       return new Date();
