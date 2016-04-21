@@ -3,7 +3,7 @@
 *   JavaScript objects for medications, conditions and default values.
 */
 
-var dictionary = dictionary || {};
+var dictionary = dictionary ||{};
 
 // http://www.whocc.no/atc_ddd_index
 dictionary.meds = dictionary.meds || {
@@ -90,7 +90,7 @@ dictionary.conditions = dictionary.conditions ||{
       { codeBeginsWith: "434.", description: "CEREBRAL THROMBOSIS" },
       { codeBeginsWith: "436",  description: "ACUTE BUT ILL-DEFINED CEREBROVASCULAR DISEASE" },
       { codeBeginsWith: "437.", description: "..." },
-      { codeBeginsWith: "438.", description: "..." }
+      { codeBeginsWith: "438.", description: "..." },
     ]
   },
   chronicKidneyDisease : {
@@ -276,7 +276,7 @@ dictionary.conditions = dictionary.conditions ||{
       { codeBeginsWith: "309.", description: "ADJUSTMENT DISORDERS AND OTHERS ..." },
       { codeBeginsWith: "314.", description: "ADD, ADHD AND OTHERS ..." },
       // NOTE: Insomnia code includes more than just insomnia (coma and other vegetative states)
-      { codeBeginsWith: "780.", description: "ADD, ADHD AND OTHERS ..." }
+      { codeBeginsWith: "780.", description: "ADD, ADHD AND OTHERS ..." },
     ]
   },
   myocardialInfarction : {
@@ -339,6 +339,11 @@ dictionary.conditions = dictionary.conditions ||{
 };
 
 dictionary.defaults = dictionary.defaults ||{
+  // Active patient window (seconds)
+  active : {
+    // 3 years ~= 60*60*24*365*3 seconds
+    window : 94608000
+  },
   // Min and max ages supported by hQuery
   ages: {
     min : 0,
@@ -347,7 +352,7 @@ dictionary.defaults = dictionary.defaults ||{
   // Start and end dates for retroactive queries
   dates: {
     start : function(){
-      // Remember months are zero indexed!
+      // Remember months are zero indexed, but days aren't!
       return new Date( 2016, 3, 1 );
     },
     end   : function(){
