@@ -22,20 +22,26 @@ profile.activeEncounter = function( patient, atDate, activeWindow ){
   // Active status window, patient encounters and dates
   var ptEncounters = patient.encounters(),
       end          = Math.floor( atDate.getTime() / 1000 ),
-      start        = end - activeWindow;
+      start        = end - activeWindow,
+      isActive     = false;
 
   // Check for encounters in the past 3 years (see activeWindow)
   ptEncounters.forEach( function( ptEnc ){
-    if( !utils.isUndefinedOrNull( ptEnc.json.start_time )){
+    if(
+      !isActive &&
+      !utils.isUndefinedOrNull( ptEnc, ptEnc.json, ptEnc.json.start_time )
+    ){
       encDate = ptEnc.json.start_time;
       if(( start <= encDate )&&( encDate <= end )){
-        return true;
+        // If found, then mark active and exit function (return false)
+        isActive = true;
+        return false;
       }
     }
   });
 
-  // Otherwise none were found
-  return false;
+  // Return results
+  return isActive;
 }
 
 
@@ -53,33 +59,41 @@ profile.activeEncounter = function( patient, atDate, activeWindow ){
  *                true/false (boolean)
  */
 profile.activeMedication = function( patient, atDate, activeWindow ){
-  // Active status window, patient encounters and dates
+  // Medications, dates and active status
   var ptMedications = patient.medications();
-      intervalEnd   = Math.floor( atDate.getTime() / 1000 ),
-      intervalStart = intervalEnd - activeWindow,
-      atTime        = "Value not assigned";
+      end           = Math.floor( atDate.getTime() / 1000 ),
+      start         = end - activeWindow,
+      atTime        = "Value not assigned",
+      isActive      = false;
 
   // Check for med events in the specified interval
   ptMedications.forEach( function( ptMed ){
-    // Is this end time in the interval?
-    if( !utils.isUndefinedOrNull( ptMed.json.end_time )){
+    // Are any end times in the interval?
+    if( !utils.isUndefinedOrNull( ptMed, ptMed.json, ptMed.json.end_time )){
       atTime = ptMed.json.end_time;
-      if(( intervalStart <= atTime )&&( atTime <= intervalEnd )){
-        return true;
+      if(( start <= atTime )&&( atTime <= end )){
+        // If found, then mark active and exit function (return false)
+        isActive = true;
+        return false;
       }
     }
 
-    // Is this start time in the interval?
-    if( !utils.isUndefinedOrNull( ptMed.json.start_time )){
+    // No?  Then are any end times in the interval?
+    if(
+      !isActive &&
+      !utils.isUndefinedOrNull( ptMed, ptMed.json, ptMed.json.start_time )
+    ){
       atTime = ptMed.json.start_time;
-      if(( intervalStart <= atTime )&&( atTime <= intervalEnd )){
-        return true;
+      if(( start <= atTime )&&( atTime <= end )){
+        // If found, then mark active and exit function (return false)
+        isActive = true;
+        return false;
       }
     }
   });
 
-  // ...Otherwise no in range med events have been found
-  return false;
+  // Return results
+  return isActive;
 }
 
 
@@ -105,18 +119,16 @@ profile.active = function( patient, atDate, errorContainer ){
   // Store active window from detauls
   var activeWindow = dictionary.defaults.active.window;
 
-  // Active if patient has an encounter in the last 3 years (activeWindow)
-  if( profile.activeEncounter( patient, atDate, activeWindow )){
+  // Check encounters and meds for active status
+  if(
+    profile.activeEncounter( patient, atDate, activeWindow ) ||
+    profile.activeMedication( patient, atDate, activeWindow )
+  ){
     return true;
   }
-
-  // Active if patient has an active medication (see activeWindow)
-  if( profile.activeMedication( patient, atDate, activeWindow )){
-    return true;
+  else {
+    return false;
   }
-
-  // ...Otherwise the patient not active
-  return false;
 };
 
 
