@@ -38,6 +38,11 @@ dictionary.meds = dictionary.meds || {
       { codeBeginsWith: "C08GA", description: "Calcium channel blockers and diuretics" }
     ]
   },
+  digoxin : {
+    ATC : [
+      { codeBeginsWith: "C01AA", description: "Digitalis glycosides" }
+    ]
+  },
   naturalOpiumAlkaloid : {
     ATC : [
       { codeBeginsWith: "N02AA", description: "Natural opium alkaloids" }
