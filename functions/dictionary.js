@@ -343,6 +343,23 @@ dictionary.conditions = dictionary.conditions ||{
   }
 };
 
+
+// PDF: https://loinc.org/discussion-documents/2008-06-09-long-common-names-report/attachment_download/file
+// http://s.details.loinc.org/LOINC/xxxxx-x.html?sections=Comprehensive
+// http://s.details.loinc.org/LOINC/xxxxx-x.html
+dictionary.labs = dictionary.labs || {
+  creatinine  : {
+    pCLOCD : [
+      { codeEquals: "14682-9", description: "Creatinine [Molecules/volume] in Serum or Plasma" }
+    ]
+  },
+  glomerularFiltrationRate : {
+    pCLOCD : [
+      { codeEquals: "33914-3", description: "Glomerular filtration rate/1.73 sq M.predicted [Flow] in Serum or Plasma by Creatinine-based formula (MDRD)" }
+    ]
+  }
+};
+
 dictionary.defaults = dictionary.defaults ||{
   // Active patient window (seconds)
   active : {
@@ -367,6 +384,11 @@ dictionary.defaults = dictionary.defaults ||{
   // Min and max bounds for medication queries without bounds
   doses: {
     min : 0,
+    max : Number.POSITIVE_INFINITY
+  },
+  // Min and max bounds for queries without lab value bounds
+  labVals: {
+    min : Number.NEGATIVE_INFINITY,
     max : Number.POSITIVE_INFINITY
   },
   // Min and max bounds for queries without dose bounds
