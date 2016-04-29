@@ -214,7 +214,6 @@ utils.emitErrorContainer = function(errorContainer, doctorKey, level,
 	doctorKey = null;
     }
 
-    
     // Determine effective error level
     var levelNumber;
     if (utils.isUndefinedOrNull(level)) {
@@ -237,12 +236,13 @@ utils.emitErrorContainer = function(errorContainer, doctorKey, level,
     }
 
     var errorEmit = {};
-    
-    if(doctorKey != null) {
-	// Add doctor value to prevent combining of multiple doctors via reduction
+
+    if (doctorKey != null) {
+	// Add doctor value to prevent combining of multiple doctors via
+	// reduction
 	errorEmit.doctor = doctorKey;
     }
-    
+
     var doEmit = false;
     // Add any Error messages
     if (errorContainer.error && (levelNumber >= 1)) {
@@ -314,3 +314,52 @@ utils.buildMessagesOutput = function(messages, combineMultiples) {
 
     return output;
 };
+
+/**
+ * Returns a string conversation of the object passed and recursively prints any subobjects in a manner that will not break emits.
+ * Currently works with objects and arrays.
+ * 
+ * Lexicon
+ * _A_ - Start of array
+ * _a_ - End of array
+ * _S_ - Array item separator
+ * _O_ - Start of object
+ * _o_ - End of object
+ * 
+ * @param item Item to be converted to string
+ * @param maxLevel how many levels to traverse into objects and arrays
+ */
+utils.deepPrint = function(item, maxLevel) {
+    if(utils.isUndefinedOrNull(maxLevel)) {
+	maxLevel = 5;
+    }
+    
+    if(maxLevel == 0) {
+	return "Level Limit";
+    }
+    
+    if (utils.isUndefinedOrNull(item)) {
+	return "" + item;
+    } else if (Array.isArray(item)) {
+	var output = " _A_ ";
+	item.forEach(function(arrayItem, index) {
+	    if (index > 0) {
+		output = output + " _S_ ";
+	    }
+	    output = output + utils.deepPrint(arrayItem, maxLevel - 1);
+
+	});
+	return output + " _a_ ";
+    } else if (typeof item === 'object') {
+	
+	var keys = Object.keys(item);
+	var output = "";
+	// we have an object
+	keys.forEach(function(key, index) {
+	    output = output + key + " _O_ " + utils.deepPrint(item[key], maxLevel - 1) + " _o_ ";
+	});
+	return output;
+    } else {
+	return "" + item;
+    }
+}
