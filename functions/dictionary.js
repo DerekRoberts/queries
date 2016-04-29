@@ -38,6 +38,11 @@ dictionary.meds = dictionary.meds || {
       { codeBeginsWith: "C08GA", description: "Calcium channel blockers and diuretics" }
     ]
   },
+  digoxin : {
+    ATC : [
+      { codeBeginsWith: "C01AA", description: "Digitalis glycosides" }
+    ]
+  },
   naturalOpiumAlkaloid : {
     ATC : [
       { codeBeginsWith: "N02AA", description: "Natural opium alkaloids" }
@@ -105,7 +110,7 @@ dictionary.conditions = dictionary.conditions ||{
   },
   COPD : {
     ICD9     : [
-      { codeEquals:     "496",  description: "CHRONIC AIRWAY OBSTRUCTION NOT ELSEWHERE CLASSIFIED" }
+      { codeEquals:     "496",  description: "CHRONIC AIRWAY OBSTRUCTION NOT ELSEWHERE CLASSIFIED" },
       { codeBeginsWith: "491.", description: "BRONCHITIS ..." },
       { codeBeginsWith: "492.", description: "EMPHYSEMA ..." },
       { codeBeginsWith: "494.", description: "BRONCHIECTASIS ..." }
@@ -291,7 +296,7 @@ dictionary.conditions = dictionary.conditions ||{
     ICD9     : [
       // NOTE: Shouldn't this be 278.?
       { codeEquals: "^298.0", description: "DEPRESSIVE TYPE PSYCHOSIS" }
-    ]
+    ],
     SNOMEDCT : [
       { codeEquals: "414916001", description: "Obesity" }
     ]
@@ -338,7 +343,29 @@ dictionary.conditions = dictionary.conditions ||{
   }
 };
 
+
+// PDF: https://loinc.org/discussion-documents/2008-06-09-long-common-names-report/attachment_download/file
+// http://s.details.loinc.org/LOINC/xxxxx-x.html?sections=Comprehensive
+// http://s.details.loinc.org/LOINC/xxxxx-x.html
+dictionary.labs = dictionary.labs || {
+  creatinine  : {
+    pCLOCD : [
+      { codeEquals: "14682-9", description: "Creatinine [Molecules/volume] in Serum or Plasma" }
+    ]
+  },
+  glomerularFiltrationRate : {
+    pCLOCD : [
+      { codeEquals: "33914-3", description: "Glomerular filtration rate/1.73 sq M.predicted [Flow] in Serum or Plasma by Creatinine-based formula (MDRD)" }
+    ]
+  }
+};
+
 dictionary.defaults = dictionary.defaults ||{
+  // Active patient window (seconds)
+  active : {
+    // 3 years ~= 60*60*24*365*3 seconds
+    window : 94608000
+  },
   // Min and max ages supported by hQuery
   ages: {
     min : 0,
@@ -347,8 +374,8 @@ dictionary.defaults = dictionary.defaults ||{
   // Start and end dates for retroactive queries
   dates: {
     start : function(){
-      // Remember months are zero indexed!
-      return new Date( 2016, 2, 1 );
+      // Remember months are zero indexed, but days aren't!
+      return new Date( 2016, 3, 1 );
     },
     end   : function(){
       return new Date();
@@ -357,6 +384,11 @@ dictionary.defaults = dictionary.defaults ||{
   // Min and max bounds for medication queries without bounds
   doses: {
     min : 0,
+    max : Number.POSITIVE_INFINITY
+  },
+  // Min and max bounds for queries without lab value bounds
+  labVals: {
+    min : Number.NEGATIVE_INFINITY,
     max : Number.POSITIVE_INFINITY
   },
   // Min and max bounds for queries without dose bounds
