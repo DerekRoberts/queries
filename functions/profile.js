@@ -25,7 +25,7 @@ profile.activeEncounter = function( patient, atDate, activeWindow ){
       start        = end - activeWindow,
       isActive     = false;
 
-  // Check for encounters in the past 3 years (see activeWindow)
+  // Check for encounters in specified window
   ptEncounters.forEach( function( ptEnc ){
     if(
       !isActive &&
@@ -33,7 +33,7 @@ profile.activeEncounter = function( patient, atDate, activeWindow ){
     ){
       encDate = ptEnc.json.start_time;
       if(( start <= encDate )&&( encDate <= end )){
-        // If found, then mark active and exit function (return false)
+        // If found, mark active and exit (false req to break function loop)
         isActive = true;
         return false;
       }
@@ -72,20 +72,20 @@ profile.activeMedication = function( patient, atDate, activeWindow ){
     if( !utils.isUndefinedOrNull( ptMed, ptMed.json, ptMed.json.end_time )){
       atTime = ptMed.json.end_time;
       if(( start <= atTime )&&( atTime <= end )){
-        // If found, then mark active and exit function (return false)
+        // If found, mark active and exit (false req to break function loop)
         isActive = true;
         return false;
       }
     }
 
-    // No?  Then are any end times in the interval?
+    // No?  Then are any start times in the interval?
     if(
       !isActive &&
       !utils.isUndefinedOrNull( ptMed, ptMed.json, ptMed.json.start_time )
     ){
       atTime = ptMed.json.start_time;
       if(( start <= atTime )&&( atTime <= end )){
-        // If found, then mark active and exit function (return false)
+        // If found, mark active and exit (false req to break function loop)
         isActive = true;
         return false;
       }
@@ -116,7 +116,7 @@ profile.active = function( patient, atDate, errorContainer ){
     );
   }
 
-  // Store active window from detauls
+  // Store active window from defaults
   var activeWindow = dictionary.defaults.active.window;
 
   // Check encounters and meds for active status
@@ -166,22 +166,22 @@ profile.gender = function( patient, errorContainer ){
  * @param atDate
  *                reference date
  * @param ageMin
- *                minimum age
+ *                minimum age (inclusive)
  * @param ageMax
- *                maximum age
+ *                maximum age (inclusive)
  * @return
  *                true/false (boolean)
  */
 profile.ages = profile.ages ||{};
 profile.ages.isRange = function( patient, atDate, ageMin, ageMax, errorContainer ){
-	// Check input
+  // Check input
   if( utils.isUndefinedOrNull( patient, atDate, ageMin, ageMax ) ){
     return utils.invalid(
       "Invalid or incomplete data in profile.ages.isRange()", errorContainer
     );
   }
 
-	var ageNow = patient.age( atDate );
+  var ageNow = patient.age( atDate );
   if( utils.isUndefinedOrNull( ageNow ) ){
     return utils.invalid(
       "Invalid or incomplete patient.age", errorContainer
@@ -199,7 +199,7 @@ profile.ages.isRange = function( patient, atDate, ageMin, ageMax, errorContainer
  * @param atDate
  *                reference date
  * @param ageMax
- *                maximum age
+ *                maximum age (inclusive)
  * @return
  *                true/false (boolean)
  */
@@ -218,7 +218,7 @@ profile.ages.isMax = function( patient, atDate, ageMax, errorContainer ){
  * @param atDate
  *                reference date
  * @param ageMin
- *                minimum age
+ *                minimum age (inclusive)
  * @return
  *                true/false (boolean)
  */
