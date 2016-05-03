@@ -21,7 +21,7 @@
        return profile.active( patient, date ) && <library>.<function>( patient, date, this.thing1 );
      },
      // Other things?
-     numerator: function( patient, date, denominator ) {
+     numerator: function( patient, date, denominator, errorContainer ) {
        return denominator && <library>.<function>( patient, date, this.thing2, this.thing3 );
      }
    };

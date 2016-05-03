@@ -18,8 +18,8 @@ function map( patient ){
       return profile.active( patient, date ) && profile.ages.isMin( patient, date, this.ageMin );
     },
     // Other things?
-    numerator: function( patient, date, denominator ) {
-      return denominator && conditions.hasRegex( patient, this.codeSet );
+    numerator: function( patient, date, denominator, errorContainer ) {
+      return denominator && conditions.hasActiveCondition( patient, date, this.codeSet, errorContainer );
     }
   };
   // Emit results based on query above
