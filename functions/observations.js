@@ -11,15 +11,15 @@ var observations = observations || {};
  * 
  * @param patient
  *                hQuery patient object
- * @param observationInfo
- *                Observation Information object from dictionary that defines
- *                the observation for which to search
  * @param minDate
  *                Start of the effective date range for which data should be
  *                examined
  * @param maxDate
  *                End of the effective date range for which data should be
  *                examined
+ * @param observationInfo
+ *                Observation Information object from dictionary that defines
+ *                the observation for which to search
  * @param valueBottom
  *                The bottom end of the value range
  * @param valueTop
@@ -38,8 +38,8 @@ var observations = observations || {};
  * @param errorContainer
  *                ErrorContainer to use for storing any errors or output
  */
-observations.hasObservation = function(patient, observationInfo, minDate,
-	maxDate, valueBottom, valueTop, valueComplement, valueUnits,
+observations.hasObservation = function(patient, minDate,
+	maxDate, observationInfo, valueBottom, valueTop, valueComplement, valueUnits,
 	valueOnlyMostRecent, errorContainer) {
 
     // Check input
