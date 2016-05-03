@@ -32,7 +32,7 @@ utils.isUndefined = function() {
  */
 utils.isUndefinedOrNull = function() {
     for (var i = 0; i < arguments.length; i++) {
-	if ((arguments[i] == undefined) || (arguments[i] == null)) {
+	if ((typeof arguments[i] === "undefined") || (arguments[i] === undefined) || (arguments[i] == null)) {
 	    // at least one of the arguments is undefined or null
 	    return true;
 	}

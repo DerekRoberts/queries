@@ -1,53 +1,52 @@
 /*
- * Basic observation functions.  Dictionary-like functions are in dictionary.js.
+ * Basic lab functions.  Dictionary-like functions are in dictionary.js.
  *
  */
 
-var observations = observations || {};
+var labs = labs || {};
 
 /**
- * Returns whether the patient passed has the observation defined by
- * observationInfo in the date range passed
+ * Returns whether the patient passed has the lab defined by labInfo in the date
+ * range passed
  * 
  * @param patient
  *                hQuery patient object
- * @param observationInfo
- *                Observation Information object from dictionary that defines
- *                the observation for which to search
  * @param minDate
  *                Start of the effective date range for which data should be
  *                examined
  * @param maxDate
  *                End of the effective date range for which data should be
  *                examined
+ * @param labInfo
+ *                Lab Information object from dictionary that defines the lab
+ *                for which to search
  * @param valueBottom
  *                The bottom end of the value range
  * @param valueTop
  *                The top end of the value range
  * @param valueComplement
- *                If false, observations in the range [valueBottom, valueTop]
- *                will be considered a match. If true, observations OUTSIDE the
- *                range [valueBottom, valueTop] will be considered a match.
+ *                If false, labs in the range [valueBottom, valueTop] will be
+ *                considered a match. If true, labs OUTSIDE the range
+ *                [valueBottom, valueTop] will be considered a match.
  * @param valueUnits
  *                The units that the value must be specified in for a
  *                measurement to be a match
  * @param valueOnlyMostRecent
- *                If true, only the most recent observation matching
- *                observationInfo within the date range will be examined for a
- *                matching value
+ *                If true, only the most recent lab matching labInfo within the
+ *                date range will be examined for a matching value
  * @param errorContainer
  *                ErrorContainer to use for storing any errors or output
  */
-observations.hasObservation = function(patient, observationInfo, minDate,
-	maxDate, valueBottom, valueTop, valueComplement, valueUnits,
-	valueOnlyMostRecent, errorContainer) {
+labs.hasLab = function(patient, minDate, maxDate, labInfo, valueBottom,
+	valueTop, valueComplement, valueUnits, valueOnlyMostRecent,
+	errorContainer) {
 
     // Check input
-    if (utils.isUndefinedOrNull(patient, patient.json, observationInfo,
-	    valueBottom, valueTop, valueComplement, valueOnlyMostRecent)) {
+    if (utils.isUndefinedOrNull(patient, patient.json, labInfo, valueBottom,
+	    valueTop, valueComplement, valueOnlyMostRecent)) {
 	return utils
 		.invalid(
-			"Invalid or incomplete data passed to observations.hasObservation:"
+			"Invalid or incomplete data passed to labs.hasLab:"
 				+ (utils.isUndefinedOrNull(patient) ? " patient = \""
 					+ patient + "\""
 					: "")
@@ -56,8 +55,8 @@ observations.hasObservation = function(patient, observationInfo, minDate,
 						.isUndefinedOrNull(patient.json) ? " patient.json = \""
 					+ patient.json + "\""
 					: "")
-				+ (utils.isUndefinedOrNull(observationInfo) ? " observationInfo = \""
-					+ observationInfo + "\""
+				+ (utils.isUndefinedOrNull(labInfo) ? " labInfo = \""
+					+ labInfo + "\""
 					: "")
 				+ (utils.isUndefinedOrNull(valueBottom) ? " valueBottom = \""
 					+ valueBottom + "\""
@@ -84,11 +83,11 @@ observations.hasObservation = function(patient, observationInfo, minDate,
 	maxDate = new Date(maxMillisFromEpoch);
     }
 
-    // Get patient observation list
-    var measurements = patient.vitalSigns();
+    // Get patient lab list
+    var measurements = patient.json.results;
 
     if (utils.isUndefinedOrNull(measurements) || (measurements.length === 0)) {
-	return utils.invalid("Patient has no observations", errorContainer);
+	return utils.invalid("Patient has no lab results", errorContainer);
     }
 
     // Filter measurements list to those that match one of the codes defined for
@@ -96,9 +95,8 @@ observations.hasObservation = function(patient, observationInfo, minDate,
     // so that all measurements will be checked and any data issues found
     var matchingCodeAndDateMeasurements = measurements.filter(function(
 	    measurement) {
-	if (observations.isCodeMatch(measurement, observationInfo,
-		errorContainer)
-		&& observations.isDateInRange(measurement, minDate, maxDate,
+	if (labs.isCodeMatch(measurement, labInfo, errorContainer)
+		&& labs.isDateInRange(measurement, minDate, maxDate,
 			errorContainer)) {
 	    // Measurement is a code match and in the appropriate date range
 	    return true;
@@ -135,8 +133,8 @@ observations.hasObservation = function(patient, observationInfo, minDate,
     // data issues found
     var fullyMatchingMeasurements = matchingCodeAndDateMeasurements
 	    .filter(function(measurement) {
-		if (observations.isValueInRange(measurement, valueBottom,
-			valueTop, valueComplement, valueUnits, errorContainer)) {
+		if (labs.isValueInRange(measurement, valueBottom, valueTop,
+			valueComplement, valueUnits, errorContainer)) {
 		    // Measurement has a value in the required range, and the
 		    // correct units.
 		    return true;
@@ -161,33 +159,54 @@ observations.hasObservation = function(patient, observationInfo, minDate,
 
 /**
  * Returns whether the measurement entry passed is a match for any of the codes
- * defined in observationInfo
+ * defined in labInfo
  * 
  * @param measurement
  *                single measurement entry from hQuery patient object
- * @param observationInfo
- *                Observation Information object from dictionary that defines
- *                the observation for which to search
+ * @param labInfo
+ *                Lab Information object from dictionary that defines the lab
+ *                for which to search
  * @param errorContainer
  *                ErrorContainer to use for storing any errors or output
  * 
  */
-observations.isCodeMatch = function(measurement, observationInfo,
-	errorContainer) {
-    // Check if it matches one of the codes defined in observationInfo
+labs.isCodeMatch = function(measurement, labInfo, errorContainer) {
+    // Check if it matches one of the codes defined in labInfo
 
+    if (utils.isUndefinedOrNull(measurement)
+	    || utils.isUndefinedOrNull(measurement.codes)) {
+	// No data is available to check
+	return false;
+	
+    }
+   
+    
     // TODO: do we want to manually do a match for each codeset or sync
     // the name in our structure to the name in the hQuery patient
     // object?
-    if (!utils.isUndefinedOrNull(observationInfo.LOINC, measurement.json,
-	    measurement.json.codes, measurement.json.codes.LOINC)
-	    && (measurement.json.codes.LOINC.length > 0)) {
-	// We have LOINC codes defined for the measurement passed in
-	// and at least one LOINC code for the measurement being examined
-	// Compare LOINC codes
+    
+    
+    if (!utils.isUndefinedOrNull(labInfo.SNOMEDCT, measurement.codes.SNOMEDCT)
+	    && (measurement.codes.SNOMEDCT.length > 0)) {
+	// We have SNOMEDCT codes defined for the measurement passed in
+	// and at least one SNOMEDCT code for the measurement being examined
+	// Compare SNOMEDCT codes
 
-	if (utils.matchCodeSet(measurement.json.codes.LOINC,
-		observationInfo.LOINC, errorContainer)) {
+	if (utils.matchCodeSet(measurement.codes.SNOMEDCT,
+		labInfo.SNOMEDCT, errorContainer)) {
+	    // we have a match
+	    return true;
+	}
+    }
+
+    if (!utils.isUndefinedOrNull(labInfo.pCLOCD, measurement.codes.pCLOCD)
+	    && (measurement.codes.pCLOCD.length > 0)) {
+	// We have pCLOCD codes defined for the measurement passed in
+	// and at least one pCLOCD code for the measurement being examined
+	// Compare pCLOCD codes
+
+	if (utils.matchCodeSet(measurement.codes.pCLOCD, labInfo.pCLOCD,
+		errorContainer)) {
 	    // we have a match
 	    return true;
 	}
@@ -206,7 +225,7 @@ observations.isCodeMatch = function(measurement, observationInfo,
  * specified
  * 
  * @param measurement
- *                single observation entry from hQuery patient object
+ *                single lab entry from hQuery patient object
  * @param minDate
  *                Start of date range to examine
  * @param maxDate
@@ -215,29 +234,21 @@ observations.isCodeMatch = function(measurement, observationInfo,
  *                ErrorContainer to use for storing any errors or output
  * 
  */
-observations.isDateInRange = function(measurement, minDate, maxDate,
-	errorContainer) {
+labs.isDateInRange = function(measurement, minDate, maxDate, errorContainer) {
     // check for valid input, if invalid then we can't operate on the
     // measurement, return false.
-    if (utils.isUndefinedOrNull(measurement, measurement.json,
-	    measurement.json.start_time, minDate, maxDate)) {
+    if (utils.isUndefinedOrNull(measurement) || 
+	    utils.isUndefinedOrNull(measurement.start_time) || utils.isUndefinedOrNull(minDate, maxDate)) {
 	utils
 		.info(
-			"Invalid or incomplete data passed to observations.isDateInRange:"
+			"Invalid or incomplete data passed to labs.isDateInRange:"
 				+ (utils.isUndefinedOrNull(measurement) ? " measurement = \""
 					+ measurement + "\""
 					: "")
 				+ (!utils.isUndefinedOrNull(measurement)
 					&& utils
-						.isUndefinedOrNull(measurement.json) ? " measurement.json = \""
-					+ measurement.json + "\""
-					: "")
-				+ (!utils.isUndefinedOrNull(measurement)
-					&& !utils
-						.isUndefinedOrNull(measurement.json)
-					&& utils
-						.isUndefinedOrNull(measurement.json.start_time) ? " measurement.json.start_time = \""
-					+ measurement.json.start_time + "\""
+						.isUndefinedOrNull(measurement.start_time) ? " measurement.start_time = \""
+					+ measurement.start_time + "\""
 					: "")
 
 				+ (utils.isUndefinedOrNull(minDate) ? " minDate = \""
@@ -246,12 +257,13 @@ observations.isDateInRange = function(measurement, minDate, maxDate,
 				+ (utils.isUndefinedOrNull(maxDate) ? " maxDate = \""
 					+ maxDate + "\""
 					: ""), errorContainer);
+
 	return false;
     }
 
     // return whether measurement date is within range
-    return measurement.json.start_time * 1000 > minDate
-	    && measurement.json.start_time * 1000 < maxDate;
+    return (measurement.start_time * 1000 > minDate
+	    && measurement.start_time * 1000 < maxDate);
 };
 
 /**
@@ -265,9 +277,9 @@ observations.isDateInRange = function(measurement, minDate, maxDate,
  * @param valueTop
  *                The top end of the value range
  * @param valueComplement
- *                If false, observations in the range [valueBottom, valueTop]
- *                will be considered a match. If true, observations OUTSIDE the
- *                range [valueBottom, valueTop] will be considered a match.
+ *                If false, labs in the range [valueBottom, valueTop] will be
+ *                considered a match. If true, labs OUTSIDE the range
+ *                [valueBottom, valueTop] will be considered a match.
  * @param valueUnits
  *                The units that the value must be specified in for a
  *                measurement to be a match
@@ -275,37 +287,37 @@ observations.isDateInRange = function(measurement, minDate, maxDate,
  *                ErrorContainer to use for storing any errors or output
  * 
  */
-observations.isValueInRange = function(measurement, valueBottom, valueTop,
+labs.isValueInRange = function(measurement, valueBottom, valueTop,
 	valueComplement, valueUnits, errorContainer) {
     // check if there is a value defined
-    if (!utils.isUndefinedOrNull(measurement, measurement.json,
-	    measurement.json.values)
-	    && (measurement.json.values.length > 0)) {
-	// At least one value is defined for measurement
+
+    if (!utils.isUndefinedOrNull(measurement)
+	    && !utils.isUndefinedOrNull(measurement.values)
+	    && (measurement.values.length > 0)) {
 
 	// check values
 	var value;
-	for (var valueCtr = 0; valueCtr < measurement.json.values.length; valueCtr++) {
-	    value = measurement.json.values[valueCtr]
+	for (var valueCtr = 0; valueCtr < measurement.values.length; valueCtr++) {
+	    value = measurement.values[valueCtr]
 	    // check for correct units
+	    // utils.info("Units " + value.units, errorContainer);
 	    if (value.units === valueUnits) {
 		// check for correct value
 		if (valueComplement) {
 		    if (value.scalar < valueBottom || value.scalar > valueTop) {
 			return true;
-		    } 
+		    }
 		} else {
 		    if (value.scalar >= valueBottom && value.scalar <= valueTop) {
 			return true;
-		    } 
+		    }
 		}
-
-	    } 
+	    }
 
 	}
-
     } else {
 	// No values were defined
 	return false;
     }
+    return false;
 }
