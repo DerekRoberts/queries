@@ -57,8 +57,10 @@ profile.activeEncounter = function( patient, atDate, activeWindow ){
 */
 profile.countEncountersByMonth = function( patient, atDate ){
     var ptEncounters = patient.encounters(),
-        start        = atDate.setDate( 1 ),
-        end          = atDate.setMonth( atDate.getMonth() + 1),
+        atYear       = atDate.getFullYear(),
+        atMonth      = atDate.getMonth(),
+        start        = new Date( atYear, atMonth -1,  1 ).getTime(),
+        end          = new Date( atYear, atMonth,     1 ).getTime(),
         count        = 0;
 
     // Check for encounters in specified window
@@ -68,6 +70,7 @@ profile.countEncountersByMonth = function( patient, atDate ){
         ){
             // Convert date from seconds to milliseconds (*1000, from epoch)
             encDate = ptEnc.json.start_time * 1000;
+            emit( start.toString() + " ?< " + encDate.toString(), -1 );
             if(( start <= encDate )&&( encDate < end )){
                 // If date in range, tally and continue
                 count++;
