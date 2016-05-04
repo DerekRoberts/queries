@@ -1,25 +1,15 @@
 # This repo only #
 ##################
 
+*.xml
+.directory
+
 # Eclipse Files #
 #################
 .project
 .settings/
 .tern-project
 
-
-*.env
-*.json
-*.xml
-*.tar
-*.gzip
-*.tar.gzip
-*.zip
-*.rar
-.vagrant/
-.directory
-dev/*/
-dev/dev.yml
 
 ########################
 ### GitHub Suggested ###
