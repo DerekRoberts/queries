@@ -46,6 +46,41 @@ profile.activeEncounter = function( patient, atDate, activeWindow ){
 
 
 /**
+* Returns the number of encounters for a patient in a date range.
+*
+* @param patient
+*                hQuery patient object
+* @param atDate
+*                date object, uses only month and year
+* @return
+*                true/false (boolean)
+*/
+profile.countEncountersByMonth = function( patient, atDate ){
+    var ptEncounters = patient.encounters(),
+        start        = atDate.setDate( 1 ),
+        end          = atDate.setMonth( atDate.getMonth() + 1),
+        count        = 0;
+
+    // Check for encounters in specified window
+    ptEncounters.forEach( function( ptEnc ){
+        if(
+            !utils.isUndefinedOrNull( ptEnc, ptEnc.json, ptEnc.json.start_time )
+        ){
+            // Convert date from seconds to milliseconds (*1000, from epoch)
+            encDate = ptEnc.json.start_time * 1000;
+            if(( start <= encDate )&&( encDate < end )){
+                // If date in range, tally and continue
+                count++;
+            }
+        }
+    });
+
+    // Return results
+    return count;
+}
+
+
+/**
  * Returns whether a patient has a prescription event (start or stop of med)
  * in a specified date range.
  *
