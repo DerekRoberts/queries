@@ -12,7 +12,7 @@ var utils = utils || {};
  */
 utils.isUndefined = function() {
     for (var i = 0; i < arguments.length; i++) {
-	if (arguments[i] == undefined) {
+	if ((arguments[i] == undefined) || (typeof arguments[i] === "undefined")) {
 	    // at least one of the arguments is undefined
 	    return true;
 	}
@@ -23,7 +23,7 @@ utils.isUndefined = function() {
 };
 
 /**
- * Returns true if any arguments passed are undefined or null Defined with no
+ * Returns true if any arguments passed are undefined or null. Defined with no
  * names arguments, it is expecting any any number of arguments can be passed
  * 
  * @return true if any arguments passed are undefined or null Defined with no
@@ -32,7 +32,9 @@ utils.isUndefined = function() {
  */
 utils.isUndefinedOrNull = function() {
     for (var i = 0; i < arguments.length; i++) {
-	if ((typeof arguments[i] === "undefined") || (arguments[i] === undefined) || (arguments[i] == null)) {
+	if ((arguments[i] === undefined)
+		|| (typeof arguments[i] === "undefined")
+		|| (arguments[i] == null)) {
 	    // at least one of the arguments is undefined or null
 	    return true;
 	}
@@ -40,6 +42,194 @@ utils.isUndefinedOrNull = function() {
 
     // No argument were undefined or null
     return false;
+};
+
+/**
+ * Returns a string indicating which of the arguments to a call to
+ * utils.getUndefinedOrNull were undefined or null.
+ * 
+ * @param argumentNames
+ *                array of argument names to use in returned message
+ * 
+ * @return A string indicating which of the arguments to a call to
+ *         utils.getUndefinedOrNull were undefined or null.
+ */
+utils.getUndefinedOrNullInfo = function(argumentNames) {
+    var message = "";
+
+    // Start with second argument to ignore argumentNames
+    for (var i = 1; i < arguments.length; i++) {
+	if (utils.isUndefinedOrNull(arguments[i])) {
+	    if (message.length > 0) {
+		// prepend comma
+		message = message + ", ";
+	    }
+
+	    // add argument name
+	    if (!utils.isUndefinedOrNull(argumentNames)
+		    && (argumentNames.length >= i)) {
+		// we have a supplied argument name.
+		message = message + argumentNames[i - 1];
+	    } else {
+		// no argument name supplied
+		message = message + "Argument " + i;
+	    }
+
+	    // add value
+	    if (arguments[i] === null) {
+		message = message + " = " + arguments[i];
+	    } else {
+		message = message + " is undefined";
+	    }
+	    
+	}
+    }
+
+    return message;
+};
+
+/**
+ * Returns true if the base object passed or any of the objects in the path from
+ * the base object passed are undefined or null. Will also return true if any
+ * additional arguments passed are undefined or null.
+ * 
+ * For instance if measurement was passed as the base object and
+ * "json.codes.LOINC" was passed as the path, the function would return true if
+ * any of measurement, measurement.json, measurement.json.codes, or
+ * measurement.json.codes.LOINC are undefined or null.
+ * 
+ * @param base
+ *                The base object to examine.
+ * @param path
+ *                the object path under the base object to examine.
+ * @return true if the base object passed or any of the objects in the path from
+ *         the base object passed are undefined or null. Will also return true
+ *         if any additional arguments passed are undefined or null.
+ */
+utils.isUndefinedOrNullPath = function(base, path) {
+    if (utils.isUndefinedOrNull(base)) {
+	// base is undefined or null
+	return true;
+    }
+    // Split path into elements
+    var pathElements = path.split(".");
+    // remove any empty elements (i.e. if path contained a leading '.')
+    pathElements = pathElements.filter(function(element) {
+	return (element.length > 0);
+    })
+
+    // navigate down object tree along path
+    var current = base;
+    for (var ctr = 0; ctr < pathElements.length; ctr++) {
+	// current = Reflect.get(current, pathElements[ctr]);
+	current = current[pathElements[ctr]];
+	if (utils.isUndefinedOrNull(current)) {
+	    // An element along the path is undefined or null
+	    return true;
+	}
+    }
+
+    // Check any additional arguments
+    if (arguments.length > 2) {
+	for (var i = 2; i < arguments.length; i++) {
+	    if (utils.isUndefinedOrNull(arguments[i])) {
+		// at least one of the additional arguments is undefined or null
+		return true;
+	    }
+	}
+    }
+
+    // No undefined or null value found
+    return false;
+};
+
+/**
+ * Return a string indicating which of the arguments to a call to
+ * utils.getUndefinedOrNullPath were undefined or null.
+ * 
+ * @param argumentNames
+ *                array of argument names to use in returned message
+ * @param base
+ *                The base object to examine.
+ * @param path
+ *                the object path under the base object to examine.
+ * @return A string indicating which of the arguments to a call to
+ *         utils.getUndefinedOrNullPath were undefined or null
+ */
+utils.getUndefinedOrNullInfoPath = function(argumentNames, base, path) {
+    var message = "";
+
+    if (utils.isUndefinedOrNull(base)) {
+	// base is undefined or null
+	message = message + utils.getUndefinedOrNullInfo(argumentNames, base);
+    }
+
+    if (message.length > 0) {
+	// prepend comma
+	message = message + ", ";
+    }
+
+    // Split path into elements
+    var pathElements = path.split(".");
+    // remove any empty elements (i.e. if path contained a leading '.')
+    pathElements = pathElements.filter(function(element) {
+	return (element.length > 0);
+    })
+
+    // Prepare reference and path label
+    var current = base;
+    var pathLabel;
+    if (!utils.isUndefinedOrNull(argumentNames) && (argumentNames.length > 0)) {
+	// a name was supplied for base
+	pathLabel = argumentNames[0];
+    } else {
+	// no name was supplied for base
+	pathLabel = "base";
+    }
+
+    // navigate down object tree along path
+    for (var ctr = 0; ctr < pathElements.length; ctr++) {
+	// current = Reflect.get(current, pathElements[ctr]);
+	current = current[pathElements[ctr]];
+	pathLabel = pathLabel + "." + pathElements[ctr];
+	if (utils.isUndefinedOrNull(current)) {
+	    // An element along the path is undefined or null
+	    if (message.length > 0) {
+		// prepend comma
+		message = message + ", ";
+	    }
+
+	    message = message
+		    + utils.getUndefinedOrNullInfo([ pathLabel ], current);
+	    
+	    // Do not navigate further down path as it does not exist
+	    break;
+	}
+    }
+
+    // Check any additional arguments
+    if (arguments.length > 3) {
+	var additionalInfo;
+	for (var i = 3; i < arguments.length; i++) {
+	    // Get any info message for argument
+	    additionalInfo = utils.getUndefinedOrNullInfo(
+		    ((argumentNames.length >= i-1) ? [ argumentNames[i - 2] ]
+			    : null), arguments[i]);
+	    if (additionalInfo.length > 0) {
+		// there is info to add to message
+
+		if (message.length > 0) {
+		    // prepend comma
+		    message = message + ", ";
+		}
+
+		message = message + additionalInfo;
+
+	    }
+	}
+    }
+
+    return message;
 };
 
 /**
@@ -111,7 +301,7 @@ utils.invalid = function(message, errorContainer) {
     if (utils.isUndefinedOrNull(errorContainer)) {
 	// We do not have a proper error container in which to store the error
 	// Emit string and conspicuous number
-	emit("Invalid: " + message, -1);
+	emit(utils.sanitizeForEmit("Invalid: " + message), -1);
 	return false;
     } else {
 	// Ensure invalid and error flags are set
@@ -135,7 +325,7 @@ utils.error = function(message, errorContainer) {
     if (utils.isUndefinedOrNull(errorContainer)) {
 	// We do not have a proper error container in which to store the error
 	// Emit string and conspicuous number
-	emit("Error: " + message, -1);
+	emit(utils.sanitizeForEmit("Error: " + message), -1);
 	return false;
     } else {
 	// Ensure error flag is set
@@ -158,7 +348,7 @@ utils.warning = function(message, errorContainer) {
     if (utils.isUndefinedOrNull(errorContainer)) {
 	// We do not have a proper error container in which to store the error
 	// Emit string and conspicuous number
-	emit("Warning: " + message, -1);
+	emit(utils.sanitizeForEmit("Warning: " + message), -1);
 	return false;
     } else {
 	// Ensure warning flag is set
@@ -181,7 +371,7 @@ utils.info = function(message, errorContainer) {
     if (utils.isUndefinedOrNull(errorContainer)) {
 	// We do not have a proper error container in which to store the error
 	// Emit string and conspicuous number
-	emit("Info: " + message, -1);
+	emit(utils.sanitizeForEmit("Info: " + message), -1);
 	return false;
     } else {
 	// Ensure info flag is set
@@ -309,35 +499,47 @@ utils.buildMessagesOutput = function(messages, combineMultiples) {
     // don't break hQuery
     // and push to output array so it displays nicely
     items.forEach(function(value) {
-	output.push(value.replace(/[^a-zA-Z\s0-9]/g, "_"));
+	output.push(utils.sanitizeForEmit(value));
     });
 
     return output;
 };
 
 /**
- * Returns a string conversation of the object passed and recursively prints any subobjects in a manner that will not break emits.
- * Currently works with objects and arrays.
+ * Returns a version of the message passed sanitized for inclusion in an emit
  * 
- * Lexicon
- * _A_ - Start of array
- * _a_ - End of array
- * _S_ - Array item separator
- * _O_ - Start of object
- * _o_ - End of object
+ * @param message
+ *                Message to sanitize
+ *                if true, combine multiple instances of the same message
  * 
- * @param item Item to be converted to string
- * @param maxLevel how many levels to traverse into objects and arrays
+ * @return A version of the message passed sanitized for inclusion in an emit
+ */
+utils.sanitizeForEmit = function(message) {
+  return message.replace(/[^a-zA-Z\s0-9]/g, "_");
+};
+
+/**
+ * Returns a string conversation of the object passed and recursively prints any
+ * subobjects in a manner that will not break emits. Currently works with
+ * objects and arrays.
+ * 
+ * Lexicon _A_ - Start of array _a_ - End of array _S_ - Array item separator
+ * _O_ - Start of object _o_ - End of object
+ * 
+ * @param item
+ *                Item to be converted to string
+ * @param maxLevel
+ *                how many levels to traverse into objects and arrays
  */
 utils.deepPrint = function(item, maxLevel) {
-    if(utils.isUndefinedOrNull(maxLevel)) {
+    if (utils.isUndefinedOrNull(maxLevel)) {
 	maxLevel = 5;
     }
-    
-    if(maxLevel == 0) {
+
+    if (maxLevel == 0) {
 	return "Level Limit";
     }
-    
+
     if (utils.isUndefinedOrNull(item)) {
 	return "" + item;
     } else if (Array.isArray(item)) {
@@ -351,12 +553,13 @@ utils.deepPrint = function(item, maxLevel) {
 	});
 	return output + " _a_ ";
     } else if (typeof item === 'object') {
-	
+
 	var keys = Object.keys(item);
 	var output = "";
 	// we have an object
 	keys.forEach(function(key, index) {
-	    output = output + key + " _O_ " + utils.deepPrint(item[key], maxLevel - 1) + " _o_ ";
+	    output = output + key + " _O_ "
+		    + utils.deepPrint(item[key], maxLevel - 1) + " _o_ ";
 	});
 	return output;
     } else {
