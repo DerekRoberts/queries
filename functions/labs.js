@@ -40,36 +40,15 @@ var labs = labs || {};
 labs.hasLab = function(patient, minDate, maxDate, labInfo, valueBottom,
 	valueTop, valueComplement, valueUnits, valueOnlyMostRecent,
 	errorContainer) {
-
+		    
     // Check input
-    if (utils.isUndefinedOrNull(patient, patient.json, labInfo, valueBottom,
-	    valueTop, valueComplement, valueOnlyMostRecent)) {
-	return utils
-		.invalid(
-			"Invalid or incomplete data passed to labs.hasLab:"
-				+ (utils.isUndefinedOrNull(patient) ? " patient = \""
-					+ patient + "\""
-					: "")
-				+ (!utils.isUndefinedOrNull(patient)
-					&& utils
-						.isUndefinedOrNull(patient.json) ? " patient.json = \""
-					+ patient.json + "\""
-					: "")
-				+ (utils.isUndefinedOrNull(labInfo) ? " labInfo = \""
-					+ labInfo + "\""
-					: "")
-				+ (utils.isUndefinedOrNull(valueBottom) ? " valueBottom = \""
-					+ valueBottom + "\""
-					: "")
-				+ (utils.isUndefinedOrNull(valueTop) ? " valueTop = \""
-					+ valueTop + "\""
-					: "")
-				+ (utils.isUndefinedOrNull(valueComplement) ? " valueComplement = \""
-					+ valueComplement + "\""
-					: "")
-				+ (utils.isUndefinedOrNull(valueOnlyMostRecent) ? " valueOnlyMostRecent = \""
-					+ valueOnlyMostRecent + "\""
-					: ""), errorContainer);
+    if (utils.isUndefinedOrNullAndLog(
+	    "Invalid or incomplete data passed to labs.hasLab", utils.invalid,
+	    errorContainer, [ patient, "patient", ".json" ], [ labInfo,
+		    "labInfo" ], [ valueBottom, "valueBottom" ], [ valueTop,
+		    "valueTop" ], [ valueComplement, "valueComplement" ], [
+		    valueOnlyMostRecent, "valueOnlyMostRecent" ])) {
+	return false;
     }
     var maxMillisFromEpoch = 8640000000000000;
 
@@ -173,33 +152,26 @@ labs.hasLab = function(patient, minDate, maxDate, labInfo, valueBottom,
 labs.isCodeMatch = function(measurement, labInfo, errorContainer) {
     // Check if it matches one of the codes defined in labInfo
 
-    if (utils.isUndefinedOrNull(measurement)
-	    || utils.isUndefinedOrNull(measurement.codes)) {
-	// No data is available to check
-	return false;
-	
-    }
-   
-    
     // TODO: do we want to manually do a match for each codeset or sync
     // the name in our structure to the name in the hQuery patient
     // object?
-    
-    
-    if (!utils.isUndefinedOrNull(labInfo.SNOMEDCT, measurement.codes.SNOMEDCT)
+
+    if (!utils.isUndefinedOrNullPath([ labInfo.SNOMEDCT ], [ measurement,
+	    ".codes.SNOMEDCT" ])
 	    && (measurement.codes.SNOMEDCT.length > 0)) {
 	// We have SNOMEDCT codes defined for the measurement passed in
 	// and at least one SNOMEDCT code for the measurement being examined
 	// Compare SNOMEDCT codes
 
-	if (utils.matchCodeSet(measurement.codes.SNOMEDCT,
-		labInfo.SNOMEDCT, errorContainer)) {
+	if (utils.matchCodeSet(measurement.codes.SNOMEDCT, labInfo.SNOMEDCT,
+		errorContainer)) {
 	    // we have a match
 	    return true;
 	}
     }
 
-    if (!utils.isUndefinedOrNull(labInfo.pCLOCD, measurement.codes.pCLOCD)
+    if (!utils.isUndefinedOrNullPath([ labInfo.pCLOCD ], [ measurement,
+	    ".codes.pCLOCD" ])
 	    && (measurement.codes.pCLOCD.length > 0)) {
 	// We have pCLOCD codes defined for the measurement passed in
 	// and at least one pCLOCD code for the measurement being examined
@@ -237,33 +209,16 @@ labs.isCodeMatch = function(measurement, labInfo, errorContainer) {
 labs.isDateInRange = function(measurement, minDate, maxDate, errorContainer) {
     // check for valid input, if invalid then we can't operate on the
     // measurement, return false.
-    if (utils.isUndefinedOrNull(measurement) || 
-	    utils.isUndefinedOrNull(measurement.start_time) || utils.isUndefinedOrNull(minDate, maxDate)) {
-	utils
-		.info(
-			"Invalid or incomplete data passed to labs.isDateInRange:"
-				+ (utils.isUndefinedOrNull(measurement) ? " measurement = \""
-					+ measurement + "\""
-					: "")
-				+ (!utils.isUndefinedOrNull(measurement)
-					&& utils
-						.isUndefinedOrNull(measurement.start_time) ? " measurement.start_time = \""
-					+ measurement.start_time + "\""
-					: "")
-
-				+ (utils.isUndefinedOrNull(minDate) ? " minDate = \""
-					+ minDate + "\""
-					: "")
-				+ (utils.isUndefinedOrNull(maxDate) ? " maxDate = \""
-					+ maxDate + "\""
-					: ""), errorContainer);
-
+    if (utils.isUndefinedOrNullAndLog(
+	    "Invalid or incomplete data passed to labs.isDateInRange",
+	    utils.invalid, errorContainer, [ measurement, "measurement",
+		    ".start_time" ], [ minDate, "minDate" ], [ maxDate,
+		    "maxDate" ])) {
 	return false;
     }
 
     // return whether measurement date is within range
-    return (measurement.start_time * 1000 > minDate
-	    && measurement.start_time * 1000 < maxDate);
+    return (measurement.start_time * 1000 > minDate && measurement.start_time * 1000 < maxDate);
 };
 
 /**
@@ -291,8 +246,7 @@ labs.isValueInRange = function(measurement, valueBottom, valueTop,
 	valueComplement, valueUnits, errorContainer) {
     // check if there is a value defined
 
-    if (!utils.isUndefinedOrNull(measurement)
-	    && !utils.isUndefinedOrNull(measurement.values)
+    if (!utils.isUndefinedOrNullPath([measurement, ".values"])
 	    && (measurement.values.length > 0)) {
 
 	// check values

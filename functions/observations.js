@@ -38,39 +38,20 @@ var observations = observations || {};
  * @param errorContainer
  *                ErrorContainer to use for storing any errors or output
  */
-observations.hasObservation = function(patient, minDate,
-	maxDate, observationInfo, valueBottom, valueTop, valueComplement, valueUnits,
+observations.hasObservation = function(patient, minDate, maxDate,
+	observationInfo, valueBottom, valueTop, valueComplement, valueUnits,
 	valueOnlyMostRecent, errorContainer) {
 
     // Check input
-    if (utils.isUndefinedOrNull(patient, patient.json, observationInfo,
-	    valueBottom, valueTop, valueComplement, valueOnlyMostRecent)) {
-	return utils
-		.invalid(
-			"Invalid or incomplete data passed to observations.hasObservation:"
-				+ (utils.isUndefinedOrNull(patient) ? " patient = \""
-					+ patient + "\""
-					: "")
-				+ (!utils.isUndefinedOrNull(patient)
-					&& utils
-						.isUndefinedOrNull(patient.json) ? " patient.json = \""
-					+ patient.json + "\""
-					: "")
-				+ (utils.isUndefinedOrNull(observationInfo) ? " observationInfo = \""
-					+ observationInfo + "\""
-					: "")
-				+ (utils.isUndefinedOrNull(valueBottom) ? " valueBottom = \""
-					+ valueBottom + "\""
-					: "")
-				+ (utils.isUndefinedOrNull(valueTop) ? " valueTop = \""
-					+ valueTop + "\""
-					: "")
-				+ (utils.isUndefinedOrNull(valueComplement) ? " valueComplement = \""
-					+ valueComplement + "\""
-					: "")
-				+ (utils.isUndefinedOrNull(valueOnlyMostRecent) ? " valueOnlyMostRecent = \""
-					+ valueOnlyMostRecent + "\""
-					: ""), errorContainer);
+    if (utils
+	    .isUndefinedOrNullAndLog(
+		    "Invalid or incomplete data passed to observations.hasObservation:",
+		    utils.invalid, errorContainer, [ patient, "patient",
+			    ".json" ], [ observationInfo, "observationInfo" ],
+		    [ valueBottom, "valueBottom" ], [ valueTop, "valueTop" ], [
+			    valueComplement, "valueComplement" ], [
+			    valueOnlyMostRecent, "valueOnlyMostRecent" ])) {
+	return false;
     }
     var maxMillisFromEpoch = 8640000000000000;
 
@@ -179,8 +160,8 @@ observations.isCodeMatch = function(measurement, observationInfo,
     // TODO: do we want to manually do a match for each codeset or sync
     // the name in our structure to the name in the hQuery patient
     // object?
-    if (!utils.isUndefinedOrNull(observationInfo.LOINC, measurement.json,
-	    measurement.json.codes, measurement.json.codes.LOINC)
+    if (!utils.isUndefinedOrNullPath([ observationInfo.LOINC ], [ measurement,
+	    ".json.codes.LOINC" ])
 	    && (measurement.json.codes.LOINC.length > 0)) {
 	// We have LOINC codes defined for the measurement passed in
 	// and at least one LOINC code for the measurement being examined
@@ -219,33 +200,11 @@ observations.isDateInRange = function(measurement, minDate, maxDate,
 	errorContainer) {
     // check for valid input, if invalid then we can't operate on the
     // measurement, return false.
-    if (utils.isUndefinedOrNull(measurement, measurement.json,
-	    measurement.json.start_time, minDate, maxDate)) {
-	utils
-		.info(
-			"Invalid or incomplete data passed to observations.isDateInRange:"
-				+ (utils.isUndefinedOrNull(measurement) ? " measurement = \""
-					+ measurement + "\""
-					: "")
-				+ (!utils.isUndefinedOrNull(measurement)
-					&& utils
-						.isUndefinedOrNull(measurement.json) ? " measurement.json = \""
-					+ measurement.json + "\""
-					: "")
-				+ (!utils.isUndefinedOrNull(measurement)
-					&& !utils
-						.isUndefinedOrNull(measurement.json)
-					&& utils
-						.isUndefinedOrNull(measurement.json.start_time) ? " measurement.json.start_time = \""
-					+ measurement.json.start_time + "\""
-					: "")
-
-				+ (utils.isUndefinedOrNull(minDate) ? " minDate = \""
-					+ minDate + "\""
-					: "")
-				+ (utils.isUndefinedOrNull(maxDate) ? " maxDate = \""
-					+ maxDate + "\""
-					: ""), errorContainer);
+    if (utils.isUndefinedOrNullAndLog(
+	    "Invalid or incomplete data passed to observations.isDateInRange:",
+	    utils.invalid, errorContainer, [ measurement, "measurement",
+		    ".json.start_time" ], [ minDate, "minDate" ], [ maxDate,
+		    "maxDate" ])) {
 	return false;
     }
 
@@ -278,8 +237,7 @@ observations.isDateInRange = function(measurement, minDate, maxDate,
 observations.isValueInRange = function(measurement, valueBottom, valueTop,
 	valueComplement, valueUnits, errorContainer) {
     // check if there is a value defined
-    if (!utils.isUndefinedOrNull(measurement, measurement.json,
-	    measurement.json.values)
+    if (!utils.isUndefinedOrNullPath([measurement, ".json.values"])
 	    && (measurement.json.values.length > 0)) {
 	// At least one value is defined for measurement
 
@@ -293,14 +251,14 @@ observations.isValueInRange = function(measurement, valueBottom, valueTop,
 		if (valueComplement) {
 		    if (value.scalar < valueBottom || value.scalar > valueTop) {
 			return true;
-		    } 
+		    }
 		} else {
 		    if (value.scalar >= valueBottom && value.scalar <= valueTop) {
 			return true;
-		    } 
+		    }
 		}
 
-	    } 
+	    }
 
 	}
 

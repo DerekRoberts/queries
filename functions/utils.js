@@ -308,9 +308,9 @@ utils.isUndefinedOrNullAndLog = function(baseMessage, logFunction,
     if (problem) {
 	// Problem was found, call log function
 	logFunction(baseMessage + " " + message, errorContainer);
-	return false;
-    } else {
 	return true;
+    } else {
+	return false;
     }
 
 }

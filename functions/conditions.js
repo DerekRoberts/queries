@@ -17,11 +17,11 @@ var conditions = conditions || {};
 conditions.hasActiveCondition = function(patient, date, conditionInfo,
 	errorContainer) {
     // Check input
-    if (utils.isUndefinedOrNull(patient, patient.json, conditionInfo)) {
-	return utils
-		.invalid(
-			"Invalid data passed to conditions conditions.hasConditionCode",
-			errorContainer);
+    if (utils.isUndefinedOrNullAndLog(
+	    "Invalid data passed to conditions conditions.hasConditionCode",
+	    utils.invalid, errorContainer, [ patient, "patient", ".json" ], [
+		    conditionInfo, "conditionInfo" ])) {
+	return false;
     }
 
     var conditionEntries = patient.conditions();
@@ -70,8 +70,8 @@ conditions.isCodeMatch = function(condition, conditionInfo, errorContainer) {
     // TODO: do we want to manually do a match for each codeset or sync
     // the name in our structure to the name in the hQuery patient
     // object?
-    if (!utils.isUndefinedOrNull(conditionInfo.ICD9, condition.json,
-	    condition.json.codes, condition.json.codes.ICD9)
+    if (!utils.isUndefinedOrNullPath([ conditionInfo.ICD9 ], [ condition,
+	    ".json.codes.ICD9" ])
 	    && (condition.json.codes.ICD9.length > 0)) {
 	// We have ICD9 codes defined for the condition passed in
 	// and at least one ICD9 code for the condition being examined
@@ -82,10 +82,9 @@ conditions.isCodeMatch = function(condition, conditionInfo, errorContainer) {
 	    // we have a match
 	    return true;
 	}
-    }
-
-    if (!utils.isUndefinedOrNull(conditionInfo.SNOMEDCT, condition.json,
-	    condition.json.codes, condition.json.codes.SNOMEDCT)
+    } 
+    if (!utils.isUndefinedOrNullPath([ conditionInfo.SNOMEDCT ], [ condition,
+	    ".json.codes.SNOMEDCT" ])
 	    && (condition.json.codes.SNOMEDCT.length > 0)) {
 	// We have SNOMEDCT codes defined for the condition passed in
 	// and at least one SNOMEDCT code for the condition being examined
@@ -96,7 +95,7 @@ conditions.isCodeMatch = function(condition, conditionInfo, errorContainer) {
 	    // we have a match
 	    return true;
 	}
-    }
+    } 
 
     // TODO add other codeset checks
 
@@ -108,9 +107,9 @@ conditions.isCodeMatch = function(condition, conditionInfo, errorContainer) {
 
 /**
  * Returns whether the condition entry passed is active on the date passed.
- * Note: The underlying data structure cannot express that a condition is no 
- * longer present. Currently a condition is considered to always be active
- *  after its start date 
+ * Note: The underlying data structure cannot express that a condition is no
+ * longer present. Currently a condition is considered to always be active after
+ * its start date
  * 
  * @param condition
  *                single condition entry from hQuery patient object
@@ -123,7 +122,7 @@ conditions.isCodeMatch = function(condition, conditionInfo, errorContainer) {
 conditions.isActive = function(condition, date, errorContainer) {
     // check for valid input, if invalid then we can't operate on the
     // condition, return false.
-    if (utils.isUndefinedOrNull(condition, condition.json)) {
+    if (utils.isUndefinedOrNullPath([condition, ".json.start_time"])) {
 	return false;
     }
 
@@ -137,14 +136,12 @@ conditions.isActive = function(condition, date, errorContainer) {
 
     // check if condition was active on date
     var startCondition = condition.json.start_time;
-    
+
     // Check if date is after start
     if (!utils.isUndefinedOrNull(startCondition)
 	    && (startCondition <= dateSeconds)) {
 	// The start of the condition is defined and occurs before the date to
 	// be examined
 	return true;
-    } else
-	return false;
+    } 
 };
-
