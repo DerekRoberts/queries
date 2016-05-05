@@ -1,5 +1,6 @@
 /*
- * A collection of utility functions that are used throughout the queries and library functions
+ * A collection of utility functions that are used throughout the queries and
+ * library functions
  */
 var utils = utils || {};
 
@@ -12,7 +13,8 @@ var utils = utils || {};
  */
 utils.isUndefined = function() {
     for (var i = 0; i < arguments.length; i++) {
-	if ((arguments[i] == undefined) || (typeof arguments[i] === "undefined")) {
+	if ((arguments[i] == undefined)
+		|| (typeof arguments[i] === "undefined")) {
 	    // at least one of the arguments is undefined
 	    return true;
 	}
@@ -45,53 +47,38 @@ utils.isUndefinedOrNull = function() {
 };
 
 /**
- * Returns a string indicating which of the arguments to a call to
- * utils.getUndefinedOrNull were undefined or null.
+ * Returns true if any of the checks passed fail an isUndefinedOrNull check.
+ * Arguments must be arrays. If an array contains 2 elements and the second is a
+ * non-empty string a path check will be performed. If an array contains only a
+ * single element a simple check will be performed.
  * 
- * @param argumentNames
- *                array of argument names to use in returned message
- * 
- * @return A string indicating which of the arguments to a call to
- *         utils.getUndefinedOrNull were undefined or null.
+ * @return true if any of the checks passed fail an isUndefinedOrNull check..
  */
-utils.getUndefinedOrNullInfo = function(argumentNames) {
-    var message = "";
-
-    // Start with second argument to ignore argumentNames
-    for (var i = 1; i < arguments.length; i++) {
-	if (utils.isUndefinedOrNull(arguments[i])) {
-	    if (message.length > 0) {
-		// prepend comma
-		message = message + ", ";
+utils.isUndefinedOrNullPath = function() {
+    for (var i = 0; i < arguments.length; i++) {
+	if ((arguments[i].length > 1) && (!utils.isUndefinedOrNull(arguments[i][1]))&& (arguments[i][1].length > 0)) {
+	    // do a path check
+	    if(utils.isUndefinedOrNullPathSingle(arguments[i][0], arguments[i][1])) {
+		// failed check
+		return true;
 	    }
-
-	    // add argument name
-	    if (!utils.isUndefinedOrNull(argumentNames)
-		    && (argumentNames.length >= i)) {
-		// we have a supplied argument name.
-		message = message + argumentNames[i - 1];
-	    } else {
-		// no argument name supplied
-		message = message + "Argument " + i;
+	} else {
+	    // do a simple check
+	    if(utils.isUndefinedOrNull(arguments[i][0])) {
+		// failed check
+		return true;
 	    }
-
-	    // add value
-	    if (arguments[i] === null) {
-		message = message + " = " + arguments[i];
-	    } else {
-		message = message + " is undefined";
-	    }
-	    
 	}
     }
 
-    return message;
-};
+    // No check failed
+    return false; 
+}
+
 
 /**
  * Returns true if the base object passed or any of the objects in the path from
- * the base object passed are undefined or null. Will also return true if any
- * additional arguments passed are undefined or null.
+ * the base object passed are undefined or null.
  * 
  * For instance if measurement was passed as the base object and
  * "json.codes.LOINC" was passed as the path, the function would return true if
@@ -103,10 +90,9 @@ utils.getUndefinedOrNullInfo = function(argumentNames) {
  * @param path
  *                the object path under the base object to examine.
  * @return true if the base object passed or any of the objects in the path from
- *         the base object passed are undefined or null. Will also return true
- *         if any additional arguments passed are undefined or null.
+ *         the base object passed are undefined or null.
  */
-utils.isUndefinedOrNullPath = function(base, path) {
+utils.isUndefinedOrNullPathSingle = function(base, path) {
     if (utils.isUndefinedOrNull(base)) {
 	// base is undefined or null
 	return true;
@@ -121,21 +107,10 @@ utils.isUndefinedOrNullPath = function(base, path) {
     // navigate down object tree along path
     var current = base;
     for (var ctr = 0; ctr < pathElements.length; ctr++) {
-	// current = Reflect.get(current, pathElements[ctr]);
 	current = current[pathElements[ctr]];
 	if (utils.isUndefinedOrNull(current)) {
 	    // An element along the path is undefined or null
 	    return true;
-	}
-    }
-
-    // Check any additional arguments
-    if (arguments.length > 2) {
-	for (var i = 2; i < arguments.length; i++) {
-	    if (utils.isUndefinedOrNull(arguments[i])) {
-		// at least one of the additional arguments is undefined or null
-		return true;
-	    }
 	}
     }
 
@@ -144,93 +119,201 @@ utils.isUndefinedOrNullPath = function(base, path) {
 };
 
 /**
- * Return a string indicating which of the arguments to a call to
- * utils.getUndefinedOrNullPath were undefined or null.
+ * Returns a string indicating which of the checks passed fails a
+ * isUndefinedOrNull check. Each check consists of an array in one of the
+ * following 2 formats:
  * 
- * @param argumentNames
- *                array of argument names to use in returned message
- * @param base
- *                The base object to examine.
- * @param path
- *                the object path under the base object to examine.
- * @return A string indicating which of the arguments to a call to
- *         utils.getUndefinedOrNullPath were undefined or null
+ * [value, label] Perform a simple check where value is the value to check and
+ * label is the label to use in any failure message
+ * 
+ * OR
+ * 
+ * [base, label, path] Perform a path check where base is the base object of the
+ * path to check, label is the label to use in any failure message, and path is
+ * the path to check under the base object.
+ * 
+ * @return a string indicating which of the checks passed fails a
+ *         isUndefinedOrNull check.
  */
-utils.getUndefinedOrNullInfoPath = function(argumentNames, base, path) {
+utils.getUndefinedOrNullInfo = function() {
+    var check;
+    var checkValue;
+    var checkLabel;
+    var checkPath;
     var message = "";
+    for (var argIndex = 0; argIndex < arguments.length; argIndex++) {
+	check = arguments[argIndex];
 
-    if (utils.isUndefinedOrNull(base)) {
-	// base is undefined or null
-	message = message + utils.getUndefinedOrNullInfo(argumentNames, base);
-    }
+	// the first element of the array is the value to examine
+	checkValue = check[0];
+	// the second element of the array is the label to use in any messages
+	checkLabel = check[1];
+	if (check.length > 2) {
+	    // We have a third element in the array.
+	    // Use it as a path and do a path check instead of a simple check
+	    checkPath = check[2];
 
-    if (message.length > 0) {
-	// prepend comma
-	message = message + ", ";
-    }
+	    if (utils.isUndefinedOrNull(checkValue)) {
+		// base is undefined or null
+		message = utils.getUndefinedOrNullInfo_AddMessageHelper(
+			message, checkValue, checkLabel);
+	    } else {
+		// Split path into elements
+		var pathElements = checkPath.split(".");
+		// remove any empty elements (i.e. if path contained a leading
+		// '.')
+		pathElements = pathElements.filter(function(element) {
+		    return (element.length > 0);
+		})
 
-    // Split path into elements
-    var pathElements = path.split(".");
-    // remove any empty elements (i.e. if path contained a leading '.')
-    pathElements = pathElements.filter(function(element) {
-	return (element.length > 0);
-    })
+		// Prepare reference and path label
+		var current = checkValue;
+		var pathLabel = checkLabel;
+		// navigate down object tree along path
+		for (var ctr = 0; ctr < pathElements.length; ctr++) {
+		    current = current[pathElements[ctr]];
+		    pathLabel = pathLabel + "." + pathElements[ctr];
+		    if (utils.isUndefinedOrNull(current)) {
+			// this element along the path is undefined or null
+			message = utils
+				.getUndefinedOrNullInfo_AddMessageHelper(
+					message, current, pathLabel);
 
-    // Prepare reference and path label
-    var current = base;
-    var pathLabel;
-    if (!utils.isUndefinedOrNull(argumentNames) && (argumentNames.length > 0)) {
-	// a name was supplied for base
-	pathLabel = argumentNames[0];
-    } else {
-	// no name was supplied for base
-	pathLabel = "base";
-    }
-
-    // navigate down object tree along path
-    for (var ctr = 0; ctr < pathElements.length; ctr++) {
-	// current = Reflect.get(current, pathElements[ctr]);
-	current = current[pathElements[ctr]];
-	pathLabel = pathLabel + "." + pathElements[ctr];
-	if (utils.isUndefinedOrNull(current)) {
-	    // An element along the path is undefined or null
-	    if (message.length > 0) {
-		// prepend comma
-		message = message + ", ";
+			// Do not navigate further down path as it does not
+			// exist
+			break;
+		    }
+		}
 	    }
+	} else {
+	    // Array only has 2 elements.
+	    // Do a simple check
 
-	    message = message
-		    + utils.getUndefinedOrNullInfo([ pathLabel ], current);
-	    
-	    // Do not navigate further down path as it does not exist
-	    break;
+	    if (utils.isUndefinedOrNull(checkValue)) {
+
+		message = utils.getUndefinedOrNullInfo_AddMessageHelper(
+			message, checkValue, checkLabel);
+	    }
 	}
+
     }
 
-    // Check any additional arguments
-    if (arguments.length > 3) {
-	var additionalInfo;
-	for (var i = 3; i < arguments.length; i++) {
-	    // Get any info message for argument
-	    additionalInfo = utils.getUndefinedOrNullInfo(
-		    ((argumentNames.length >= i-1) ? [ argumentNames[i - 2] ]
-			    : null), arguments[i]);
-	    if (additionalInfo.length > 0) {
-		// there is info to add to message
+    return message;
+};
+
+/**
+ * Helper function to utils.getUndefinedOrNullInfo. Adds a message to the
+ * messages string passed
+ * 
+ * @param value
+ *                Value that failed a check
+ * @param label
+ *                Label to use in message
+ * @returns The messages string passed with a message added to it
+ */
+utils.getUndefinedOrNullInfo_AddMessageHelper = function(messages, value, label) {
+    var messageForCheck = label;
+    // add value
+    if (value === null) {
+	messageForCheck = messageForCheck + " = " + value;
+    } else {
+	messageForCheck = messageForCheck + " is undefined";
+    }
+
+    if (messages.length > 0) {
+	// prepend comma
+	messages = messages + ", ";
+    }
+
+    // Add to message string
+    messages = messages + messageForCheck;
+
+    return messages;
+}
+
+/**
+ * Returns a whether all of the checks passed meet a isUndefinedOrNull check and
+ * logs any failures. Each check consists of an array in one of the following 2
+ * formats:
+ * 
+ * [value, label] Perform a simple check where value is the value to check and
+ * label is the label to use in any failure message
+ * 
+ * OR
+ * 
+ * [base, label, path] Perform a path check where base is hte base object of hte
+ * path to check, label is the label to use in any failure message, and path is
+ * the path to check under the base object.
+ * 
+ * @param baseMessage
+ *                Message to prepend to any resulting log
+ * @param logFunction
+ *                function to call to perform any required logging
+ * @param errorContainer
+ *                Error Container to pass to logging function
+ * @return whether all of the checks passed meet a isUndefinedOrNull check.
+ */
+utils.isUndefinedOrNullAndLog = function(baseMessage, logFunction,
+	errorContainer) {
+    // Cycle through additional arguments which should be arrays of length 2 or
+    // 3 which are each a check to be performed
+    var check;
+    var checkValue;
+    var checkLabel;
+    var checkPath;
+    var problem = false;
+    var message = "";
+    for (var argIndex = 3; argIndex < arguments.length; argIndex++) {
+	check = arguments[argIndex];
+
+	// the first element of the array is the value to examine
+	checkValue = check[0];
+	// the second element of the array is the label to use in any messages
+	checkLabel = check[1];
+	if (check.length > 2) {
+	    // We have a third element in the array.
+	    // Use it as a path and do a path check instead of a simple check
+	    checkPath = check[2];
+
+	    if (utils.isUndefinedOrNullPathSingle(checkValue, checkPath)) {
+		// problem found
+		problem = true;
 
 		if (message.length > 0) {
 		    // prepend comma
 		    message = message + ", ";
 		}
 
-		message = message + additionalInfo;
+		message = message + utils.getUndefinedOrNullInfo(check);
+	    }
+	} else {
+	    // Array only has 2 elements.
+	    // Do a simple check
 
+	    if (utils.isUndefinedOrNull(checkValue)) {
+		// problem found
+		problem = true;
+
+		if (message.length > 0) {
+		    // prepend comma
+		    message = message + ", ";
+		}
+
+		message = message + utils.getUndefinedOrNullInfo(check);
 	    }
 	}
+
     }
 
-    return message;
-};
+    if (problem) {
+	// Problem was found, call log function
+	logFunction(baseMessage + " " + message, errorContainer);
+	return false;
+    } else {
+	return true;
+    }
+
+}
 
 /**
  * Returns whether the code passed matches any of the values in the codeset
@@ -509,13 +592,13 @@ utils.buildMessagesOutput = function(messages, combineMultiples) {
  * Returns a version of the message passed sanitized for inclusion in an emit
  * 
  * @param message
- *                Message to sanitize
- *                if true, combine multiple instances of the same message
+ *                Message to sanitize if true, combine multiple instances of the
+ *                same message
  * 
  * @return A version of the message passed sanitized for inclusion in an emit
  */
 utils.sanitizeForEmit = function(message) {
-  return message.replace(/[^a-zA-Z\s0-9]/g, "_");
+    return message.replace(/[^a-zA-Z\s0-9]/g, "_");
 };
 
 /**
