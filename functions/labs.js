@@ -19,6 +19,29 @@ var labs = labs || {};
  *                examined
  * @param labInfo
  *                Lab Information object from dictionary that defines the lab
+ * for which to search @ *
+ * @param errorContainer
+ *                ErrorContainer to use for storing any errors or output
+ */
+labs.hasLabInDateRange = function(patient, minDate, maxDate, labInfo,
+	errorContainer) {
+    return labs.hasLabInDateRangeWithValue(patient, minDate, maxDate, labInfo,
+	    null, null, false, null, false, errorContainer);
+}
+/**
+ * Returns whether the patient passed has the lab defined by labInfo in the date
+ * range passed
+ * 
+ * @param patient
+ *                hQuery patient object
+ * @param minDate
+ *                Start of the effective date range for which data should be
+ *                examined
+ * @param maxDate
+ *                End of the effective date range for which data should be
+ *                examined
+ * @param labInfo
+ *                Lab Information object from dictionary that defines the lab
  *                for which to search
  * @param valueBottom
  *                The bottom end of the value range
@@ -37,19 +60,19 @@ var labs = labs || {};
  * @param errorContainer
  *                ErrorContainer to use for storing any errors or output
  */
-labs.hasLab = function(patient, minDate, maxDate, labInfo, valueBottom,
-	valueTop, valueComplement, valueUnits, valueOnlyMostRecent,
-	errorContainer) {
-		    
+labs.hasLabInDateRangeWithValue = function(patient, minDate, maxDate, labInfo,
+	valueBottom, valueTop, valueComplement, valueUnits,
+	valueOnlyMostRecent, errorContainer) {
+
     // Check input
     if (utils.isUndefinedOrNullAndLog(
 	    "Invalid or incomplete data passed to labs.hasLab", utils.invalid,
 	    errorContainer, [ patient, "patient", ".json" ], [ labInfo,
-		    "labInfo" ], [ valueBottom, "valueBottom" ], [ valueTop,
-		    "valueTop" ], [ valueComplement, "valueComplement" ], [
+		    "labInfo" ], [ valueComplement, "valueComplement" ], [
 		    valueOnlyMostRecent, "valueOnlyMostRecent" ])) {
 	return false;
     }
+
     var maxMillisFromEpoch = 8640000000000000;
 
     if (utils.isUndefinedOrNull(minDate)) {
@@ -246,23 +269,24 @@ labs.isValueInRange = function(measurement, valueBottom, valueTop,
 	valueComplement, valueUnits, errorContainer) {
     // check if there is a value defined
 
-    if (!utils.isUndefinedOrNullPath([measurement, ".values"])
+    if (!utils.isUndefinedOrNullPath([ measurement, ".values" ])
 	    && (measurement.values.length > 0)) {
 
 	// check values
 	var value;
 	for (var valueCtr = 0; valueCtr < measurement.values.length; valueCtr++) {
 	    value = measurement.values[valueCtr]
-	    // check for correct units
-	    // utils.info("Units " + value.units, errorContainer);
-	    if (value.units === valueUnits) {
+	    // check for correct units if requested
+	    if ((valueUnits == null) || (value.units === valueUnits)) {
 		// check for correct value
 		if (valueComplement) {
-		    if (value.scalar < valueBottom || value.scalar > valueTop) {
+		    if ((valueBottom == null) || (value.scalar < valueBottom)
+			    || (valueTop == null) || value.scalar > valueTop) {
 			return true;
 		    }
 		} else {
-		    if (value.scalar >= valueBottom && value.scalar <= valueTop) {
+		    if (((valueBottom == null) || (value.scalar >= valueBottom))
+			    && ((valueTop == null) || (value.scalar <= valueTop))) {
 			return true;
 		    }
 		}

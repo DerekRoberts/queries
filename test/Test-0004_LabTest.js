@@ -1,4 +1,3 @@
-
 /**
  * LabTest
  * 
@@ -31,10 +30,13 @@ function map(patient) {
 	    return true
 	},
 	numerator : function(patient, date, denominator, errorContainer) {
+	    // return denominator
+	    // && labs.hasLab(patient, new Date(2015, 1, 1), date,
+	    // this.codeSet, 0, 100, false, "mmol/L", false,
+	    // errorContainer);
 	    return denominator
-		    && labs.hasLab(patient, new Date(2015, 1, 1), date,
-			    this.codeSet, 0, 100, false, "mmol/L", false,
-			    errorContainer);
+		    && labs.hasLabInDateRange(patient, new Date(2015, 1, 1),
+			    date, this.codeSet, errorContainer);
 	}
     };
     // Emit results based on query above
