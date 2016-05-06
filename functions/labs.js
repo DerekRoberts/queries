@@ -6,6 +6,29 @@
 var labs = labs || {};
 
 /**
+ * Returns whether the patient passed has the lab defined by labInfo before the
+ * date passed
+ * 
+ * @param patient
+ *                hQuery patient object
+ * @param minDate
+ *                Start of the effective date range for which data should be
+ *                examined
+ * @param maxDate
+ *                End of the effective date range for which data should be
+ *                examined
+ * @param labInfo
+ *                Lab Information object from dictionary that defines the lab
+ * for which to search @ *
+ * @param errorContainer
+ *                ErrorContainer to use for storing any errors or output
+ */
+labs.hasLab = function(patient, date, labInfo, errorContainer) {
+    return labs.hasLabInDateRangeWithValue(patient, null, date, labInfo, null,
+	    null, false, null, false, errorContainer);
+}
+
+/**
  * Returns whether the patient passed has the lab defined by labInfo in the date
  * range passed
  * 
@@ -235,13 +258,12 @@ labs.isDateInRange = function(measurement, minDate, maxDate, errorContainer) {
     if (utils.isUndefinedOrNullAndLog(
 	    "Invalid or incomplete data passed to labs.isDateInRange",
 	    utils.invalid, errorContainer, [ measurement, "measurement",
-		    ".start_time" ], [ minDate, "minDate" ], [ maxDate,
-		    "maxDate" ])) {
+		    ".start_time" ], [ maxDate, "maxDate" ])) {
 	return false;
     }
 
     // return whether measurement date is within range
-    return (measurement.start_time * 1000 > minDate && measurement.start_time * 1000 < maxDate);
+    return (((minDate == null) || measurement.start_time * 1000 > minDate) && measurement.start_time * 1000 < maxDate);
 };
 
 /**
