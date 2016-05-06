@@ -344,10 +344,41 @@ dictionary.conditions = dictionary.conditions ||{
 };
 
 
+// http://www.whocc.no/atc_ddd_index
+dictionary.immunizations = dictionary.immunizations || {
+  influenza  : {
+    whoATC : [
+      { codeBeginsWith: "J07BB", description: "Influenza vaccines" }
+    ]
+  },
+  pneumococcal  : {
+    whoATC : [
+      { codeEquals: "J07AL02", description: "pneumococcus, purified polysaccharides antigen conjugated" }
+    ],
+    SNOMEDCT : [
+      { codeEquals: "12866006",  description: "Pneumococcal vaccination (procedure)" },
+      { codeEquals: "394678003", description: "Booster pneumococcal vaccination" }
+    ]
+  },
+  tetanus  : {
+    whoATC : [
+      { codeBeginsWith: "J07AM", description: "Tetanus vaccines" }
+    ]
+  }
+};
+
+
 // PDF: https://loinc.org/discussion-documents/2008-06-09-long-common-names-report/attachment_download/file
 // http://s.details.loinc.org/LOINC/xxxxx-x.html?sections=Comprehensive
 // http://s.details.loinc.org/LOINC/xxxxx-x.html
 dictionary.labs = dictionary.labs || {
+  cervical  : {
+    SNOMEDCT : [
+      { codeEquals: "171149006", description: "Screening for malignant neoplasm of cervix (procedure)" },
+      { codeEquals: "308728002", description: "Cervical smear biopsy taken (procedure)" },
+      { codeEquals: "439958008", description: "Sampling of cervix for Papanicolaou smear" }
+    ]
+  },
   creatinine  : {
     pCLOCD : [
       { codeEquals: "14682-9", description: "Creatinine [Molecules/volume] in Serum or Plasma" }
@@ -359,6 +390,7 @@ dictionary.labs = dictionary.labs || {
     ]
   }
 };
+
 
 dictionary.defaults = dictionary.defaults ||{
   // Active patient window (seconds)
