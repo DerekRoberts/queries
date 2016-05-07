@@ -371,12 +371,32 @@ dictionary.immunizations = dictionary.immunizations || {
 // PDF: https://loinc.org/discussion-documents/2008-06-09-long-common-names-report/attachment_download/file
 // http://s.details.loinc.org/LOINC/xxxxx-x.html?sections=Comprehensive
 // http://s.details.loinc.org/LOINC/xxxxx-x.html
+// http://search.loinc.org
 dictionary.labs = dictionary.labs || {
-  cervical  : {
+  cervicalCancer  : {
+    pCLOCD : [
+      { codeEquals: "10524-7", description: "Microscopic observation [Identifier] in Cervix by Cyto stain" },
+      { codeEquals: "19762-4", description: "General categories [Interpretation] of Cervical or vaginal smear or scraping by Cyto stain" },
+      { codeEquals: "47527-7", description: "Cytology report of Cervical or vaginal smear or scraping Cyto stain.thin prep" },
+      { codeEquals: "47528-5", description: "Cytology report of Cervical or vaginal smear or scraping Cyto stain" }
+    ],
     SNOMEDCT : [
       { codeEquals: "171149006", description: "Screening for malignant neoplasm of cervix (procedure)" },
       { codeEquals: "308728002", description: "Cervical smear biopsy taken (procedure)" },
       { codeEquals: "439958008", description: "Sampling of cervix for Papanicolaou smear" }
+    ]
+  },
+  chlamydia  : {
+    pCLOCD : [
+      { codeEquals: "21613-5", description: "Chlamydia trachomatis DNA [Presence] in Unspecified specimen by Probe and target amplification method" }
+    ]
+  },
+  cholesterol  : {
+    pCLOCD : [
+      { codeEquals: "14647-2", description: "Cholesterol [Moles/volume] in Serum or Plasma" },
+      { codeEquals: "14646-4", description: "Cholesterol in HDL [Moles/volume] in Serum or Plasma" },
+      { codeEquals: "70204-3", description: "Cholesterol non HDL [Moles/volume] in Serum or Plasma" },
+      { codeEquals: "39469-2", description: "Cholesterol in LDL [Moles/volume] in Serum or Plasma by calculation" }
     ]
   },
   creatinine  : {
@@ -384,9 +404,83 @@ dictionary.labs = dictionary.labs || {
       { codeEquals: "14682-9", description: "Creatinine [Molecules/volume] in Serum or Plasma" }
     ]
   },
+  fecalOccult  : {
+    pCLOCD : [
+      { codeEquals: "14563-1", description: "Hemoglobin.gastrointestinal [Presence] in Stool --1st specimen" },
+      { codeEquals: "14564-9", description: "Hemoglobin.gastrointestinal [Presence] in Stool --2nd specimen" },
+      { codeEquals: "19762-4", description: "General categories [Interpretation] of Cervical or vaginal smear or scraping by Cyto stain" },
+      { codeEquals: "58453-2", description: "Hemoglobin.gastrointestinal [Mass/volume] in Stool by Immunologic method" }
+    ],
   glomerularFiltrationRate : {
     pCLOCD : [
       { codeEquals: "33914-3", description: "Glomerular filtration rate/1.73 sq M.predicted [Flow] in Serum or Plasma by Creatinine-based formula (MDRD)" }
+    ]
+  },
+  glucoseFasting  : {
+    pCLOCD : [
+      { codeEquals: "14771-0", description: "Fasting glucose [Moles/volume] in Serum or Plasma" }
+    ]
+  },
+  hemoglobinA1C : {
+    pCLOCD : [
+      { codeEquals: "4548-4", description: "Hemoglobin A1c/Hemoglobin.total in Blood" }
+    ]
+  },
+  hiv : {
+    pCLOCD : [
+      { codeEquals: "5017-9",  description: "" },
+      { codeEquals: "5018-7",  description: "" },
+      { codeEquals: "7917-8",  description: "" },
+      { codeEquals: "7918-6",  description: "" },
+      { codeEquals: "25835-0", description: "" },
+      { codeEquals: "31201-7", description: "" },
+      { codeEquals: "48345-3", description: "" },
+      { codeEquals: "56888-1", description: "" },
+      { codeEquals: "69668-2", description: "" }
+    ]
+  },
+  inr : {
+    pCLOCD : [
+      { codeEquals: "6301-6",  description: "INR in Platelet poor plasma by Coagulation assay" },
+      { codeEquals: "34714-6", description: "INR in Blood by Coagulation assay" },
+      { codeEquals: "38875-1", description: "INR in Platelet poor plasma or blood by Coagulation assay" },
+      { codeEquals: "46418-0", description: "INR in Capillary blood by Coagulation assay" }
+    ]
+  },
+  mammogram  : {
+    pCLOCD : [
+      { codeEquals: "24604-1", description: "" },
+      { codeEquals: "24605-8", description: "" },
+      { codeEquals: "24606-6", description: "" },
+      { codeEquals: "24610-8", description: "" },
+      { codeEquals: "26175-0", description: "" },
+      { codeEquals: "26176-8", description: "" },
+      { codeEquals: "26177-6", description: "" },
+      { codeEquals: "26287-3", description: "" },
+      { codeEquals: "26289-9", description: "" },
+      { codeEquals: "26291-5", description: "" },
+      { codeEquals: "26346-7", description: "" },
+      { codeEquals: "26347-5", description: "" },
+      { codeEquals: "26348-3", description: "" },
+      { codeEquals: "26349-1", description: "" },
+      { codeEquals: "26350-9", description: "" },
+      { codeEquals: "26351-7", description: "" },
+      { codeEquals: "49154-0", description: "" },
+      { codeEquals: "42174-3", description: "" },
+      { codeEquals: "72137-3", description: "" },
+      { codeEquals: "72138-1", description: "" },
+      { codeEquals: "72139-9", description: "" },
+      { codeEquals: "72140-7", description: "" },
+      { codeEquals: "72141-5", description: "" },
+      { codeEquals: "72142-3", description: "" }
+    ]
+  },
+  sigmoidoscopyOrColonoscopy  : {
+    pCLOCD : [
+      { codeEquals: "67166-9", description: "" },
+      { codeEquals: "67222-0", description: "" },
+      { codeEquals: "67221-2", description: "" },
+      { codeEquals: "67220-4", description: "" }
     ]
   }
 };
