@@ -11,10 +11,7 @@ var labs = labs || {};
  * 
  * @param patient
  *                hQuery patient object
- * @param minDate
- *                Start of the effective date range for which data should be
- *                examined
- * @param maxDate
+ * @param date
  *                End of the effective date range for which data should be
  *                examined
  * @param labInfo
