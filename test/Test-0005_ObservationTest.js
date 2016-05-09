@@ -45,10 +45,13 @@ function map(patient) {
 	    return true
 	},
 	numerator : function(patient, date, denominator, errorContainer) {
+//	    return denominator
+//		    && observations.hasObservationInDateRangeWithValue(patient,
+//			    new Date(2010, 1, 1), date, this.codeSet, 0, 100,
+//			    false, "kg", false, errorContainer);
 	    return denominator
-		    && observations.hasObservation(patient,
-			    new Date(2010, 1, 1), date, this.codeSet, 0, 100,
-			    false, "kg", false, errorContainer);
+	    && observations.hasObservationInDateRange(patient,
+		    new Date(2010, 1, 1), date, this.codeSet, errorContainer);
 	}
     };
     // Emit results based on query above

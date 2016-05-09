@@ -7,6 +7,51 @@ var observations = observations || {};
 
 /**
  * Returns whether the patient passed has the observation defined by
+ * observationInfo before the date passed
+ * 
+ * @param patient
+ *                hQuery patient object
+ * @param date
+ *                End of the effective date range for which data should be
+ *                examined
+ * @param observationInfo
+ *                Observation Information object from dictionary that defines
+ *                the observation for which to search
+ * @param errorContainer
+ *                ErrorContainer to use for storing any errors or output
+ */
+observations.hasObservation = function(patient, date, observationInfo,
+	errorContainer) {
+    return observations.hasObservationInDateRangeWithValue(patient, null, date,
+	    observationInfo, null, null, false, null, false, errorContainer);
+}
+
+/**
+ * Returns whether the patient passed has the observation defined by
+ * observationInfo in the date range passed
+ * 
+ * @param patient
+ *                hQuery patient object
+ * @param minDate
+ *                Start of the effective date range for which data should be
+ *                examined
+ * @param maxDate
+ *                End of the effective date range for which data should be
+ *                examined
+ * @param observationInfo
+ *                Observation Information object from dictionary that defines
+ *                the observation for which to search
+ * @param errorContainer
+ *                ErrorContainer to use for storing any errors or output
+ */
+observations.hasObservationInDateRange = function(patient, minDate, maxDate,
+	observationInfo, errorContainer) {
+    return observations.hasObservationInDateRangeWithValue(patient, minDate,
+	    maxDate, observationInfo, null, null, false, null, false, errorContainer);
+}
+
+/**
+ * Returns whether the patient passed has the observation defined by
  * observationInfo in the date range passed
  * 
  * @param patient
@@ -38,18 +83,16 @@ var observations = observations || {};
  * @param errorContainer
  *                ErrorContainer to use for storing any errors or output
  */
-observations.hasObservation = function(patient, minDate, maxDate,
-	observationInfo, valueBottom, valueTop, valueComplement, valueUnits,
-	valueOnlyMostRecent, errorContainer) {
-
+observations.hasObservationInDateRangeWithValue = function(patient, minDate,
+	maxDate, observationInfo, valueBottom, valueTop, valueComplement,
+	valueUnits, valueOnlyMostRecent, errorContainer) {
     // Check input
     if (utils
 	    .isUndefinedOrNullAndLog(
 		    "Invalid or incomplete data passed to observations.hasObservation:",
 		    utils.invalid, errorContainer, [ patient, "patient",
 			    ".json" ], [ observationInfo, "observationInfo" ],
-		    [ valueBottom, "valueBottom" ], [ valueTop, "valueTop" ], [
-			    valueComplement, "valueComplement" ], [
+		    [ valueComplement, "valueComplement" ], [
 			    valueOnlyMostRecent, "valueOnlyMostRecent" ])) {
 	return false;
     }
@@ -237,7 +280,7 @@ observations.isDateInRange = function(measurement, minDate, maxDate,
 observations.isValueInRange = function(measurement, valueBottom, valueTop,
 	valueComplement, valueUnits, errorContainer) {
     // check if there is a value defined
-    if (!utils.isUndefinedOrNullPath([measurement, ".json.values"])
+    if (!utils.isUndefinedOrNullPath([ measurement, ".json.values" ])
 	    && (measurement.json.values.length > 0)) {
 	// At least one value is defined for measurement
 
@@ -246,14 +289,16 @@ observations.isValueInRange = function(measurement, valueBottom, valueTop,
 	for (var valueCtr = 0; valueCtr < measurement.json.values.length; valueCtr++) {
 	    value = measurement.json.values[valueCtr]
 	    // check for correct units
-	    if (value.units === valueUnits) {
+	    if ((valueUnits == null) || (value.units === valueUnits)) {
 		// check for correct value
 		if (valueComplement) {
-		    if (value.scalar < valueBottom || value.scalar > valueTop) {
+		    if ((valueBottom == null) || (value.scalar < valueBottom)
+			    || (valueTop == null) || (value.scalar > valueTop)) {
 			return true;
 		    }
 		} else {
-		    if (value.scalar >= valueBottom && value.scalar <= valueTop) {
+		    if (((valueBottom == null) || (value.scalar >= valueBottom))
+			    && ((valueTop == null) || (value.scalar <= valueTop))) {
 			return true;
 		    }
 		}

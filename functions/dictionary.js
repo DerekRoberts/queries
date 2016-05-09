@@ -487,6 +487,31 @@ dictionary.labs = dictionary.labs || {
 };
 
 
+
+dictionary.observations = dictionary.observations || {
+    waistCircumference : {
+	LOINC : [ {
+	    codeEquals : "56115-9", description : ""
+	} ]
+    },
+    bodyMassIndex : {
+	LOINC : [ {
+	    codeEquals : "39156-5", description : ""
+	} ]
+    },
+    height : {
+	LOINC : [ {
+	    codeEquals : "8302-2", description : ""
+	} ]
+    },
+    weight : {
+	LOINC : [ {
+	    codeEquals : "3141-9", description : ""
+	} ]
+    }
+
+};
+
 dictionary.defaults = dictionary.defaults ||{
   // Active patient window (seconds)
   active : {
