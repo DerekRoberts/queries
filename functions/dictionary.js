@@ -95,7 +95,7 @@ dictionary.conditions = dictionary.conditions ||{
       { codeBeginsWith: "434", description: "CEREBRAL THROMBOSIS" },
       { codeBeginsWith: "436", description: "ACUTE BUT ILL-DEFINED CEREBROVASCULAR DISEASE" },
       { codeBeginsWith: "437", description: "..." },
-      { codeBeginsWith: "438", description: "..." },
+      { codeBeginsWith: "438", description: "..." }
     ]
   },
   chronicKidneyDisease : {
@@ -281,7 +281,7 @@ dictionary.conditions = dictionary.conditions ||{
       { codeBeginsWith: "309", description: "ADJUSTMENT DISORDERS AND OTHERS ..." },
       { codeBeginsWith: "314", description: "ADD, ADHD AND OTHERS ..." },
       // NOTE: Insomnia code includes more than just insomnia (coma and other vegetative states)
-      { codeBeginsWith: "780", description: "ADD, ADHD AND OTHERS ..." },
+      { codeBeginsWith: "780", description: "ADD, ADHD AND OTHERS ..." }
     ]
   },
   myocardialInfarction : {
@@ -410,7 +410,8 @@ dictionary.labs = dictionary.labs || {
       { codeEquals: "14564-9", description: "Hemoglobin.gastrointestinal [Presence] in Stool --2nd specimen" },
       { codeEquals: "19762-4", description: "General categories [Interpretation] of Cervical or vaginal smear or scraping by Cyto stain" },
       { codeEquals: "58453-2", description: "Hemoglobin.gastrointestinal [Mass/volume] in Stool by Immunologic method" }
-    ],
+    ]
+  },
   glomerularFiltrationRate : {
     pCLOCD : [
       { codeEquals: "33914-3", description: "Glomerular filtration rate/1.73 sq M.predicted [Flow] in Serum or Plasma by Creatinine-based formula (MDRD)" }
