@@ -9,7 +9,7 @@ function map(patient) {
 
 	// Age restraint
 	minAge : 20,
-	waist : dictionary.observations.waistCircumference,
+	waistCircumference : dictionary.observations.waistCircumference,
 	bmi : dictionary.observations.bodyMassIndex,
 	height : dictionary.observations.height,
 	weight : dictionary.observations.weight,
@@ -19,36 +19,40 @@ function map(patient) {
 	 * 
 	 * Base criteria: - age 20+
 	 */
-	denominator : function(patient, date, errorContainer ) {
+	denominator : function(patient, date, errorContainer) {
 	    return profile.active(patient, date)
 		    && profile.ages.isMin(patient, date, this.minAge);
 	},
 	/**
 	 * Numerator
 	 * 
-	 * Additional criteria: - has Waist circuference OR - has BMI OR - has
+	 * Additional criteria: - has Waist circumference OR - has BMI OR - has
 	 * height AND has weight ---> ALL documented in last 2 years
 	 * 
 	 */
-	numerator : function(patient, date, denominator, errorContainer ) {
-	    var minDate = new Date(date.getFullYear() - 2, date.getMonth(),
-		    date.getDate());
-	    return denominator
-		    && (observations.hasObservationInDateRange(patient,
-			    minDate, date, this.waist, errorContainer)
-			    || observations.hasObservationInDateRange(patient,
-				    minDate, date, this.bmi, errorContainer) || (observations
-			    .hasObservationInDateRange(patient, minDate, date,
-				    this.height, errorContainer) && observations
-			    .hasObservationInDateRange(patient, minDate, date,
-				    this.weight, errorContainer))
+	numerator : function(patient, date, denominator, errorContainer) {
+	    var minDate = utils.yearsBefore(date, 2);
+	    var maxDate = date;
 
-		    );
-	}
+	    var waistCircumference = observations.hasObservationInDateRange(
+		    patient, minDate, maxDate, this.waistCircumference,
+		    errorContainer);
+
+	    var bmi = observations.hasObservationInDateRange(patient, minDate,
+		    maxDate, this.bmi, errorContainer);
+
+	    var height = observations.hasObservationInDateRange(patient,
+		    minDate, maxDate, this.height, errorContainer);
+
+	    var weight = observations.hasObservationInDateRange(patient,
+		    minDate, maxDate, this.weight, errorContainer);
+
+	    return denominator
+		    && (waistCircumference || bmi || (height && weight));
+	},
+
     };
 
     // Emit results based on query above
     emitter.ratio(patient, query);
 }
-
-
