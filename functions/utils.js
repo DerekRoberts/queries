@@ -52,19 +52,22 @@ utils.isUndefinedOrNull = function() {
  * non-empty string a path check will be performed. If an array contains only a
  * single element a simple check will be performed.
  * 
- * @return true if any of the checks passed fail an isUndefinedOrNull check..
+ * @return true if any of the checks passed fail an isUndefinedOrNull check.
  */
 utils.isUndefinedOrNullPath = function() {
     for (var i = 0; i < arguments.length; i++) {
-	if ((arguments[i].length > 1) && (!utils.isUndefinedOrNull(arguments[i][1]))&& (arguments[i][1].length > 0)) {
+	if ((arguments[i].length > 1)
+		&& (!utils.isUndefinedOrNull(arguments[i][1]))
+		&& (arguments[i][1].length > 0)) {
 	    // do a path check
-	    if(utils.isUndefinedOrNullPathSingle(arguments[i][0], arguments[i][1])) {
+	    if (utils.isUndefinedOrNullPathSingle(arguments[i][0],
+		    arguments[i][1])) {
 		// failed check
 		return true;
 	    }
 	} else {
 	    // do a simple check
-	    if(utils.isUndefinedOrNull(arguments[i][0])) {
+	    if (utils.isUndefinedOrNull(arguments[i][0])) {
 		// failed check
 		return true;
 	    }
@@ -72,9 +75,8 @@ utils.isUndefinedOrNullPath = function() {
     }
 
     // No check failed
-    return false; 
+    return false;
 }
-
 
 /**
  * Returns true if the base object passed or any of the objects in the path from
@@ -368,6 +370,73 @@ utils.matchCodeSet = function(codes, codeSet, errorContainer) {
     return false;
 
 };
+
+/**
+ * Returns A date that is the number of years before the date passed.
+ * 
+ * Any time component in the original date is ignored.
+ */
+utils.yearsBefore = function(date, years) {
+    return utils.before(date, years, 0);
+}
+
+/**
+ * Returns A date that is the number of months before the date passed.
+ * 
+ * Any time component in the original date is ignored.
+ */
+utils.monthsBefore = function(date, months) {
+    return utils.before(date, 0, months);
+}
+
+/**
+ * Returns A date that is the number of years after the date passed.
+ * 
+ * Any time component in the original date is ignored.
+ */
+utils.yearsAfter = function(date, years) {
+    return utils.before(date, -years, 0);
+}
+
+/**
+ * Returns A date that is the number of months after the date passed.
+ * 
+ * Any time component in the original date is ignored.
+ */
+utils.monthsAfter = function(date, months) {
+    return utils.before(date, 0, -months);
+}
+
+
+/**
+ * Returns A date that is the number of years, and months after the date
+ * passed.
+ * 
+ * Any time component in the original date is ignored.
+ */
+utils.after = function(date, years, months) {
+    return utils.before(date, -years, -months);
+}
+
+/**
+ * Returns A date that is the number of years, and months before the date
+ * passed.
+ * 
+ * Any time component in the original date is ignored.
+ */
+utils.before = function(date, years, months) {
+    // Default parameters to 0
+    if (utils.isUndefinedOrNull(years)) {
+	years = 0;
+    }
+    if (utils.isUndefinedOrNull(months)) {
+	months = 0;
+    }
+
+    // construct the new date
+    return new Date(date.getFullYear() - years, date.getMonth() - months, date.getDate());
+}
+
 
 /**
  * Mark current patient as being excluded from the query due to invalid data.
