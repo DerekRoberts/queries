@@ -13,7 +13,7 @@ function map(patient) {
 
 	/**
 	 * Denominator
-	 * 
+	 *
 	 * Base criteria: - diagnosed with diabetes
 	 */
 	denominator : function(patient, date, errorContainer) {
@@ -25,11 +25,11 @@ function map(patient) {
 
 	/**
 	 * Numerator
-	 * 
+	 *
 	 * Additional criteria: - HGBA1C recorded ---> in last year with value <= 7%
 	 */
 	numerator : function(patient, date, denominator, errorContainer) {
-	    var minDate = utils.yearsBefore(date, 6);
+	    var minDate = utils.yearsBefore(date, 1);
 	    var maxDate = date;
 
 	    var hemoglobinA1C = labs.hasLabInDateRangeWithValue(patient, minDate,
