@@ -399,17 +399,17 @@ dictionary.labs = dictionary.labs || {
       { codeEquals: "39469-2", description: "Cholesterol in LDL [Moles/volume] in Serum or Plasma by calculation" }
     ]
   },
-  creatinine  : {
-    pCLOCD : [
-      { codeEquals: "14682-9", description: "Creatinine [Molecules/volume] in Serum or Plasma" }
-    ]
-  },
-  fecalOccult  : {
+  colonCancer : {
     pCLOCD : [
       { codeEquals: "14563-1", description: "Hemoglobin.gastrointestinal [Presence] in Stool --1st specimen" },
       { codeEquals: "14564-9", description: "Hemoglobin.gastrointestinal [Presence] in Stool --2nd specimen" },
       { codeEquals: "19762-4", description: "General categories [Interpretation] of Cervical or vaginal smear or scraping by Cyto stain" },
       { codeEquals: "58453-2", description: "Hemoglobin.gastrointestinal [Mass/volume] in Stool by Immunologic method" }
+    ]
+  },
+  creatinine  : {
+    pCLOCD : [
+      { codeEquals: "14682-9", description: "Creatinine [Molecules/volume] in Serum or Plasma" }
     ]
   },
   glomerularFiltrationRate : {
@@ -509,7 +509,6 @@ dictionary.observations = dictionary.observations || {
 	    codeEquals : "3141-9", description : ""
 	} ]
     }
-
 };
 
 dictionary.defaults = dictionary.defaults ||{
