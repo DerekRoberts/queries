@@ -399,6 +399,11 @@ dictionary.labs = dictionary.labs || {
       { codeEquals: "39469-2", description: "Cholesterol in LDL [Moles/volume] in Serum or Plasma by calculation" }
     ]
   },
+  cholesterolLDL  : {
+      pCLOCD : [
+        { codeEquals: "39469-2", description: "Cholesterol in LDL [Moles/volume] in Serum or Plasma by calculation" }
+      ]
+  },
   colonCancer : {
     pCLOCD : [
       { codeEquals: "14563-1", description: "Hemoglobin.gastrointestinal [Presence] in Stool --1st specimen" },
