@@ -1,0 +1,6 @@
+{
+    "type" : "FUNCTION",
+    "name" : "utils.js",
+    "path" : "functions/utils.js",
+    "description" : "Utility/support functions."
+}

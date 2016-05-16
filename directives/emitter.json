@@ -1,0 +1,6 @@
+{
+    "type" : "FUNCTION",
+    "name" : "emitter.js",
+    "path" : "functions/emitter.js",
+    "description" : "Functions supporting emitting of results."
+}

@@ -1,0 +1,6 @@
+{
+    "type" : "FUNCTION",
+    "name" : "profile.js",
+    "path" : "functions/profile.js",
+    "description" : "Functions supporting patient profile queries."
+}

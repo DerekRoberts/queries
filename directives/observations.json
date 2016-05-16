@@ -1,0 +1,6 @@
+{
+    "type" : "FUNCTION",
+    "name" : "observations.js",
+    "path" : "functions/observations.js",
+    "description" : "Functions supporting observation queries."
+}

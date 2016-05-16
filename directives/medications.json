@@ -1,0 +1,6 @@
+{
+    "type" : "FUNCTION",
+    "name" : "medications.js",
+    "path" : "functions/medications.js",
+    "description" : "Functions supporting medication queries."
+}
