@@ -37,8 +37,8 @@ function map( patient )
   }
 
   // Monthly results
-  var i = dictionary.defaults.dates.start(),
-    end = dictionary.defaults.dates.end();
+  var i = defaults.dates.start(),
+    end = defaults.dates.end();
   for( ; i < end; i.setMonth( i.getMonth() + 1 )){
     // Array to emit from (by age range, then F/M/UN)
     var mask = [

@@ -21,7 +21,7 @@ var medications = medications || {};
  */
 medications.hasActiveMed = function(patient, date, medInfo, errorContainer) {
     // Check for dose in default range
-    var doseMin = dictionary.defaults.doses.min, doseMax = dictionary.defaults.doses.max;
+    var doseMin = defaults.doses.min, doseMax = defaults.doses.max;
     return medications.hasActiveMedRange(patient, date, medInfo, doseMin,
 	    doseMax, errorContainer);
 };

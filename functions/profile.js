@@ -144,7 +144,7 @@ profile.active = function(patient, atDate, errorContainer) {
     }
 
     // Store active window from defaults
-    var activeWindow = dictionary.defaults.active.window;
+    var activeWindow = defaults.active.window;
 
     // Check encounters and meds for active status
     if (profile.activeEncounter(patient, atDate, activeWindow)
@@ -226,7 +226,7 @@ profile.ages.isRange = function(patient, atDate, ageMin, ageMax, errorContainer)
  */
 profile.ages.isMax = function(patient, atDate, ageMax, errorContainer) {
     // Call isRange, use default for ageMin
-    var ageMin = dictionary.defaults.ages.min;
+    var ageMin = defaults.ages.min;
     return profile.ages
 	    .isRange(patient, atDate, ageMin, ageMax, errorContainer);
 };
@@ -244,7 +244,7 @@ profile.ages.isMax = function(patient, atDate, ageMax, errorContainer) {
  */
 profile.ages.isMin = function(patient, atDate, ageMin, errorContainer) {
     // Call isRange, use default for ageMax
-    var ageMax = dictionary.defaults.ages.max;
+    var ageMax = defaults.ages.max;
     return profile.ages
 	    .isRange(patient, atDate, ageMin, ageMax, errorContainer);
 };
