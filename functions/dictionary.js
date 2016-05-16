@@ -1,6 +1,6 @@
 /*
 * Dictionary
-*   JavaScript objects for medications, conditions and default values.
+*   JavaScript objects for medications, conditions and labs and immunizations..
 */
 
 var dictionary = dictionary ||{};
@@ -487,7 +487,6 @@ dictionary.labs = dictionary.labs || {
 };
 
 
-
 dictionary.observations = dictionary.observations || {
     waistCircumference : {
 	LOINC : [ {
@@ -509,47 +508,4 @@ dictionary.observations = dictionary.observations || {
 	    codeEquals : "3141-9", description : ""
 	} ]
     }
-};
-
-dictionary.defaults = dictionary.defaults ||{
-  // Active patient window (seconds)
-  active : {
-    // 3 years ~= 60*60*24*365*3 seconds
-    window : 94608000
-  },
-  // Min and max ages supported by hQuery
-  ages: {
-    min : 0,
-    max : 120
-  },
-  // Start and end dates for retroactive queries
-  dates: {
-    start : function(){
-      // Remember months are zero indexed, but days aren't!
-      return new Date( 2016, 3, 1 );
-    },
-    end   : function(){
-      return new Date();
-    }
-  },
-  // Min and max bounds for medication queries without bounds
-  doses: {
-    min : 0,
-    max : Number.POSITIVE_INFINITY
-  },
-  // Min and max bounds for queries without lab value bounds
-  labVals: {
-    min : Number.NEGATIVE_INFINITY,
-    max : Number.POSITIVE_INFINITY
-  },
-  // Min and max bounds for queries without dose bounds
-  numbers: {
-    min : 0,
-    max : Number.POSITIVE_INFINITY
-  },
-  // Min and max bounds for observation/lab queries without bounds
-  observations: {
-    min : 0,
-    max : Number.POSITIVE_INFINITY
-  }
 };
