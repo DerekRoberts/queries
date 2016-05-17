@@ -1,0 +1,10 @@
+{
+	"type"         : "QUERY",
+	"name"         : "HDC-1922_MU-AceInhibitor65+",
+	"title"        : "HDC-1922",
+	"description"  : "MU-AceInhibitor65+",
+	"display_name" : "MU-AceInhibitor65+",
+	"query_type"   : "RATIO",
+	"map"          : "queries/HDC-1922_MU-AceInhibitor65+.js",
+	"reduce"       : "queries/ReduceRatio.js"
+}

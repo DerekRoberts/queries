@@ -1,10 +1,10 @@
 {
-    "type"         : "QUERY",
-    "name"         : "HDC-0009_bmi_map_20",
-    "title"        : "HDC-0009",
-    "description"  : "Age 20+, BMI or WC recorded?",
-    "display_name" : "Age 20+, BMI or WC recorded?",
-    "query_type"   : "RATIO",
-    "map"          : "queries/HDC-0009_bmi_map_20.js",
-    "reduce"       : "queries/ReduceRatio.js"
+	"type"         : "QUERY",
+	"name"         : "HDC-0009_bmi_map_20",
+	"title"        : "HDC-0009",
+	"description"  : "bmi_map_20",
+	"display_name" : "bmi_map_20",
+	"query_type"   : "RATIO",
+	"map"          : "queries/HDC-0009_bmi_map_20.js",
+	"reduce"       : "queries/ReduceRatio.js"
 }

@@ -1,0 +1,10 @@
+{
+	"type"         : "QUERY",
+	"name"         : "HDC-1930_MU-Thiazide65+",
+	"title"        : "HDC-1930",
+	"description"  : "MU-Thiazide65+",
+	"display_name" : "MU-Thiazide65+",
+	"query_type"   : "RATIO",
+	"map"          : "queries/HDC-1930_MU-Thiazide65+.js",
+	"reduce"       : "queries/ReduceRatio.js"
+}

@@ -1,0 +1,10 @@
+{
+	"type"         : "QUERY",
+	"name"         : "HDC-1923_MU-PPI65+",
+	"title"        : "HDC-1923",
+	"description"  : "MU-PPI65+",
+	"display_name" : "MU-PPI65+",
+	"query_type"   : "RATIO",
+	"map"          : "queries/HDC-1923_MU-PPI65+.js",
+	"reduce"       : "queries/ReduceRatio.js"
+}

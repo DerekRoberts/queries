@@ -1,0 +1,10 @@
+{
+	"type"         : "QUERY",
+	"name"         : "HDC-1788_PH-osteoarthritis",
+	"title"        : "HDC-1788",
+	"description"  : "PH-osteoarthritis",
+	"display_name" : "PH-osteoarthritis",
+	"query_type"   : "RATIO",
+	"map"          : "queries/HDC-1788_PH-osteoarthritis.js",
+	"reduce"       : "queries/ReduceRatio.js"
+}

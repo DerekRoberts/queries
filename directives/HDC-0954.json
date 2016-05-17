@@ -1,0 +1,10 @@
+{
+	"type"         : "QUERY",
+	"name"         : "HDC-0954_PH-chronicKidneyDisease",
+	"title"        : "HDC-0954",
+	"description"  : "PH-chronicKidneyDisease",
+	"display_name" : "PH-chronicKidneyDisease",
+	"query_type"   : "RATIO",
+	"map"          : "queries/HDC-0954_PH-chronicKidneyDisease.js",
+	"reduce"       : "queries/ReduceRatio.js"
+}

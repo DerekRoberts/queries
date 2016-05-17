@@ -1,0 +1,10 @@
+{
+	"type"         : "QUERY",
+	"name"         : "HDC-0964_PH-rheumatoid",
+	"title"        : "HDC-0964",
+	"description"  : "PH-rheumatoid",
+	"display_name" : "PH-rheumatoid",
+	"query_type"   : "RATIO",
+	"map"          : "queries/HDC-0964_PH-rheumatoid.js",
+	"reduce"       : "queries/ReduceRatio.js"
+}

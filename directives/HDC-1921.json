@@ -1,0 +1,10 @@
+{
+	"type"         : "QUERY",
+	"name"         : "HDC-1921_MU-MHG-CoA65+",
+	"title"        : "HDC-1921",
+	"description"  : "MU-MHG-CoA65+",
+	"display_name" : "MU-MHG-CoA65+",
+	"query_type"   : "RATIO",
+	"map"          : "queries/HDC-1921_MU-MHG-CoA65+.js",
+	"reduce"       : "queries/ReduceRatio.js"
+}

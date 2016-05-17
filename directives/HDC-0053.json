@@ -1,0 +1,10 @@
+{
+	"type"         : "QUERY",
+	"name"         : "HDC-0053_PP-ppMap5+",
+	"title"        : "HDC-0053",
+	"description"  : "PP-ppMap5+",
+	"display_name" : "PP-ppMap5+",
+	"query_type"   : "RATIO",
+	"map"          : "queries/HDC-0053_PP-ppMap5+.js",
+	"reduce"       : "queries/ReduceRatio.js"
+}

@@ -1,0 +1,10 @@
+{
+	"type"         : "QUERY",
+	"name"         : "HDC-0981_PH-hepC",
+	"title"        : "HDC-0981",
+	"description"  : "PH-hepC",
+	"display_name" : "PH-hepC",
+	"query_type"   : "RATIO",
+	"map"          : "queries/HDC-0981_PH-hepC.js",
+	"reduce"       : "queries/ReduceRatio.js"
+}

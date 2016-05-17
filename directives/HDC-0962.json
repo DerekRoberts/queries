@@ -1,0 +1,10 @@
+{
+	"type"         : "QUERY",
+	"name"         : "HDC-0962_PH-hypertension",
+	"title"        : "HDC-0962",
+	"description"  : "PH-hypertension",
+	"display_name" : "PH-hypertension",
+	"query_type"   : "RATIO",
+	"map"          : "queries/HDC-0962_PH-hypertension.js",
+	"reduce"       : "queries/ReduceRatio.js"
+}

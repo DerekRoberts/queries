@@ -1,0 +1,10 @@
+{
+	"type"         : "QUERY",
+	"name"         : "HDC-1928_MU-Angeotensin2Antagonist65+",
+	"title"        : "HDC-1928",
+	"description"  : "MU-Angeotensin2Antagonist65+",
+	"display_name" : "MU-Angeotensin2Antagonist65+",
+	"query_type"   : "RATIO",
+	"map"          : "queries/HDC-1928_MU-Angeotensin2Antagonist65+.js",
+	"reduce"       : "queries/ReduceRatio.js"
+}

@@ -1,0 +1,10 @@
+{
+	"type"         : "QUERY",
+	"name"         : "HDC-1149_PH-cervixScreening",
+	"title"        : "HDC-1149",
+	"description"  : "PH-cervixScreening",
+	"display_name" : "PH-cervixScreening",
+	"query_type"   : "RATIO",
+	"map"          : "queries/HDC-1149_PH-cervixScreening.js",
+	"reduce"       : "queries/ReduceRatio.js"
+}

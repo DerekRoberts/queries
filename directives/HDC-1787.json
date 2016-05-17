@@ -1,0 +1,10 @@
+{
+	"type"         : "QUERY",
+	"name"         : "HDC-1787_PH-cerebrovascularDisease",
+	"title"        : "HDC-1787",
+	"description"  : "PH-cerebrovascularDisease",
+	"display_name" : "PH-cerebrovascularDisease",
+	"query_type"   : "RATIO",
+	"map"          : "queries/HDC-1787_PH-cerebrovascularDisease.js",
+	"reduce"       : "queries/ReduceRatio.js"
+}

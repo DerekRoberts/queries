@@ -1,0 +1,10 @@
+{
+	"type"         : "QUERY",
+	"name"         : "HDC-0956_PH-asthma",
+	"title"        : "HDC-0956",
+	"description"  : "PH-asthma",
+	"display_name" : "PH-asthma",
+	"query_type"   : "RATIO",
+	"map"          : "queries/HDC-0956_PH-asthma.js",
+	"reduce"       : "queries/ReduceRatio.js"
+}

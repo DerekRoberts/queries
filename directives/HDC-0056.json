@@ -1,0 +1,10 @@
+{
+	"type"         : "QUERY",
+	"name"         : "HDC-0056_PP-renalMap65",
+	"title"        : "HDC-0056",
+	"description"  : "PP-renalMap65",
+	"display_name" : "PP-renalMap65",
+	"query_type"   : "RATIO",
+	"map"          : "queries/HDC-0056_PP-renalMap65.js",
+	"reduce"       : "queries/ReduceRatio.js"
+}

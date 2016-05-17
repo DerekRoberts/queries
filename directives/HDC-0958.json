@@ -1,0 +1,10 @@
+{
+	"type"         : "QUERY",
+	"name"         : "HDC-0958_PH-chronicObstructivePulminaryDisease",
+	"title"        : "HDC-0958",
+	"description"  : "PH-chronicObstructivePulminaryDisease",
+	"display_name" : "PH-chronicObstructivePulminaryDisease",
+	"query_type"   : "RATIO",
+	"map"          : "queries/HDC-0958_PH-chronicObstructivePulminaryDisease.js",
+	"reduce"       : "queries/ReduceRatio.js"
+}

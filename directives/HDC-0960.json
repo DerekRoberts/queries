@@ -1,0 +1,10 @@
+{
+	"type"         : "QUERY",
+	"name"         : "HDC-0960_PH-diabetes",
+	"title"        : "HDC-0960",
+	"description"  : "PH-diabetes",
+	"display_name" : "PH-diabetes",
+	"query_type"   : "RATIO",
+	"map"          : "queries/HDC-0960_PH-diabetes.js",
+	"reduce"       : "queries/ReduceRatio.js"
+}

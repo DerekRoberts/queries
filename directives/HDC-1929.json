@@ -1,0 +1,10 @@
+{
+	"type"         : "QUERY",
+	"name"         : "HDC-1929_MU-Biguinide65+",
+	"title"        : "HDC-1929",
+	"description"  : "MU-Biguinide65+",
+	"display_name" : "MU-Biguinide65+",
+	"query_type"   : "RATIO",
+	"map"          : "queries/HDC-1929_MU-Biguinide65+.js",
+	"reduce"       : "queries/ReduceRatio.js"
+}

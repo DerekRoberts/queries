@@ -1,0 +1,10 @@
+{
+	"type"         : "QUERY",
+	"name"         : "HDC-1925_MU-DihydropyridineCalciumChannelBlocker65+",
+	"title"        : "HDC-1925",
+	"description"  : "MU-DihydropyridineCalciumChannelBlocker65+",
+	"display_name" : "MU-DihydropyridineCalciumChannelBlocker65+",
+	"query_type"   : "RATIO",
+	"map"          : "queries/HDC-1925_MU-DihydropyridineCalciumChannelBlocker65+.js",
+	"reduce"       : "queries/ReduceRatio.js"
+}

@@ -1,10 +1,10 @@
 {
-    "type"         : "QUERY",
-    "name"         : "HDC-0027_DiabetesLDLValue",
-    "title"        : "HDC-0027",
-    "description"  : "Diabetics, LDL <= 2.5 mmol/L in last 1y?",
-    "display_name" : "Diabetics, LDL <= 2.5 mmol/L in last 1y?",
-    "query_type"   : "RATIO",
-    "map"          : "queries/HDC-0027_DiabetesLDLValue.js",
-    "reduce"       : "queries/ReduceRatio.js"
+	"type"         : "QUERY",
+	"name"         : "HDC-0027_DiabetesLDLValue",
+	"title"        : "HDC-0027",
+	"description"  : "DiabetesLDLValue",
+	"display_name" : "DiabetesLDLValue",
+	"query_type"   : "RATIO",
+	"map"          : "queries/HDC-0027_DiabetesLDLValue.js",
+	"reduce"       : "queries/ReduceRatio.js"
 }

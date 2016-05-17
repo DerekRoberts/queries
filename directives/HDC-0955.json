@@ -1,0 +1,10 @@
+{
+	"type"         : "QUERY",
+	"name"         : "HDC-0955_PH-congestiveHeartFailure",
+	"title"        : "HDC-0955",
+	"description"  : "PH-congestiveHeartFailure",
+	"display_name" : "PH-congestiveHeartFailure",
+	"query_type"   : "RATIO",
+	"map"          : "queries/HDC-0955_PH-congestiveHeartFailure.js",
+	"reduce"       : "queries/ReduceRatio.js"
+}

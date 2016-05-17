@@ -1,10 +1,10 @@
 {
-    "type"         : "QUERY",
-    "name"         : "HDC-0020_PH-recentColonScreening",
-    "title"        : "HDC-0020",
-    "description"  : "50-74.96, recent colon screening?",
-    "display_name" : "50-74.96, recent colon screening?",
-    "query_type"   : "RATIO",
-    "map"          : "queries/HDC-0020_PH-recentColonScreening.js",
-    "reduce"       : "queries/ReduceRatio.js"
+	"type"         : "QUERY",
+	"name"         : "HDC-0020_PH-recentColonScreening",
+	"title"        : "HDC-0020",
+	"description"  : "PH-recentColonScreening",
+	"display_name" : "PH-recentColonScreening",
+	"query_type"   : "RATIO",
+	"map"          : "queries/HDC-0020_PH-recentColonScreening.js",
+	"reduce"       : "queries/ReduceRatio.js"
 }

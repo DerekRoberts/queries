@@ -1,0 +1,10 @@
+{
+	"type"         : "QUERY",
+	"name"         : "HDC-1926_MU-ThyroidHormone65+",
+	"title"        : "HDC-1926",
+	"description"  : "MU-ThyroidHormone65+",
+	"display_name" : "MU-ThyroidHormone65+",
+	"query_type"   : "RATIO",
+	"map"          : "queries/HDC-1926_MU-ThyroidHormone65+.js",
+	"reduce"       : "queries/ReduceRatio.js"
+}

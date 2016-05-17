@@ -1,0 +1,10 @@
+{
+	"type"         : "QUERY",
+	"name"         : "HDC-0959_PH-depression",
+	"title"        : "HDC-0959",
+	"description"  : "PH-depression",
+	"display_name" : "PH-depression",
+	"query_type"   : "RATIO",
+	"map"          : "queries/HDC-0959_PH-depression.js",
+	"reduce"       : "queries/ReduceRatio.js"
+}

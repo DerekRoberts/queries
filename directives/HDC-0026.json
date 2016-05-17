@@ -1,10 +1,10 @@
 {
-    "type"         : "QUERY",
-    "name"         : "HDC-0026_DiabetesHgbA1CValue",
-    "title"        : "HDC-0026",
-    "description"  : "Diabetics, hemoglobin <= 7% in last 1y?",
-    "display_name" : "Diabetics, hemoglobin <= 7% in last 1y?",
-    "query_type"   : "RATIO",
-    "map"          : "queries/HDC-0026_DiabetesHgbA1CValue.js",
-    "reduce"       : "queries/ReduceRatio.js"
+	"type"         : "QUERY",
+	"name"         : "HDC-0026_DiabetesHgbA1CValue",
+	"title"        : "HDC-0026",
+	"description"  : "DiabetesHgbA1CValue",
+	"display_name" : "DiabetesHgbA1CValue",
+	"query_type"   : "RATIO",
+	"map"          : "queries/HDC-0026_DiabetesHgbA1CValue.js",
+	"reduce"       : "queries/ReduceRatio.js"
 }

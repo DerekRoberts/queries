@@ -1,0 +1,10 @@
+{
+	"type"         : "QUERY",
+	"name"         : "HDC-0057_PP-primaryStatinMap65",
+	"title"        : "HDC-0057",
+	"description"  : "PP-primaryStatinMap65",
+	"display_name" : "PP-primaryStatinMap65",
+	"query_type"   : "RATIO",
+	"map"          : "queries/HDC-0057_PP-primaryStatinMap65.js",
+	"reduce"       : "queries/ReduceRatio.js"
+}
