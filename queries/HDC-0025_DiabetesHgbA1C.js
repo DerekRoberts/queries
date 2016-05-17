@@ -1,5 +1,7 @@
 /**
- * Query Title: HDC-0025 Query Type: Ratio Description: A1C Check 6m
+ * Query Title: HDC-0025
+ * Query Type:  Ratio
+ * Description: A1C Check 6m
  */
 function map(patient) {
 
@@ -11,7 +13,7 @@ function map(patient) {
 
 	/**
 	 * Denominator
-	 * 
+	 *
 	 * Base criteria: - diagnosed with diabetes
 	 */
 	denominator : function(patient, date, errorContainer) {
@@ -23,7 +25,7 @@ function map(patient) {
 
 	/**
 	 * Numerator
-	 * 
+	 *
 	 * Additional criteria: - HGBA1C recorded ---> in last six months
 	 */
 	numerator : function(patient, date, denominator, errorContainer) {

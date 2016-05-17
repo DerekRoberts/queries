@@ -1,7 +1,7 @@
 /**
- * Query Title: HDC-0027 
- * Query Type: 
- * Ratio Description: DM: w LDL <= 2.5 1y
+ * Query Title: HDC-0027
+ * Query Type:  Ratio
+ * Description: DM: w LDL <= 2.5 1y
  */
 function map(patient) {
 
@@ -13,7 +13,7 @@ function map(patient) {
 
 	/**
 	 * Denominator
-	 * 
+	 *
 	 * Base criteria: - diagnosed with diabetes
 	 */
 	denominator : function(patient, date, errorContainer) {
@@ -25,7 +25,7 @@ function map(patient) {
 
 	/**
 	 * Numerator
-	 * 
+	 *
 	 * Additional criteria: - LDL <= 2.5 mmol/L --> in last year
 	 */
 	numerator : function(patient, date, denominator, errorContainer) {

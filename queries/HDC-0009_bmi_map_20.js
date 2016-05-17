@@ -1,5 +1,8 @@
 /**
  * Query Title: HDC-0009 Query Type: Ratio Description: BMI-WC Check, 20+
+ * Query Type:  Ratio
+ * Description: Of patients 20+,
+ *              how many have BMI or WC recorded?
  */
 
 function map(patient) {
@@ -16,7 +19,7 @@ function map(patient) {
 
 	/**
 	 * Denominator
-	 * 
+	 *
 	 * Base criteria: - age 20+
 	 */
 	denominator : function(patient, date, errorContainer) {
@@ -25,10 +28,10 @@ function map(patient) {
 	},
 	/**
 	 * Numerator
-	 * 
+	 *
 	 * Additional criteria: - has Waist circumference OR - has BMI OR - has
 	 * height AND has weight ---> ALL documented in last 2 years
-	 * 
+	 *
 	 */
 	numerator : function(patient, date, denominator, errorContainer) {
 	    var minDate = utils.yearsBefore(date, 2);

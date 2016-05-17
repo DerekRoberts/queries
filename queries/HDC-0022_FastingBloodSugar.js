@@ -1,5 +1,7 @@
 /**
- * Query Title: HDC-0022 Query Type: Ratio Description: Fasting BS 3y, 46+
+ * Query Title: HDC-0022
+ * Query Type:  Ratio
+ * Description: Fasting BS 3y, 46+
  */
 function map(patient) {
 
@@ -12,7 +14,7 @@ function map(patient) {
 
 	/**
 	 * Denominator
-	 * 
+	 *
 	 * Base criteria: - 46+ years old
 	 */
 	denominator : function(patient, date, errorContainer) {
@@ -22,7 +24,7 @@ function map(patient) {
 
 	/**
 	 * Numerator
-	 * 
+	 *
 	 * Additional criteria: - has had fasting glucose (blood sugar) recorded
 	 * --> tested in the last three years
 	 */
