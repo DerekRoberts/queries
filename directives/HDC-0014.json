@@ -1,0 +1,10 @@
+{
+    "type"         : "QUERY",
+    "name"         : "HDC-0014_PH-pneumococcalMap",
+    "title"        : "HDC-0014",
+    "description"  : "65+, pneumococcal vaccine?",
+    "display_name" : "65+, pneumococcal vaccine?",
+    "query_type"   : "RATIO",
+    "map"          : "queries/HDC-0014_PH-pneumococcalMap.js",
+    "reduce"       : "queries/ReduceRatio.js"
+}

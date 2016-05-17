@@ -1,0 +1,10 @@
+{
+    "type"         : "QUERY",
+    "name"         : "HDC-0025_DiabetesHgbA1C",
+    "title"        : "HDC-0025",
+    "description"  : "Diabetics, recorded HGBA1C in last 6m?",
+    "display_name" : "Diabetics, recorded HGBA1C in last 6m?",
+    "query_type"   : "RATIO",
+    "map"          : "queries/HDC-0025_DiabetesHgbA1C.js",
+    "reduce"       : "queries/ReduceRatio.js"
+}

@@ -1,10 +1,10 @@
 {
-    "type": "QUERY",
-    "name" : "HDC-0001_PatientCounts",
-    "title" : "HDC-0001",
-    "description" : "Active patient counts arranged by sex and age range.",
+    "type"         : "QUERY",
+    "name"         : "HDC-0001_PatientCounts",
+    "title"        : "HDC-0001",
+    "description"  : "Active patient counts arranged by sex and age range.",
     "display_name" : "Active patient counts arranged by sex and age range.",
-    "query_type" : "STRATIFIED",
-    "map": "queries/HDC-0001_PatientCounts.js",
-    "reduce" : "queries/ReduceCount.js"
+    "query_type"   : "STRATIFIED",
+    "map"          : "queries/HDC-0001_PatientCounts.js",
+    "reduce"       : "queries/ReduceCount.js"
 }
