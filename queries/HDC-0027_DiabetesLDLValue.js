@@ -10,6 +10,7 @@ function map(patient) {
 
 	diabetes : dictionary.conditions.diabetes,
 	ldl : dictionary.labs.cholesterolLDL,
+	maxValue : 2.5,
 
 	/**
 	 * Denominator
@@ -33,7 +34,7 @@ function map(patient) {
 	    var maxDate = date;
 
 	    var ldl = labs.hasLabInDateRangeWithValue(patient, minDate,
-		    maxDate, this.ldl, null, 2.5, false, "mmol/L", false,
+		    maxDate, this.ldl, null, this.maxValue, false, "mmol/L", false,
 		    errorContainer);
 
 	    return (denominator && ldl);

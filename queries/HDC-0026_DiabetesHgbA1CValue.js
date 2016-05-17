@@ -10,7 +10,8 @@ function map(patient) {
 
 	diabetes : dictionary.conditions.diabetes,
 	hemoglobinA1C : dictionary.labs.hemoglobinA1C,
-
+	maxValue : 7,
+	
 	/**
 	 * Denominator
 	 *
@@ -33,7 +34,7 @@ function map(patient) {
 	    var maxDate = date;
 
 	    var hemoglobinA1C = labs.hasLabInDateRangeWithValue(patient, minDate,
-		    maxDate, this.hemoglobinA1C, null, 7, false, "%", false,  errorContainer);
+		    maxDate, this.hemoglobinA1C, null, this.maxValue, false, "%", false,  errorContainer);
 
 	    return (denominator && hemoglobinA1C);
 	},
