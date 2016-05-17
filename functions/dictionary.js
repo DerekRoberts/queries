@@ -512,5 +512,15 @@ dictionary.observations = dictionary.observations || {
 	LOINC : [ {
 	    codeEquals : "3141-9", description : ""
 	} ]
+    },
+    systolicBloodPressure : {
+	LOINC : [ {
+	    codeEquals : "8480-6", description : ""
+	} ]
+    },
+    diastolicBloodPressure : {
+	LOINC : [ {
+	    codeEquals : "8462-4", description : ""
+	} ]
     }
 };
