@@ -15,7 +15,7 @@ function map(patient) {
 	},
 	numerator : function(patient, date, denominator, errorContainer) {
 	    return denominator
-	    && (profile.gender(patient, errorContainer) == 'male');
+	    && (profile.gender.getGender(patient, errorContainer) == 'male');
 	}
     };
     // Emit results based on query above

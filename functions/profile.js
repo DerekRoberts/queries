@@ -155,6 +155,8 @@ profile.active = function(patient, atDate, errorContainer) {
     }
 };
 
+
+profile.gender = profile.gender || {};
 /**
  * Returns a patient's gender. E2E does not support gender change over time.
  * 
@@ -162,7 +164,7 @@ profile.active = function(patient, atDate, errorContainer) {
  *                hQuery patient object
  * @return Gender (string)
  */
-profile.gender = function(patient, errorContainer) {
+profile.gender.getGender = function(patient, errorContainer) {
     // Check input
     if (utils.isUndefinedOrNullAndLog("Invalid or incomplete patient object",
 	    utils.invalid, errorContainer, [ patient, "patient", ".json" ])) {
@@ -179,6 +181,57 @@ profile.gender = function(patient, errorContainer) {
 	return 'undifferentiated';
     default:
 	return 'undefined';
+    }
+};
+
+/**
+ * Returns whether a patient is female.
+ * 
+ * @param patient
+ *                hQuery patient object
+ * @return true, if patient is female
+ */
+profile.gender.isF = function(patient, errorContainer) {
+    var result = profile.gender.getGender(patient, errorContainer);
+    
+    if(result == 'female') {
+	return true;
+    } else {
+	return false;
+    }
+};
+
+/**
+ * Returns whether a patient is male.
+ * 
+ * @param patient
+ *                hQuery patient object
+ * @return true, if patient is male
+ */
+profile.gender.isM = function(patient, errorContainer) {
+    var result = profile.gender.getGender(patient, errorContainer);
+    
+    if(result == 'male') {
+	return true;
+    } else {
+	return false;
+    }
+};
+
+/**
+ * Returns whether a patient is of unspecified/other gender.
+ * 
+ * @param patient
+ *                hQuery patient object
+ * @return true, if patient is of unspecified/other gender.
+ */
+profile.gender.isUN = function(patient, errorContainer) {
+    var result = profile.gender.getGender(patient, errorContainer);
+    
+    if((result == 'undifferentiated') || ((result == 'undefined'))) {
+	return true;
+    } else {
+	return false;
     }
 };
 

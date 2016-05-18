@@ -24,7 +24,7 @@ function map( patient )
         retroAge;
 
     // Store gender (can't change)
-    switch( profile.gender( patient ).toString().toUpperCase() ){
+    switch( profile.gender.getGender( patient ).toString().toUpperCase() ){
         case 'FEMALE':
         indexGdrs = 0;
         break;
