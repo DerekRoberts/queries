@@ -496,11 +496,17 @@ dictionary.observations = dictionary.observations || {
     waistCircumference : {
 	LOINC : [ {
 	    codeEquals : "56115-9", description : ""
-	} ]
+	} ],
+	SNOMEDCT : [ {
+	    codeEquals : "276361009", description : ""
+	} ],
     },
     bodyMassIndex : {
 	LOINC : [ {
 	    codeEquals : "39156-5", description : ""
+	} ],
+	SNOMEDCT : [ {
+	    codeEquals : "60621009", description : ""
 	} ]
     },
     height : {
