@@ -1,5 +1,5 @@
 /**
- * Query Title: PDC-1135C_LastLab-A1C>8point1<9point0wDiabetes
+ * Query Title: HDC-1135D_LastLab-A1C>9point0wDiabetes
  * Query Type:  Ratio
  */
 function map(patient) {
@@ -9,8 +9,7 @@ function map(patient) {
 
 	diabetes : dictionary.conditions.diabetes,
 	hemoglobinA1C : dictionary.labs.hemoglobinA1C,
-	minValue : 8.1,
-	maxValue : 9.0,
+	minValue : 9.0,
 	
 	/**
 	 * Denominator
@@ -27,14 +26,14 @@ function map(patient) {
 	/**
 	 * Numerator
 	 *
-	 * Additional criteria: - HGBA1C recorded ---> in last 6 months with value >= 8.1% and <= 9.0%
+	 * Additional criteria: - HGBA1C recorded ---> in last 6 months with value >= 9.0%
 	 */
 	numerator : function(patient, date, denominator, errorContainer) {
 	    var minDate = utils.monthsBefore(date, 6);
 	    var maxDate = date;
 
 	    var hemoglobinA1C = labs.hasLabInDateRangeWithValue(patient, minDate,
-		    maxDate, this.hemoglobinA1C, this.minValue, this.maxValue, false, "%", false,  errorContainer);
+		    maxDate, this.hemoglobinA1C, this.minValue, null, false, "%", false,  errorContainer);
 
 	    return (denominator && hemoglobinA1C);
 	},
