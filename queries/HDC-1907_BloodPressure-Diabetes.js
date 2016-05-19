@@ -1,9 +1,9 @@
 /**
- * Query Title: HDC-0028
+ * Query Title: HDC-1907 BloodPressure-Diabetes
  * Query Type:  Ratio
  * Description: DM: w BP<=130/80 1y
  * 
- * Duplicate of HDC-1907
+ * Duplicate of HDC-0028
  */
 function map(patient) {
 
