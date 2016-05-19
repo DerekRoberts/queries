@@ -1,9 +1,9 @@
 /**
- * Query Title: HDC-0027
+ * Query Title: HDC-1906_Lab-LDL<=2point5wDiabetes
  * Query Type:  Ratio
  * Description: DM: w LDL <= 2.5 1y
- * 
- * Duplicate of HDC-1906
+ *
+ * Duplicate of HDC-0027 
  */
 function map(patient) {
 
