@@ -1,9 +1,8 @@
 /**
- * Query Title: HDC-0025
+ * Query Title: HDC-1904_Lab-A1CwDiabetes
  * Query Type:  Ratio
- * Description: A1C Check 6m
  * 
- * Duplicate of HDC-1904
+ * Duplicate of HDC-0025
  */
 function map(patient) {
 
