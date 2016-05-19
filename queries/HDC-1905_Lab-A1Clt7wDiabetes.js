@@ -1,9 +1,9 @@
 /**
- * Query Title: HDC-0026
+ * Query Title: PDC-1905_Lab-A1C<=7wDiabetes
  * Query Type:  Ratio
  * Description: DM: w A1C <= 7% 1y
  * 
- * Duplicate of HDC-1905
+ * Duplicate of HDC-0026
  */
 function map(patient) {
 
