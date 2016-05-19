@@ -37,9 +37,6 @@ function map(patient) {
 	 * 
 	 */
 	numerator : function(patient, date, denominator, errorContainer) {
-	    var minDate = utils.yearsBefore(date, 2);
-	    var maxDate = date;
-
 	    // Calculate maximum waist circumference based on patient gender
 	    var effectiveWaistCircumferenceMax;
 	    if(profile.gender.isF(patient, errorContainer)) {
