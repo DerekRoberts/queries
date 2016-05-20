@@ -15,7 +15,32 @@ var immunizations = immunizations || {};
 */
 immunizations.hasActiveImmunization = function(patient, date, immunizationInfo,
 	errorContainer
-) {
+)
+{
+    return immunizations.hasActiveImmunizationInDateRange(patient, null, date, immunizationInfo, errorContainer);
+}
+
+/**
+* Returns whether a patient has an immunition matching the provided code in the date range passed
+*
+* @param patient
+*                hQuery patient object
+ * @param minDate
+ *                Start of the effective date range for which data should be
+ *                examined
+ * @param maxDate
+ *                End of the effective date range for which data should be
+ *                examined
+* @param immunizationInfo
+*                Immunication object from dictionary that defines the
+*                immunization for which to search
+* @param errorContainer
+*                ErrorContainer to use for storing any errors or output
+*/
+immunizations.hasImmunizationInDateRange = function(patient, minDate, maxDate, immunizationInfo,
+	errorContainer
+)
+{
 	// Check input
 	if (utils.isUndefinedOrNull(patient, patient.json, immunizationInfo)) {
 		return utils
@@ -33,7 +58,7 @@ immunizations.hasActiveImmunization = function(patient, date, immunizationInfo,
 	var matchingActiveimmunizations = immunizationEntries.filter(function(immunization) {
 		if (
 			immunizations.isCodeMatch(immunization, immunizationInfo, errorContainer) &&
-			immunizations.isActive(immunization, date, errorContainer)
+			immunizations.isDateInRange(immunization, minDate, maxDate, errorContainer)
 		) {
 			// Immunization is a code match and active for the date being examined
 			return true;
@@ -114,43 +139,33 @@ immunizations.isCodeMatch = function(immunization, immunizationInfo, errorContai
 };
 
 /**
-* Returns whether the immunization entry passed is active on the date passed.
-* Note: The underlying data structure cannot express that a immunization is no
-* longer present. Currently a immunization is considered to always be active
-*  after its start date
-*
-* @param immunization
-*                single immunization entry from hQuery patient object
-* @param date
-*                Effective date for which data should be examined
-* @param errorContainer
-*                ErrorContainer to use for storing any errors or output
-*
-*/
-immunizations.isActive = function(immunization, date, errorContainer) {
-	// check for valid input, if invalid then we can't operate on the
-	// immunization, return false.
-	if (utils.isUndefinedOrNull(immunization, immunization.json)) {
-		return false;
-	}
-
-	// Default to current date if no date is supplied
-	if (utils.isUndefinedOrNull(date) || isNaN(date)) {
-		date = new Date();
-	}
-
-	// convert date to absolute time in seconds
-	var dateSeconds = Math.floor(date.getTime() / 1000);
-
-	// check if immunization was active on date
-	var startImmunization = immunization.json.start_time;
-
-	// Check if date is after start
-	if (!utils.isUndefinedOrNull(startImmunization) &&
-	(startImmunization <= dateSeconds)) {
-		// The start of the immunization is defined and occurs before the date to
-		// be examined
-		return true;
-	} else
+ * Returns whether the measurement entry passed is within the date range
+ * specified
+ * 
+ * @param immunization
+ *                single immunization entry from hQuery patient object
+ * @param minDate
+ *                Start of date range to examine
+ * @param maxDate
+ *                End of date range to examine
+ * @param errorContainer
+ *                ErrorContainer to use for storing any errors or output
+ * 
+ */
+immunizations.isDateInRange = function(immunization, minDate, maxDate,
+	errorContainer) {
+    
+    // check for valid input, if invalid then we can't operate on the
+    // immunization, return false.
+    if (utils.isUndefinedOrNullAndLog(
+	    "Invalid or incomplete data passed to immunizations.isDateInRange",
+	    utils.invalid, errorContainer, [ immunization, "immunization",
+		    ".json.start_time" ], [ maxDate, "maxDate" ])) {
 	return false;
+    }
+
+    // return whether immunization date is within range
+    return (((minDate == null) || immunization.json.start_time * 1000 > minDate) 
+	    && immunization.json.start_time * 1000 < maxDate);
 };
+
