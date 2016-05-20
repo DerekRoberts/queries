@@ -1,0 +1,10 @@
+{
+	"type"         : "QUERY",
+	"name"         : "HDC-1135A_LastLab-A1Clt7point1wDiabetes",
+	"title"        : "HDC-1135A",
+	"description"  : "LastLab-A1Clt7point1wDiabetes",
+	"display_name" : "LastLab-A1Clt7point1wDiabetes",
+	"query_type"   : "RATIO",
+	"map"          : "queries/HDC-1135A_LastLab-A1Clt7point1wDiabetes.js",
+	"reduce"       : "queries/ReduceRatio.js"
+}

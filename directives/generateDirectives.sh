@@ -5,9 +5,10 @@ set -euo pipefail nounset
 QUERY_LIST=$(find ../queries/ -regextype posix-extended -regex ".*./HDC-[0-9]{4}.*\.js")
 for q in ${QUERY_LIST}
 do
-	FULL=${q:11}
-	NAME=${q:11:8}
-	DESC=${q:20:-3}
+	FILE=${q#../*/*}
+	FULL=${FILE%.*}
+	NAME=${FILE%%_*}
+	DESC=${FULL#*_}
 	SAVE=${NAME}.json
 	if [ -f ./${SAVE} ]
 	then
@@ -21,7 +22,7 @@ do
 			echo -e '\t"description"  : "'${DESC}'",'
 			echo -e '\t"display_name" : "'${DESC}'",'
 			echo -e '\t"query_type"   : "RATIO",'
-			echo -e '\t"map"          : "queries/'${FULL}'",'
+			echo -e '\t"map"          : "queries/'${FULL}'.js",'
 			echo -e '\t"reduce"       : "queries/ReduceRatio.js"'
 			echo -e '}'
 		) > ./${SAVE}
