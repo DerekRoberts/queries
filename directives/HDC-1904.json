@@ -1,0 +1,10 @@
+{
+	"type"         : "QUERY",
+	"name"         : "HDC-1904_Lab-A1CwDiabetes",
+	"title"        : "HDC-1904",
+	"description"  : "Lab-A1CwDiabetes",
+	"display_name" : "Lab-A1CwDiabetes",
+	"query_type"   : "RATIO",
+	"map"          : "queries/HDC-1904_Lab-A1CwDiabetes.js",
+	"reduce"       : "queries/ReduceRatio.js"
+}

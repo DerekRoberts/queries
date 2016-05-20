@@ -1,0 +1,10 @@
+{
+	"type"         : "QUERY",
+	"name"         : "HDC-1155_PH-tetanusVaccinations",
+	"title"        : "HDC-1155",
+	"description"  : "PH-tetanusVaccinations",
+	"display_name" : "PH-tetanusVaccinations",
+	"query_type"   : "RATIO",
+	"map"          : "queries/HDC-1155_PH-tetanusVaccinations.js",
+	"reduce"       : "queries/ReduceRatio.js"
+}

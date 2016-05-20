@@ -1,0 +1,10 @@
+{
+	"type"         : "QUERY",
+	"name"         : "HDC-1153_Lab-FBSorA1C45+",
+	"title"        : "HDC-1153",
+	"description"  : "Lab-FBSorA1C45+",
+	"display_name" : "Lab-FBSorA1C45+",
+	"query_type"   : "RATIO",
+	"map"          : "queries/HDC-1153_Lab-FBSorA1C45+.js",
+	"reduce"       : "queries/ReduceRatio.js"
+}

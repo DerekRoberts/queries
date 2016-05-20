@@ -1,0 +1,10 @@
+{
+	"type"         : "QUERY",
+	"name"         : "HDC-1903_Lab-FBS46+",
+	"title"        : "HDC-1903",
+	"description"  : "Lab-FBS46+",
+	"display_name" : "Lab-FBS46+",
+	"query_type"   : "RATIO",
+	"map"          : "queries/HDC-1903_Lab-FBS46+.js",
+	"reduce"       : "queries/ReduceRatio.js"
+}

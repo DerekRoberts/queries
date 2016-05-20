@@ -1,0 +1,10 @@
+{
+	"type"         : "QUERY",
+	"name"         : "HDC-0602_DQ-Obesity-last2years",
+	"title"        : "HDC-0602",
+	"description"  : "DQ-Obesity-last2years",
+	"display_name" : "DQ-Obesity-last2years",
+	"query_type"   : "RATIO",
+	"map"          : "queries/HDC-0602_DQ-Obesity-last2years.js",
+	"reduce"       : "queries/ReduceRatio.js"
+}

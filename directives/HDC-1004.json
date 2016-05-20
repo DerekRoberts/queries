@@ -1,0 +1,10 @@
+{
+	"type"         : "QUERY",
+	"name"         : "HDC-1004_ObesityYouth",
+	"title"        : "HDC-1004",
+	"description"  : "ObesityYouth",
+	"display_name" : "ObesityYouth",
+	"query_type"   : "RATIO",
+	"map"          : "queries/HDC-1004_ObesityYouth.js",
+	"reduce"       : "queries/ReduceRatio.js"
+}

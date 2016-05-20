@@ -1,0 +1,10 @@
+{
+	"type"         : "QUERY",
+	"name"         : "HDC-0732_ChronicPain",
+	"title"        : "HDC-0732",
+	"description"  : "ChronicPain",
+	"display_name" : "ChronicPain",
+	"query_type"   : "RATIO",
+	"map"          : "queries/HDC-0732_ChronicPain.js",
+	"reduce"       : "queries/ReduceRatio.js"
+}

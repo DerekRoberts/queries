@@ -1,0 +1,10 @@
+{
+	"type"         : "QUERY",
+	"name"         : "HDC-1907_BloodPressure-Diabetes",
+	"title"        : "HDC-1907",
+	"description"  : "BloodPressure-Diabetes",
+	"display_name" : "BloodPressure-Diabetes",
+	"query_type"   : "RATIO",
+	"map"          : "queries/HDC-1907_BloodPressure-Diabetes.js",
+	"reduce"       : "queries/ReduceRatio.js"
+}
