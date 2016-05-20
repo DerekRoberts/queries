@@ -1,0 +1,10 @@
+{
+	"type"         : "QUERY",
+	"name"         : "HDC-1154_PH-pneumovaxAdministered",
+	"title"        : "HDC-1154",
+	"description"  : "PH-pneumovaxAdministered",
+	"display_name" : "PH-pneumovaxAdministered",
+	"query_type"   : "RATIO",
+	"map"          : "queries/HDC-1154_PH-pneumovaxAdministered.js",
+	"reduce"       : "queries/ReduceRatio.js"
+}
