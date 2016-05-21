@@ -3,6 +3,9 @@
 
 *.xml
 .directory
+queries.json
+job_params.json
+
 
 # Eclipse Files #
 #################
