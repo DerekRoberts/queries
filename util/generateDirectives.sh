@@ -2,7 +2,10 @@
 #
 set -euo pipefail nounset
 
+DIRECTIVES="../directives"
 QUERY_LIST=$(find ../queries/ -regextype posix-extended -regex ".*./HDC-[0-9]{4}.*\.js")
+
+cd ${DIRECTIVES}
 for q in ${QUERY_LIST}
 do
 	FILE=${q#../*/*}
