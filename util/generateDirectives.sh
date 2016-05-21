@@ -2,24 +2,36 @@
 #
 set -euo pipefail nounset
 
+
+# Target directory and source query list
+#
 DIRECTIVES="../directives"
 QUERY_LIST=$(find ../queries/ -regextype posix-extended -regex ".*./HDC-[0-9]{4}.*\.js")
 
-#cd ${DIRECTIVES}
+
+# For each query file
+#
 for q in ${QUERY_LIST}
 do
+	# Chop file names to build strings
+	#
 	FILE=${q#../*/*}
 	FULL=${FILE%.*}
 	NAME=${FILE%%_*}
 	DESC=${FULL#*_}
 	SAVE=${NAME}.json
 	HERE=${DIRECTIVES}/${SAVE}
+
+	# Only create files that don't exist
+	#
 	if [ -f ./${HERE} ]
 	then
 		echo "${SAVE} already exists"
 	else
-		if( grep 'emitter.ratio' ${q})
+		if( grep --quiet 'emitter.ratio' ${q} )
 		then
+			# Ratio queries use the emitter.ratio() function
+			#
 			(
 				echo -e '{'
 				echo -e '\t"type"         : "QUERY",'
@@ -33,6 +45,7 @@ do
 				echo -e '}'
 			) > ${HERE}
 		else
+			# ...Otherwise they're count/stratified queries
 			(
 				echo -e '{'
 				echo -e '\t"type"         : "QUERY",'
