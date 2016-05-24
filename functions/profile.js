@@ -155,6 +155,37 @@ profile.active = function(patient, atDate, errorContainer) {
     }
 };
 
+/**
+ * Returns whether a patient has ever been active before the date passed. Uses encounter times and
+ * medication status.
+ * 
+ * @param patient
+ *                hQuery patient object
+ * @param atDate
+ *                reference date for active status
+ * @return true/false (boolean)
+ */
+profile.activeEver = function(patient, atDate, errorContainer) {
+    // Check input
+    if (utils.isUndefinedOrNullAndLog(
+	    "Invalid or incomplete data in profile.active", utils.invalid,
+	    errorContainer, [ patient, "patient", ".json" ],
+	    [ atDate, "atDate" ])) {
+	return false;
+    }
+
+    // Use maximum possible active window
+    var activeWindow = Number.MAX_SAFE_INTEGER;
+
+    // Check encounters and meds for active status
+    if (profile.activeEncounter(patient, atDate, activeWindow)
+	    || profile.activeMedication(patient, atDate, activeWindow)) {
+	return true;
+    } else {
+	return false;
+    }
+};
+
 
 profile.gender = profile.gender || {};
 /**
