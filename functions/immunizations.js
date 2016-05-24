@@ -17,7 +17,7 @@ immunizations.hasActiveImmunization = function(patient, date, immunizationInfo,
 	errorContainer
 )
 {
-    return immunizations.hasActiveImmunizationInDateRange(patient, null, date, immunizationInfo, errorContainer);
+    return immunizations.hasImmunizationInDateRange(patient, null, date, immunizationInfo, errorContainer);
 }
 
 /**
