@@ -301,3 +301,37 @@ profile.ages.isMin = function(patient, atDate, ageMin, errorContainer) {
     return profile.ages
 	    .isRange(patient, atDate, ageMin, ageMax, errorContainer);
 };
+
+/**
+ * Returns a patient's birthdate. Returns null if birthdate is not recorded
+ * 
+ * @param patient
+ *                hQuery patient object
+ * @return patient's birthdate or null if birthdate is not recorded
+ */
+profile.ages.getBirthdate = function(patient, errorContainer) {
+    if (utils.isUndefinedOrNullAndLog(
+	    "Invalid or incomplete data in profile.ages.getBirthdate()",
+	    utils.invalid, errorContainer, [ patient, "patient", ".json" ])) {
+	return null;
+    }
+
+    // Birthdate is a key in patient.json.  Select it.
+    if (utils.isUndefinedOrNull(patient.json.birthdate)) {
+	// No birthdate specified
+	return null;
+    } else {
+	// Note: Formatted in milliseconds, so multiply by 1000.
+	var bdNumber = patient.json.birthdate * 1000;
+
+	// This is a date, so format it as one. 
+	var bd = new Date(bdNumber);
+
+	if (bd == "Invalid Date") {
+	    // Birthdate  invalid
+	    return null;
+	} else {
+	    return bd;
+	}
+    }
+}
