@@ -316,6 +316,11 @@ dictionary.conditions = dictionary.conditions ||{
       { codeBeginsWith: "338", description: "CHRONIC PAIN ..." }
     ]
   },
+  palliativeCare : {
+    ICD9     : [
+      { codeEquals: "V66.7", description: "ENCOUNTER FOR PALLIATIVE CARE" }
+    ]
+  },
   rheumatoid : {
     ICD9     : [
       { codeEquals: "714.0", description: "RHEUMATOID ARTHRITIS" }
