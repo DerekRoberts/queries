@@ -1,0 +1,10 @@
+{
+	"type"         : "QUERY",
+	"name"         : "HDC-0934_COPDandPneumococcal",
+	"title"        : "HDC-0934",
+	"description"  : "COPDandPneumococcal",
+	"display_name" : "COPDandPneumococcal",
+	"query_type"   : "RATIO",
+	"map"          : "queries/HDC-0934_COPDandPneumococcal.js",
+	"reduce"       : "queries/ReduceRatio.js"
+}

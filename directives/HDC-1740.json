@@ -4,7 +4,7 @@
 	"title"        : "HDC-1740",
 	"description"  : "ContactCounts",
 	"display_name" : "ContactCounts",
-	"query_type"   : "RATIO",
+	"query_type"   : "STRATIFIED",
 	"map"          : "queries/HDC-1740_ContactCounts.js",
-	"reduce"       : "queries/ReduceRatio.js"
+	"reduce"       : "queries/ReduceCount.js"
 }

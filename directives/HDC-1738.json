@@ -1,0 +1,10 @@
+{
+	"type"         : "QUERY",
+	"name"         : "HDC-1738_ActivePatients",
+	"title"        : "HDC-1738",
+	"description"  : "ActivePatients",
+	"display_name" : "ActivePatients",
+	"query_type"   : "RATIO",
+	"map"          : "queries/HDC-1738_ActivePatients.js",
+	"reduce"       : "queries/ReduceRatio.js"
+}

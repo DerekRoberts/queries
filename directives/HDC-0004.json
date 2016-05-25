@@ -1,0 +1,10 @@
+{
+	"type"         : "QUERY",
+	"name"         : "HDC-0004_UndocumentedBirthdate",
+	"title"        : "HDC-0004",
+	"description"  : "UndocumentedBirthdate",
+	"display_name" : "UndocumentedBirthdate",
+	"query_type"   : "RATIO",
+	"map"          : "queries/HDC-0004_UndocumentedBirthdate.js",
+	"reduce"       : "queries/ReduceRatio.js"
+}

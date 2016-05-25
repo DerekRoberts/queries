@@ -1,0 +1,10 @@
+{
+	"type"         : "QUERY",
+	"name"         : "HDC-0943_PH-recentInfluencaVacc65+",
+	"title"        : "HDC-0943",
+	"description"  : "PH-recentInfluencaVacc65+",
+	"display_name" : "PH-recentInfluencaVacc65+",
+	"query_type"   : "RATIO",
+	"map"          : "queries/HDC-0943_PH-recentInfluencaVacc65+.js",
+	"reduce"       : "queries/ReduceRatio.js"
+}

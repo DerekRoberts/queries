@@ -1,0 +1,10 @@
+{
+	"type"         : "QUERY",
+	"name"         : "HDC-0743_RaOaLbp",
+	"title"        : "HDC-0743",
+	"description"  : "RaOaLbp",
+	"display_name" : "RaOaLbp",
+	"query_type"   : "RATIO",
+	"map"          : "queries/HDC-0743_RaOaLbp.js",
+	"reduce"       : "queries/ReduceRatio.js"
+}

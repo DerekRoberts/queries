@@ -1,0 +1,10 @@
+{
+	"type"         : "QUERY",
+	"name"         : "HDC-0995_PH-recentMammogram50-70",
+	"title"        : "HDC-0995",
+	"description"  : "PH-recentMammogram50-70",
+	"display_name" : "PH-recentMammogram50-70",
+	"query_type"   : "RATIO",
+	"map"          : "queries/HDC-0995_PH-recentMammogram50-70.js",
+	"reduce"       : "queries/ReduceRatio.js"
+}
