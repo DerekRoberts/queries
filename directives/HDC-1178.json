@@ -1,0 +1,10 @@
+{
+	"type"         : "QUERY",
+	"name"         : "HDC-1178_ElderlyPatients",
+	"title"        : "HDC-1178",
+	"description"  : "ElderlyPatients",
+	"display_name" : "ElderlyPatients",
+	"query_type"   : "RATIO",
+	"map"          : "queries/HDC-1178_ElderlyPatients.js",
+	"reduce"       : "queries/ReduceRatio.js"
+}

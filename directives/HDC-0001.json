@@ -4,7 +4,7 @@
 	"title"        : "HDC-0001",
 	"description"  : "PatientCounts",
 	"display_name" : "PatientCounts",
-	"query_type"   : "RATIO",
+	"query_type"   : "STRATIFIED",
 	"map"          : "queries/HDC-0001_PatientCounts.js",
-	"reduce"       : "queries/ReduceRatio.js"
+	"reduce"       : "queries/ReduceCount.js"
 }
