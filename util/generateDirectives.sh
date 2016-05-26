@@ -11,6 +11,7 @@ QUERY_LIST=$(find ../queries/ -regextype posix-extended -regex ".*./HDC-[0-9]{4}
 
 # For each query file
 #
+COUNT=0
 for q in ${QUERY_LIST}
 do
 	# Chop file names to build strings
@@ -62,4 +63,15 @@ do
 		fi
 		echo "${SAVE} successfully created"
 	fi
+
+	# Increment count
+	#
+	((COUNT+=1))
 done
+
+
+# Output results
+#
+echo
+echo "Total queries: ${COUNT}"
+echo
