@@ -1,0 +1,10 @@
+{
+	"type"         : "QUERY",
+	"name"         : "HDC-0833_DQ-InvalidBirthdate",
+	"title"        : "HDC-0833",
+	"description"  : "DQ-InvalidBirthdate",
+	"display_name" : "DQ-InvalidBirthdate",
+	"query_type"   : "RATIO",
+	"map"          : "queries/HDC-0833_DQ-InvalidBirthdate.js",
+	"reduce"       : "queries/ReduceRatio.js"
+}

@@ -1,0 +1,10 @@
+{
+	"type"         : "QUERY",
+	"name"         : "HDC-0831_DQ-EncounterFrequency",
+	"title"        : "HDC-0831",
+	"description"  : "DQ-EncounterFrequency",
+	"display_name" : "DQ-EncounterFrequency",
+	"query_type"   : "RATIO",
+	"map"          : "queries/HDC-0831_DQ-EncounterFrequency.js",
+	"reduce"       : "queries/ReduceRatio.js"
+}
