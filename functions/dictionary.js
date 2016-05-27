@@ -43,7 +43,12 @@ dictionary.meds = dictionary.meds || {
       { codeBeginsWith: "C01AA", description: "Digitalis glycosides" }
     ]
   },
-  naturalOpiumAlkaloid : {
+  opioid : {
+    ATC : [
+      { codeBeginsWith: "N02A", description: "Natural opium alkaloids" }
+    ]
+  },
+  opioidNatural : {
     ATC : [
       { codeBeginsWith: "N02AA", description: "Natural opium alkaloids" }
     ]
