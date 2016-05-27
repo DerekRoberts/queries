@@ -1,9 +1,9 @@
 /**
-* Query Title: HDC-1932
+* Query Title: HDC-1934
 * Query Type:  Ratio
 * Initiative:  Practice Reflection
 * Description: Of active patients with chronic pain,
-*              how many receive opioids at 200+ mg/day?
+*              how many receive opioids at 50 <= mg < 100 /day?
 */
 function map( patient ){
 
@@ -11,7 +11,8 @@ function map( patient ){
   var query = {
 
     // Variables
-    dailyDoseMin : 200,
+    dailyDoseMin : 50,
+    dailyDoseMax : 99.99,
     measurement  : "mg",
     condition    : dictionary.conditions.painChronic,
     medication   : dictionary.meds.opioid,
@@ -22,8 +23,8 @@ function map( patient ){
     },
     // Other things?
     numerator: function( patient, date, denominator, err ) {
-      return denominator && medications.hasActiveMedMinDaily(
-               patient, date, this.medication, this.dailyDoseMin, this.measurement, err
+      return denominator && medications.hasActiveMedRangeDaily(
+               patient, date, this.medication, this.dailyDoseMin, this.dailyDoseMax, this.measurement, err
       );
     }
   };
