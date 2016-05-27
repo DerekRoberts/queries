@@ -78,6 +78,7 @@ dictionary.meds = dictionary.meds || {
 };
 
 // http://www.cms.gov/medicare-coverage-database/staticpages/icd-9-code-lookup.aspx
+// http://www.medilexicon.com/icd9codes.php
 // http://www.snomedbrowser.com
 dictionary.conditions = dictionary.conditions ||{
   asthma : {
