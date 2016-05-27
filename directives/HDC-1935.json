@@ -1,0 +1,10 @@
+{
+	"type"         : "QUERY",
+	"name"         : "HDC-1935_PH-chronicPainOpioids10-50",
+	"title"        : "HDC-1935",
+	"description"  : "PH-chronicPainOpioids10-50",
+	"display_name" : "PH-chronicPainOpioids10-50",
+	"query_type"   : "RATIO",
+	"map"          : "queries/HDC-1935_PH-chronicPainOpioids10-50.js",
+	"reduce"       : "queries/ReduceRatio.js"
+}
