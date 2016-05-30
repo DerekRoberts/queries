@@ -12,6 +12,11 @@ dictionary.meds = dictionary.meds || {
       { codeBeginsWith: "C09A",  description: "ACE INHIBITORS, PLAIN" }
     ]
   },
+  acetaminophen  : {
+    ATC : [
+      { codeBeginsWith: "N02BE01", description: "Paracetamol" }
+    ]
+  },
   angeotensin2Antagonist  : {
     ATC : [
       { codeBeginsWith: "C09C", description: "ANGIOTENSIN II ANTAGONISTS, PLAIN" }
