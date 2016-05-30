@@ -1,9 +1,10 @@
 /**
-* Query Title: HDC-0801
+* Query Title: HDC-0761
 * Query Type:  Ratio
 * Initiative:  End of Life
-* Description: Of active patients, 55+,
-*              how many of them are end of life or in palliative care?
+* Description: Of active patients,
+*              how many are currently at risk of death?
+*              (55+, condition: end of life or palliative care)
 */
 function map( patient ){
 
@@ -17,13 +18,14 @@ function map( patient ){
 
     // Active patient? Age restraints?
     denominator: function( patient, date ){
-      return profile.active( patient, date ) && profile.ages.isMin( patient, date, this.ageMin );
+      return profile.active( patient, date );
     },
     // Other things?
     numerator: function( patient, date, denominator, err ) {
-      return denominator &&(
-              conditions.hasActiveCondition( patient, date, this.endOfLife, err )||
-              conditions.hasActiveCondition( patient, date, this.palliative, err )
+      return denominator && profile.ages.isMin( patient, date, this.ageMin )&&
+      (
+        conditions.hasActiveCondition( patient, date, this.endOfLife, err )||
+        conditions.hasActiveCondition( patient, date, this.palliative, err )
       );
     }
   };
