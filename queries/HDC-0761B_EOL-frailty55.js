@@ -1,9 +1,9 @@
 /**
-* Query Title: HDC-0802
+* Query Title: HDC-0761B
 * Query Type:  Ratio
 * Initiative:  End of Life
-* Description: Of active patients, 55+,
-*              how many of them are frail?
+* Description: Of active patients,
+*              how many of them are frail, 55+?
 */
 function map( patient ){
 
@@ -16,11 +16,13 @@ function map( patient ){
 
     // Active patient? Age restraints?
     denominator: function( patient, date ){
-      return profile.active( patient, date ) && profile.ages.isMin( patient, date, this.ageMin );
+      return profile.active( patient, date );
     },
     // Other things?
     numerator: function( patient, date, denominator, err ) {
-      return denominator && conditions.hasActiveCondition( patient, date, this.codeSet, err );
+      return denominator &&
+        profile.ages.isMin( patient, date, this.ageMin )&&
+        conditions.hasActiveCondition( patient, date, this.codeSet, err );
     }
   };
   // Emit results based on query above
