@@ -22,6 +22,11 @@ dictionary.meds = dictionary.meds || {
       { codeBeginsWith: "C09C", description: "ANGIOTENSIN II ANTAGONISTS, PLAIN" }
     ]
   },
+  antigout  : {
+    ATC : [
+      { codeBeginsWith: "M04A", description: "Antigout preparations" }
+    ]
+  },
   betaBlocker  : {
     ATC : [
       { codeBeginsWith: "C07AB", description: "Beta blocking agents, selective" },
