@@ -79,6 +79,11 @@ dictionary.meds = dictionary.meds || {
     ATC : [
       { codeBeginsWith: "H03AA", description: "Thyroid hormones" }
     ]
+  },
+  tiotropium : {
+    ATC : [
+      { codeBeginsWith: "R03BB04", description: "Tiotropium bromide" }
+    ]
   }
 };
 
