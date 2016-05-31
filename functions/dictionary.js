@@ -53,6 +53,11 @@ dictionary.meds = dictionary.meds || {
       { codeBeginsWith: "N02A", description: "Natural opium alkaloids" }
     ]
   },
+  levothyroxine : {
+    ATC : [
+      { codeBeginsWith: "H03AA", description: "Thyroid hormones" }
+    ]
+  },
   opioidNatural : {
     ATC : [
       { codeBeginsWith: "N02AA", description: "Natural opium alkaloids" }
