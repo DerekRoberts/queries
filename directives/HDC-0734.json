@@ -1,0 +1,10 @@
+{
+	"type"         : "QUERY",
+	"name"         : "HDC-0734_PR-opioidsWithoutChronicPain",
+	"title"        : "HDC-0734",
+	"description"  : "PR-opioidsWithoutChronicPain",
+	"display_name" : "PR-opioidsWithoutChronicPain",
+	"query_type"   : "RATIO",
+	"map"          : "queries/HDC-0734_PR-opioidsWithoutChronicPain.js",
+	"reduce"       : "queries/ReduceRatio.js"
+}

@@ -1,0 +1,10 @@
+{
+	"type"         : "QUERY",
+	"name"         : "HDC-0753_PR-oseteoarthritisAcetaminophen",
+	"title"        : "HDC-0753",
+	"description"  : "PR-oseteoarthritisAcetaminophen",
+	"display_name" : "PR-oseteoarthritisAcetaminophen",
+	"query_type"   : "RATIO",
+	"map"          : "queries/HDC-0753_PR-oseteoarthritisAcetaminophen.js",
+	"reduce"       : "queries/ReduceRatio.js"
+}

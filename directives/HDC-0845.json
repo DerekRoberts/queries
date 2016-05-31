@@ -1,0 +1,10 @@
+{
+	"type"         : "QUERY",
+	"name"         : "HDC-0845_DQ-levothroxineAndHypothyroidism",
+	"title"        : "HDC-0845",
+	"description"  : "DQ-levothroxineAndHypothyroidism",
+	"display_name" : "DQ-levothroxineAndHypothyroidism",
+	"query_type"   : "RATIO",
+	"map"          : "queries/HDC-0845_DQ-levothroxineAndHypothyroidism.js",
+	"reduce"       : "queries/ReduceRatio.js"
+}

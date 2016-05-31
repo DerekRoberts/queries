@@ -1,0 +1,10 @@
+{
+	"type"         : "QUERY",
+	"name"         : "HDC-0846_DQ-antigoutWithGout",
+	"title"        : "HDC-0846",
+	"description"  : "DQ-antigoutWithGout",
+	"display_name" : "DQ-antigoutWithGout",
+	"query_type"   : "RATIO",
+	"map"          : "queries/HDC-0846_DQ-antigoutWithGout.js",
+	"reduce"       : "queries/ReduceRatio.js"
+}

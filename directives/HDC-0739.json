@@ -1,0 +1,10 @@
+{
+	"type"         : "QUERY",
+	"name"         : "HDC-0739_PR-chronicPainAndDepression",
+	"title"        : "HDC-0739",
+	"description"  : "PR-chronicPainAndDepression",
+	"display_name" : "PR-chronicPainAndDepression",
+	"query_type"   : "RATIO",
+	"map"          : "queries/HDC-0739_PR-chronicPainAndDepression.js",
+	"reduce"       : "queries/ReduceRatio.js"
+}

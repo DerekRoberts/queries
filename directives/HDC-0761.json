@@ -1,0 +1,10 @@
+{
+	"type"         : "QUERY",
+	"name"         : "HDC-0761_EOL-55+",
+	"title"        : "HDC-0761",
+	"description"  : "EOL-55+",
+	"display_name" : "EOL-55+",
+	"query_type"   : "RATIO",
+	"map"          : "queries/HDC-0761_EOL-55+.js",
+	"reduce"       : "queries/ReduceRatio.js"
+}

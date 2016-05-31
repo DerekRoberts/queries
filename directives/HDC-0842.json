@@ -1,0 +1,10 @@
+{
+	"type"         : "QUERY",
+	"name"         : "HDC-0842_DQ-diabetes12+",
+	"title"        : "HDC-0842",
+	"description"  : "DQ-diabetes12+",
+	"display_name" : "DQ-diabetes12+",
+	"query_type"   : "RATIO",
+	"map"          : "queries/HDC-0842_DQ-diabetes12+.js",
+	"reduce"       : "queries/ReduceRatio.js"
+}

@@ -1,0 +1,10 @@
+{
+	"type"         : "QUERY",
+	"name"         : "HDC-0843_DQ-tiotropiumAndCOPD",
+	"title"        : "HDC-0843",
+	"description"  : "DQ-tiotropiumAndCOPD",
+	"display_name" : "DQ-tiotropiumAndCOPD",
+	"query_type"   : "RATIO",
+	"map"          : "queries/HDC-0843_DQ-tiotropiumAndCOPD.js",
+	"reduce"       : "queries/ReduceRatio.js"
+}

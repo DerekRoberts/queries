@@ -1,0 +1,10 @@
+{
+	"type"         : "QUERY",
+	"name"         : "HDC-0761B_EOL-frailty55",
+	"title"        : "HDC-0761B",
+	"description"  : "EOL-frailty55",
+	"display_name" : "EOL-frailty55",
+	"query_type"   : "RATIO",
+	"map"          : "queries/HDC-0761B_EOL-frailty55.js",
+	"reduce"       : "queries/ReduceRatio.js"
+}
