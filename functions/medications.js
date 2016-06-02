@@ -132,6 +132,30 @@ medications.isCodeMatch = function(med, medInfo, errorContainer) {
 };
 
 /**
+ * Returns whether the medication entry passed is coded
+ *
+ * @param med
+ *                single medication entry from hQuery patient object
+ * @param errorContainer
+ *                ErrorContainer to use for storing any errors or output
+ *
+ */
+medications.isCoded = function(med, errorContainer) {
+    
+    
+    if (!utils.isUndefinedOrNullPath([ med,
+	    ".json.codes" ])
+	    && (Object.keys(med.json.codes).length > 0)) {
+	// We have at least one codeset defined for the med passed in
+	return true;
+    }
+
+    // We did not find any codesets defined for the Med
+    return false;
+};
+
+
+/**
  * Examines the medication entry passed and returns whether it contains a valid
  * dose in the range dosemin =< med dose <= doseMax
  *
@@ -174,19 +198,47 @@ medications.isDoseInRange = function(med, doseMin, doseMax, errorContainer) {
  *
  */
 medications.isActiveMed = function(med, date, errorContainer) {
-    // check for valid input, if invalid then we can't operate on the
-    // medication, return false.
-    if (utils.isUndefinedOrNullPath([ med, ".json" ])) {
-	return false;
-    }
 
     // Default to current date if no date is supplied
     if (utils.isUndefinedOrNull(date) || isNaN(date)) {
 	date = new Date();
     }
 
-    // convert date to absolute time in seconds
-    var dateSeconds = Math.floor(date.getTime() / 1000);
+    return medications.isActiveMedInDateRange(med, date, date, errorContainer);
+    
+};
+
+/**
+ * Returns whether the medication entry passed was active in the date range
+ * passed
+ * 
+ * @param med
+ *                single medication entry from hQuery patient object
+ * @param startDate
+ *                Start date for range to examine, if null, check to beginning
+ *                of available data
+ * @param endDate
+ *                End date for range to examine
+ * @param errorContainer
+ *                ErrorContainer to use for storing any errors or output
+ * 
+ */
+medications.isActiveMedInDateRange = function(med, startDate, endDate,
+	errorContainer) {
+    // check for valid input, if invalid then we can't operate on the
+    // medication, return false.
+    if (utils.isUndefinedOrNullPath([ med, ".json" ])) {
+	return false;
+    }
+
+    // convert dates to absolute time in seconds
+    var startDateSeconds;
+    if (utils.isUndefinedOrNull(startDate)) {
+	startDateSeconds = null;
+    } else {
+	startDateSeconds = Math.floor(startDate.getTime() / 1000);
+    }
+    var endDateSeconds = Math.floor(endDate.getTime() / 1000);
 
     // check if the status of the medication is defined
     if (!utils.isUndefinedOrNullPath([ med, ".json.statusOfMedication.value" ])) {
@@ -202,14 +254,17 @@ medications.isActiveMed = function(med, date, errorContainer) {
 	    // padding required
 
 	    // Check if date is within standard range
-	    if ((utils.isUndefinedOrNull(startMed) || startMed < dateSeconds)
-		    && (utils.isUndefinedOrNull(stopMed) || dateSeconds < stopMed)) {
+	    if ((utils.isUndefinedOrNull(startMed) || startMed < endDateSeconds)
+		    && (utils.isUndefinedOrNull(stopMed)
+			    || utils.isUndefinedOrNull(startDateSeconds) || startDateSeconds < stopMed)) {
 		return true;
 	    } else if (
 	    // Check if date is within extended range
-	    !utils.isUndefinedOrNull(startMed) && (startMed < dateSeconds)
+	    !utils.isUndefinedOrNull(startMed)
+		    && (startMed < endDateSeconds)
 		    && !utils.isUndefinedOrNull(lengthExtended)
-		    && (dateSeconds < startMed + lengthExtended)) {
+		    && (utils.isUndefinedOrNull(startDateSeconds) || (startDateSeconds < startMed
+			    + lengthExtended))) {
 		return true;
 	    } else {
 		return false;
@@ -427,3 +482,54 @@ medications.hasActiveMedMaxDaily = function(
                 expectedMeasurement, errorContainer
         );
 };
+
+
+/**
+ * Returns a count of entries for all medications for the patient passed.
+ *
+ * @param patient
+ *                hQuery patient object
+ * @param startDate
+ *                Start date for range to examine, if null, check to beginning of available data
+ * @param endDate
+ *                End date for range to examine
+ * @param coded If true, inclue only coded entries in count              
+ * @param errorContainer
+ *                ErrorContainer to use for storing any errors or output
+ */
+medications.count = function(patient, startDate, endDate, coded, errorContainer) {
+    // Check input
+    if (utils.isUndefinedOrNullAndLog(
+	    "Invalid data passed to medications.count", utils.invalid,
+	    errorContainer, [ patient, "patient" ], [ endDate, "endDate" ])) {
+	return 0;
+    }
+
+    // Get patient medication list
+    var meds = patient.medications();
+
+    if (utils.isUndefinedOrNull(meds) || (meds.length === 0)) {
+	return utils.invalid("Patient has no meds", errorContainer);
+    }
+
+    // Filter meds list to those that match the parameter values. Implemented as
+    // a filter so that all meds will be checked and any
+    // data issues found
+    var matchingMeds = meds.filter(function(med) {
+	if (medications.isActiveMedInDateRange(med, startDate, endDate,
+		errorContainer)
+		&& (!coded || medications.isCoded(med, errorContainer))) {
+	    // Med is active in the date range and coded if required
+	    return true;
+	} else {
+	    // Med either is not active in the date range being
+	    // examined, or is not coded and coding is required and
+	    // is therefore not a match
+	    return false;
+	}
+    });
+
+    return matchingMeds.length;
+};
+
+
