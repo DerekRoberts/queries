@@ -1,0 +1,10 @@
+{
+	"type"         : "QUERY",
+	"name"         : "HDC-0889_DQ-bmiCheck21+",
+	"title"        : "HDC-0889",
+	"description"  : "DQ-bmiCheck21+",
+	"display_name" : "DQ-bmiCheck21+",
+	"query_type"   : "RATIO",
+	"map"          : "queries/HDC-0889_DQ-bmiCheck21+.js",
+	"reduce"       : "queries/ReduceRatio.js"
+}

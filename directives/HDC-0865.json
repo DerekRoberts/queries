@@ -1,0 +1,10 @@
+{
+	"type"         : "QUERY",
+	"name"         : "HDC-0865_DQ-bpCheck21+",
+	"title"        : "HDC-0865",
+	"description"  : "DQ-bpCheck21+",
+	"display_name" : "DQ-bpCheck21+",
+	"query_type"   : "RATIO",
+	"map"          : "queries/HDC-0865_DQ-bpCheck21+.js",
+	"reduce"       : "queries/ReduceRatio.js"
+}
