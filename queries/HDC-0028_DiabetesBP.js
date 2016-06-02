@@ -2,7 +2,7 @@
  * Query Title: HDC-0028
  * Query Type:  Ratio
  * Description: DM: w BP<=130/80 1y
- * 
+ *
  * Duplicate of HDC-1907
  */
 function map(patient) {
@@ -11,12 +11,12 @@ function map(patient) {
     var query = {
 
 	diabetes : dictionary.conditions.diabetes,
-	systolicBloodPressure  : dictionary.observations.systolicBloodPressure,
-	maxSystolicBloodPressure : 130,
-	diastolicBloodPressure  : dictionary.observations.diastolicBloodPressure,
-	maxDiastolicBloodPressure : 80,
-	
-	
+	bloodPressureSystolic  : dictionary.observations.bloodPressureSystolic,
+	maxBloodPressureSystolic : 130,
+	bloodPressureDiastolic  : dictionary.observations.bloodPressureDiastolic,
+	maxBloodPressureDiastolic : 80,
+
+
 	/**
 	 * Denominator
 	 *
@@ -43,14 +43,14 @@ function map(patient) {
 	    var minDate = utils.yearsBefore(date, 1);
 	    var maxDate = date;
 
-	    var systolicBloodPressure = observations.hasObservationInDateRangeWithValue(patient, minDate,
-		    maxDate, this.systolicBloodPressure, null, this.maxSystolicBloodPressure, false, "mm[Hg]", false,
+	    var bloodPressureSystolic = observations.hasObservationInDateRangeWithValue(patient, minDate,
+		    maxDate, this.bloodPressureSystolic, null, this.maxBloodPressureSystolic, false, "mm[Hg]", false,
 		    errorContainer);
-	    var diastolicBloodPressure = observations.hasObservationInDateRangeWithValue(patient, minDate,
-		    maxDate, this.diastolicBloodPressure, null, this.maxDiastolicBloodPressure, false, "mm[Hg]", false,
+	    var bloodPressureDiastolic = observations.hasObservationInDateRangeWithValue(patient, minDate,
+		    maxDate, this.bloodPressureDiastolic, null, this.maxBloodPressureDiastolic, false, "mm[Hg]", false,
 		    errorContainer);
 
-	    return (denominator && systolicBloodPressure && diastolicBloodPressure);
+	    return (denominator && bloodPressureSystolic && bloodPressureDiastolic);
 	},
 
     };

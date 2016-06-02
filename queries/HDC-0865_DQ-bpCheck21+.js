@@ -13,8 +13,8 @@ function map( pt ) {
 
     // Age restraint
     minAge      : 21,
-    bpDiastolic : dictionary.observations.diastolicBloodPressure,
-    bpSystolic  : dictionary.observations.systolicBloodPressure,
+    bpDiastolic : dictionary.observations.bloodPressureDiastolic,
+    bpSystolic  : dictionary.observations.bloodPressureSystolic,
 
     // Active?  Age?
     denominator : function( pt, date, err ){
