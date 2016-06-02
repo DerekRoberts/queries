@@ -1,7 +1,6 @@
 /**
- * Query Title: HDC-0836_DQ-CodedMedications
+ * Query Title: HDC-0837 DQ-PrescriptionFrequency
  * Query Type:  Ratio
- * Description: % of medication entries that are coded
  */
 function map(patient) {
 
@@ -11,19 +10,19 @@ function map(patient) {
 	/**
 	 * Denominator
 	 * 
-	 * Total medication count
+	 * Total encounter count
 	 */
 	denominator : function(patient, date, errorContainer) {
-	    return medications.count(patient, null, date, false, errorContainer);
+	    return profile.countEncounters(patient, null, date, errorContainer); 
 	},
 
 	/**
 	 * Numerator
 	 * 
-	 * Total coded medication count 
+	 * Total medication count 
 	 */
 	numerator : function(patient, date, denominator, errorContainer) {
-	    return medications.count(patient, null, date, true, errorContainer);
+	    return medications.count(patient, null, date, false, errorContainer);
 
 	}
 
