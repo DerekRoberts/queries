@@ -106,6 +106,27 @@ conditions.isCodeMatch = function(condition, conditionInfo, errorContainer) {
 }
 
 /**
+ * Returns whether the condition entry passed is coded
+ * 
+ * @param condition
+ *                single condition entry from hQuery patient object
+ * @param errorContainer
+ *                ErrorContainer to use for storing any errors or output
+ * 
+ */
+conditions.isCoded = function(condition, errorContainer) {
+    if (!utils.isUndefinedOrNullPath([ condition, ".json.codes" ])
+	    && (Object.keys(condition.json.codes).length > 0)) {
+	// We have at least one codeset defined
+	return true;
+
+    } else {
+	// No codesets were defined
+	return false;
+    }
+}
+
+/**
  * Returns whether the condition entry passed is active on the date passed.
  * Note: The underlying data structure cannot express that a condition is no
  * longer present. Currently a condition is considered to always be active after
@@ -144,4 +165,50 @@ conditions.isActive = function(condition, date, errorContainer) {
 	// be examined
 	return true;
     } 
+};
+
+/**
+ * Returns a count of entries for all conditions for the patient passed.
+ *
+ * @param patient
+ *                hQuery patient object
+ * @param date
+ *                Effective date for which data should be examined
+ * @param coded If true, include only coded entries in count              
+ * @param errorContainer
+ *                ErrorContainer to use for storing any errors or output
+ */
+conditions.count = function(patient, date, coded, errorContainer) {
+    // Check input
+    if (utils.isUndefinedOrNullAndLog(
+	    "Invalid data passed to conditions.count", utils.invalid,
+	    errorContainer, [ patient, "patient" ], [ date, "date" ])) {
+	return 0;
+    }
+
+    // Get patient conditions list
+    var conds = patient.conditions();
+
+    if (utils.isUndefinedOrNull(conds) || (conds.length === 0)) {
+	return utils.invalid("Patient has no conditions", errorContainer);
+    }
+
+    // Filter conditions list to those that match the parameter values. Implemented as
+    // a filter so that all conditions will be checked and any
+    // data issues found
+    var matchingConditions = conds.filter(function(condition) {
+	if (conditions.isActive(condition, date,
+		errorContainer)
+		&& (!coded || conditions.isCoded(condition, errorContainer))) {
+	    // Condition is active in the date range and coded if required
+	    return true;
+	} else {
+	    // Condition either is not active in the date range being
+	    // examined, or is not coded and coding is required and
+	    // is therefore not a match
+	    return false;
+	}
+    });
+
+    return matchingConditions.length;
 };
