@@ -46,6 +46,40 @@ profile.activeEncounter = function(patient, atDate, activeWindow) {
  * 
  * @param patient
  *                hQuery patient object
+ * @param startDate
+ *                Beginning of date range in which to count
+ * @param endDate
+ *                End of date range in which to count
+ * @param errorContainer
+ *                ErrorContainer to use for storing any errors or output
+  * @return the number of encounters for the patient
+ */
+profile.countEncounters = function(patient, startDate, endDate, errorContainer ) {
+    var ptEncounters = patient.encounters();
+    var count = 0;
+
+    // Check for encounters in specified window
+    ptEncounters.forEach(function(ptEnc) {
+	if (!utils.isUndefinedOrNullPath([ ptEnc, ".json.start_time" ])
+	) {
+	    // Convert date from seconds to milliseconds (*1000, from epoch)
+	    encDate = ptEnc.json.start_time * 1000;
+	    if (((startDate == null) || (startDate <= encDate)) && (encDate < endDate)) {
+		// If date in range, tally and continue
+		count++;
+	    }
+	}
+    });
+
+    // Return results
+    return count;
+}
+
+/**
+ * Returns the number of encounters for a patient in the month of the date passed.
+ * 
+ * @param patient
+ *                hQuery patient object
  * @param atDate
  *                date object, uses only month and year
  * @return true/false (boolean)
