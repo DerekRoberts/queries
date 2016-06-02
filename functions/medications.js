@@ -493,7 +493,7 @@ medications.hasActiveMedMaxDaily = function(
  *                Start date for range to examine, if null, check to beginning of available data
  * @param endDate
  *                End date for range to examine
- * @param coded If true, inclue only coded entries in count              
+ * @param coded If true, include only coded entries in count              
  * @param errorContainer
  *                ErrorContainer to use for storing any errors or output
  */
@@ -530,6 +530,53 @@ medications.count = function(patient, startDate, endDate, coded, errorContainer)
     });
 
     return matchingMeds.length;
+};
+
+/**
+ * Whether the patient passed has no medication entries for any medications. 
+ * Does not mark patient as invalid if the patient has no meds.
+ *
+ * @param patient
+ *                hQuery patient object
+ * @param startDate
+ *                Start date for range to examine, if null, check to beginning of available data
+ * @param endDate
+ *                End date for range to examine
+ * @param errorContainer
+ *                ErrorContainer to use for storing any errors or output
+ */
+medications.noMeds = function(patient, startDate, endDate, errorContainer) {
+    // Check input
+    if (utils.isUndefinedOrNullAndLog(
+	    "Invalid data passed to medications.count", utils.invalid,
+	    errorContainer, [ patient, "patient" ], [ endDate, "endDate" ])) {
+	return false;
+    }
+
+    // Get patient medication list
+    var meds = patient.medications();
+
+    if (utils.isUndefinedOrNull(meds) || (meds.length === 0)) {
+	// Patient has no meds whatsoever
+	return true;
+    }
+
+    // Filter meds list to those that match the parameter values. Implemented as
+    // a filter so that all meds will be checked and any
+    // data issues found
+    var matchingMeds = meds.filter(function(med) {
+	if (medications.isActiveMedInDateRange(med, startDate, endDate,
+		errorContainer)) {
+	    // Med is active in the date range
+	    return true;
+	} else {
+	    // Med either is not active in the date range being
+	    // examined
+	    return false;
+	}
+    });
+
+    return (matchingMeds.length == 0);
 };
 
 
