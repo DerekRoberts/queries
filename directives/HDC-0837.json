@@ -1,0 +1,10 @@
+{
+	"type"         : "QUERY",
+	"name"         : "HDC-0837_DQ-PrescriptionFrequency",
+	"title"        : "HDC-0837",
+	"description"  : "DQ-PrescriptionFrequency",
+	"display_name" : "DQ-PrescriptionFrequency",
+	"query_type"   : "RATIO",
+	"map"          : "queries/HDC-0837_DQ-PrescriptionFrequency.js",
+	"reduce"       : "queries/ReduceRatio.js"
+}

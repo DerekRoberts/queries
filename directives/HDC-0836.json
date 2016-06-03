@@ -1,0 +1,10 @@
+{
+	"type"         : "QUERY",
+	"name"         : "HDC-0836_DQ-CodedMedications",
+	"title"        : "HDC-0836",
+	"description"  : "DQ-CodedMedications",
+	"display_name" : "DQ-CodedMedications",
+	"query_type"   : "RATIO",
+	"map"          : "queries/HDC-0836_DQ-CodedMedications.js",
+	"reduce"       : "queries/ReduceRatio.js"
+}
