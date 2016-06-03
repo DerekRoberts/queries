@@ -23,7 +23,7 @@ function map( patient ){
       minDate = utils.yearsBefore( date, 1 );
       maxDate = date;
 
-      return denominator && immunizations.hasActiveImmunizationInDateRange( patient, minDate, maxDate, this.codeSet, errorContainer );
+      return denominator && immunizations.hasImmunizationInDateRange( patient, minDate, maxDate, this.codeSet, errorContainer );
     }
   };
   // Emit results based on query above
