@@ -7,7 +7,7 @@ var profile = profile || {};
 
 /**
  * Returns whether a patient has an encounter in a specified date range.
- * 
+ *
  * @param patient
  *                hQuery patient object
  * @param atDate
@@ -43,7 +43,7 @@ profile.activeEncounter = function(patient, atDate, activeWindow) {
 
 /**
  * Returns the number of encounters for a patient in a date range.
- * 
+ *
  * @param patient
  *                hQuery patient object
  * @param startDate
@@ -77,7 +77,7 @@ profile.countEncounters = function(patient, startDate, endDate, errorContainer )
 
 /**
  * Returns the number of encounters for a patient in the month of the date passed.
- * 
+ *
  * @param patient
  *                hQuery patient object
  * @param atDate
@@ -96,7 +96,6 @@ profile.countEncountersByMonth = function(patient, atDate) {
 	) {
 	    // Convert date from seconds to milliseconds (*1000, from epoch)
 	    encDate = ptEnc.json.start_time * 1000;
-	    emit(start.toString() + " ?< " + encDate.toString(), -1);
 	    if ((start <= encDate) && (encDate < end)) {
 		// If date in range, tally and continue
 		count++;
@@ -111,7 +110,7 @@ profile.countEncountersByMonth = function(patient, atDate) {
 /**
  * Returns whether a patient has a prescription event (start or stop of med) in
  * a specified date range.
- * 
+ *
  * @param patient
  *                hQuery patient object
  * @param atDate
@@ -161,7 +160,7 @@ profile.activeMedication = function(patient, atDate, activeWindow) {
 /**
  * Returns whether a patient is active or not. Uses encounter times and
  * medication status with a specified window (activeWindow).
- * 
+ *
  * @param patient
  *                hQuery patient object
  * @param atDate
@@ -192,7 +191,7 @@ profile.active = function(patient, atDate, errorContainer) {
 /**
  * Returns whether a patient has ever been active before the date passed. Uses encounter times and
  * medication status.
- * 
+ *
  * @param patient
  *                hQuery patient object
  * @param atDate
@@ -224,7 +223,7 @@ profile.activeEver = function(patient, atDate, errorContainer) {
 profile.gender = profile.gender || {};
 /**
  * Returns a patient's gender. E2E does not support gender change over time.
- * 
+ *
  * @param patient
  *                hQuery patient object
  * @return Gender (string)
@@ -251,14 +250,14 @@ profile.gender.getGender = function(patient, errorContainer) {
 
 /**
  * Returns whether a patient is female.
- * 
+ *
  * @param patient
  *                hQuery patient object
  * @return true, if patient is female
  */
 profile.gender.isF = function(patient, errorContainer) {
     var result = profile.gender.getGender(patient, errorContainer);
-    
+
     if(result == 'female') {
 	return true;
     } else {
@@ -268,14 +267,14 @@ profile.gender.isF = function(patient, errorContainer) {
 
 /**
  * Returns whether a patient is male.
- * 
+ *
  * @param patient
  *                hQuery patient object
  * @return true, if patient is male
  */
 profile.gender.isM = function(patient, errorContainer) {
     var result = profile.gender.getGender(patient, errorContainer);
-    
+
     if(result == 'male') {
 	return true;
     } else {
@@ -285,14 +284,14 @@ profile.gender.isM = function(patient, errorContainer) {
 
 /**
  * Returns whether a patient is of unspecified/other gender.
- * 
+ *
  * @param patient
  *                hQuery patient object
  * @return true, if patient is of unspecified/other gender.
  */
 profile.gender.isUN = function(patient, errorContainer) {
     var result = profile.gender.getGender(patient, errorContainer);
-    
+
     if((result == 'undifferentiated') || ((result == 'undefined'))) {
 	return true;
     } else {
@@ -302,7 +301,7 @@ profile.gender.isUN = function(patient, errorContainer) {
 
 /**
  * Returns whether a patient's age, at a specific date, is within a range.
- * 
+ *
  * @param patient
  *                hQuery patient object
  * @param atDate
@@ -333,7 +332,7 @@ profile.ages.isRange = function(patient, atDate, ageMin, ageMax, errorContainer)
 
 /**
  * Returns whether a patient's age, at a specific date, is within a range.
- * 
+ *
  * @param patient
  *                hQuery patient object
  * @param atDate
@@ -351,7 +350,7 @@ profile.ages.isMax = function(patient, atDate, ageMax, errorContainer) {
 
 /**
  * Returns whether a patient's age, at a specific date, is within a range.
- * 
+ *
  * @param patient
  *                hQuery patient object
  * @param atDate
@@ -369,7 +368,7 @@ profile.ages.isMin = function(patient, atDate, ageMin, errorContainer) {
 
 /**
  * Returns a patient's birthdate. Returns null if birthdate is not recorded
- * 
+ *
  * @param patient
  *                hQuery patient object
  * @return patient's birthdate or null if birthdate is not recorded
@@ -389,7 +388,7 @@ profile.ages.getBirthdate = function(patient, errorContainer) {
 	// Note: Formatted in milliseconds, so multiply by 1000.
 	var bdNumber = patient.json.birthdate * 1000;
 
-	// This is a date, so format it as one. 
+	// This is a date, so format it as one.
 	var bd = new Date(bdNumber);
 
 	if (bd == "Invalid Date") {
