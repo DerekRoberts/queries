@@ -212,3 +212,52 @@ conditions.count = function(patient, date, coded, errorContainer) {
 
     return matchingConditions.length;
 };
+
+/**
+ * Whether the patient passed has no condition entries. 
+ * Does not mark patient as invalid if the patient has no conditions. 
+ * 
+ * @param patient
+ *                hQuery patient object
+ * @param date
+ *                Effective date for which data should be examined
+ * @param coded If true, include only coded entries in count              
+ * @param errorContainer
+ *                ErrorContainer to use for storing any errors or output
+ */
+conditions.noConditions = function(patient, date, coded, errorContainer) {
+    // Check input
+    if (utils.isUndefinedOrNullAndLog(
+	    "Invalid data passed to conditions.noConditions", utils.invalid,
+	    errorContainer, [ patient, "patient" ], [ date, "date" ])) {
+	return false;
+    }
+
+    // Get patient conditions list
+    var conds = patient.conditions();
+
+    if (utils.isUndefinedOrNull(conds) || (conds.length === 0)) {
+	// Paitent has no conditions whatsoever
+	return true;
+    }
+
+    // Filter conditions list to those that match the parameter values. Implemented as
+    // a filter so that all conditions will be checked and any
+    // data issues found
+    var matchingConditions = conds.filter(function(condition) {
+	if (conditions.isActive(condition, date,
+		errorContainer)
+		&& (!coded || conditions.isCoded(condition, errorContainer))) {
+	    // Condition is active in the date range and coded if required
+	    return true;
+	} else {
+	    // Condition either is not active in the date range being
+	    // examined, or is not coded and coding is required and
+	    // is therefore not a match
+	    return false;
+	}
+    });
+
+    // patient has no matching conditions if resulting list is empty
+    return (matchingConditions.length == 0);
+};
