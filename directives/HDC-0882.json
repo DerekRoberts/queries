@@ -1,0 +1,10 @@
+{
+	"type"         : "QUERY",
+	"name"         : "HDC-0882_DQ-PatientsWithACondition",
+	"title"        : "HDC-0882",
+	"description"  : "DQ-PatientsWithACondition",
+	"display_name" : "DQ-PatientsWithACondition",
+	"query_type"   : "RATIO",
+	"map"          : "queries/HDC-0882_DQ-PatientsWithACondition.js",
+	"reduce"       : "queries/ReduceRatio.js"
+}
