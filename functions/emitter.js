@@ -20,7 +20,7 @@ emitter.ratio = function(patient, query) {
     // Emit variables
     var denominator = 'Value not provided', numerator = 'Value not provided', jsonEmit = {
 	doctor : patient.json.primary_care_provider_id,
-	category : 'Ratio',
+	type   : 'Ratio',
 	result : 'Value not provided'
     };
 
@@ -85,7 +85,7 @@ emitter.ratioCount = function(patient, query) {
     // Emit variables
     var denominator = 'Value not provided', numerator = 'Value not provided', jsonEmit = {
 	doctor : patient.json.primary_care_provider_id,
-	category : 'Ratio',
+	type   : 'Ratio',
 	result : 'Value not provided'
     };
 
