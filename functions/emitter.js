@@ -7,20 +7,20 @@ var emitter = emitter || {};
 /**
  * Run retroactive ratio query and emit results. Numerator and denominator
  * functions should return true or false for each patient.
- * 
+ *
  * @param patient -
  *                hQuery patient object
  * @param query -
  *                query object containing numerator and denominator objects, and
  *                variables required to use them
- * 
+ *
  * @return none
  */
 emitter.ratio = function(patient, query) {
     // Emit variables
     var denominator = 'Value not provided', numerator = 'Value not provided', jsonEmit = {
 	doctor : patient.json.primary_care_provider_id,
-	category : 'ReportingCategories',
+	category : 'Ratio',
 	result : 'Value not provided'
     };
 
@@ -72,20 +72,20 @@ emitter.ratio = function(patient, query) {
 /**
  * Run retroactive ratio count query and emit results. Numerator and denominator
  * should return counts for each patient.
- * 
+ *
  * @param patient -
  *                hQuery patient object
  * @param query -
  *                query object containing numerator and denominator objects, and
  *                variables required to use them
- * 
+ *
  * @return none
  */
 emitter.ratioCount = function(patient, query) {
     // Emit variables
     var denominator = 'Value not provided', numerator = 'Value not provided', jsonEmit = {
 	doctor : patient.json.primary_care_provider_id,
-	category : 'ReportingCategories',
+	category : 'Ratio',
 	result : 'Value not provided'
     };
 
