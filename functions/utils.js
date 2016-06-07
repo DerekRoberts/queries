@@ -579,11 +579,15 @@ utils.emitErrorContainer = function(errorContainer, doctorKey, level,
 
     var errorEmit = {};
 
+    
     if (doctorKey != null) {
 	// Add doctor value to prevent combining of multiple doctors via
 	// reduction
 	errorEmit.doctor = doctorKey;
     }
+
+    // Set Category
+    errorEmit.category = "Message";
 
     var doEmit = false;
     // Add any Error messages
