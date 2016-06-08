@@ -7,7 +7,7 @@ var utils = utils || {};
 /**
  * Returns true if any arguments passed are undefined Defined with no named
  * arguments, it is expect any any number of arguments can be passed
- * 
+ *
  * @return true if any arguments passed are undefined Defined with no named
  *         arguments, it is expect any any number of arguments can be passed
  */
@@ -27,7 +27,7 @@ utils.isUndefined = function() {
 /**
  * Returns true if any arguments passed are undefined or null. Defined with no
  * names arguments, it is expecting any any number of arguments can be passed
- * 
+ *
  * @return true if any arguments passed are undefined or null Defined with no
  *         names arguments, it is expecting any any number of arguments can be
  *         passed
@@ -51,7 +51,7 @@ utils.isUndefinedOrNull = function() {
  * Arguments must be arrays. If an array contains 2 elements and the second is a
  * non-empty string a path check will be performed. If an array contains only a
  * single element a simple check will be performed.
- * 
+ *
  * @return true if any of the checks passed fail an isUndefinedOrNull check.
  */
 utils.isUndefinedOrNullPath = function() {
@@ -81,12 +81,12 @@ utils.isUndefinedOrNullPath = function() {
 /**
  * Returns true if the base object passed or any of the objects in the path from
  * the base object passed are undefined or null.
- * 
+ *
  * For instance if measurement was passed as the base object and
  * "json.codes.LOINC" was passed as the path, the function would return true if
  * any of measurement, measurement.json, measurement.json.codes, or
  * measurement.json.codes.LOINC are undefined or null.
- * 
+ *
  * @param base
  *                The base object to examine.
  * @param path
@@ -124,16 +124,16 @@ utils.isUndefinedOrNullPathSingle = function(base, path) {
  * Returns a string indicating which of the checks passed fails a
  * isUndefinedOrNull check. Each check consists of an array in one of the
  * following 2 formats:
- * 
+ *
  * [value, label] Perform a simple check where value is the value to check and
  * label is the label to use in any failure message
- * 
+ *
  * OR
- * 
+ *
  * [base, label, path] Perform a path check where base is the base object of the
  * path to check, label is the label to use in any failure message, and path is
  * the path to check under the base object.
- * 
+ *
  * @return a string indicating which of the checks passed fails a
  *         isUndefinedOrNull check.
  */
@@ -206,7 +206,7 @@ utils.getUndefinedOrNullInfo = function() {
 /**
  * Helper function to utils.getUndefinedOrNullInfo. Adds a message to the
  * messages string passed
- * 
+ *
  * @param value
  *                Value that failed a check
  * @param label
@@ -237,16 +237,16 @@ utils.getUndefinedOrNullInfo_AddMessageHelper = function(messages, value, label)
  * Returns a whether all of the checks passed meet a isUndefinedOrNull check and
  * logs any failures. Each check consists of an array in one of the following 2
  * formats:
- * 
+ *
  * [value, label] Perform a simple check where value is the value to check and
  * label is the label to use in any failure message
- * 
+ *
  * OR
- * 
+ *
  * [base, label, path] Perform a path check where base is hte base object of hte
  * path to check, label is the label to use in any failure message, and path is
  * the path to check under the base object.
- * 
+ *
  * @param baseMessage
  *                Message to prepend to any resulting log
  * @param logFunction
@@ -320,14 +320,14 @@ utils.isUndefinedOrNullAndLog = function(baseMessage, logFunction,
 /**
  * Returns whether the code passed matches any of the values in the codeset
  * passed.
- * 
+ *
  * @param codes
  *                array of Codes to be examined
  * @param codeSet
  *                CodeSet to compare codes to
  * @param errorContainer
  *                ErrorContainer to use for storing any errors or output
- * 
+ *
  * @return whether the code passed matches any of the values in the codeset
  *         passed.
  */
@@ -373,7 +373,7 @@ utils.matchCodeSet = function(codes, codeSet, errorContainer) {
 
 /**
  * Returns A date that is the number of years before the date passed.
- * 
+ *
  * Any time component in the original date is ignored.
  */
 utils.yearsBefore = function(date, years) {
@@ -382,7 +382,7 @@ utils.yearsBefore = function(date, years) {
 
 /**
  * Returns A date that is the number of months before the date passed.
- * 
+ *
  * Any time component in the original date is ignored.
  */
 utils.monthsBefore = function(date, months) {
@@ -391,7 +391,7 @@ utils.monthsBefore = function(date, months) {
 
 /**
  * Returns A date that is the number of years after the date passed.
- * 
+ *
  * Any time component in the original date is ignored.
  */
 utils.yearsAfter = function(date, years) {
@@ -400,7 +400,7 @@ utils.yearsAfter = function(date, years) {
 
 /**
  * Returns A date that is the number of months after the date passed.
- * 
+ *
  * Any time component in the original date is ignored.
  */
 utils.monthsAfter = function(date, months) {
@@ -411,7 +411,7 @@ utils.monthsAfter = function(date, months) {
 /**
  * Returns A date that is the number of years, and months after the date
  * passed.
- * 
+ *
  * Any time component in the original date is ignored.
  */
 utils.after = function(date, years, months) {
@@ -421,7 +421,7 @@ utils.after = function(date, years, months) {
 /**
  * Returns A date that is the number of years, and months before the date
  * passed.
- * 
+ *
  * Any time component in the original date is ignored.
  */
 utils.before = function(date, years, months) {
@@ -441,12 +441,12 @@ utils.before = function(date, years, months) {
 /**
  * Mark current patient as being excluded from the query due to invalid data.
  * This is also recorded as an Error-level problem
- * 
+ *
  * @param message -
  *                message to store with query results
  * @param errorContainer -
  *                ErrorContainer object to store error in
- * 
+ *
  * @return false - function intended to be called as a return
  */
 utils.invalid = function(message, errorContainer) {
@@ -465,12 +465,12 @@ utils.invalid = function(message, errorContainer) {
 
 /**
  * Record an Error-level problem
- * 
+ *
  * @param message -
  *                message to store with query results
  * @param errorContainer -
  *                ErrorContainer object to store error in
- * 
+ *
  * @return false - function intended to be called as a return
  */
 utils.error = function(message, errorContainer) {
@@ -488,12 +488,12 @@ utils.error = function(message, errorContainer) {
 
 /**
  * Record an Warning-level problem
- * 
+ *
  * @param message -
  *                message to store with query results
  * @param errorContainer -
  *                ErrorContainer object to store warning in
- * 
+ *
  * @return false - function intended to be called as a return
  */
 utils.warning = function(message, errorContainer) {
@@ -511,12 +511,12 @@ utils.warning = function(message, errorContainer) {
 
 /**
  * Record an Information-level event
- * 
+ *
  * @param message -
  *                message to store with query results
  * @param errorContainer -
  *                ErrorContainer object to store information message in
- * 
+ *
  * @return false - function intended to be called as a return
  */
 utils.info = function(message, errorContainer) {
@@ -534,7 +534,7 @@ utils.info = function(message, errorContainer) {
 
 /**
  * Emit the contents of the error container passed based on the other parameters
- * 
+ *
  * @param errorContainer
  *                ErrorContainer to emit
  * @param doctorKey
@@ -579,7 +579,7 @@ utils.emitErrorContainer = function(errorContainer, doctorKey, level,
 
     var errorEmit = {};
 
-    
+
     if (doctorKey != null) {
 	// Add doctor value to prevent combining of multiple doctors via
 	// reduction
@@ -587,7 +587,7 @@ utils.emitErrorContainer = function(errorContainer, doctorKey, level,
     }
 
     // Set Category
-    errorEmit.category = "Message";
+    errorEmit.type = "Message";
 
     var doEmit = false;
     // Add any Error messages
@@ -633,12 +633,12 @@ utils.emitErrorContainer = function(errorContainer, doctorKey, level,
 
 /**
  * Build and return array to output for the messages passed
- * 
+ *
  * @param messages
  *                Messages to be output
  * @param combineMultiples
  *                if true, combine multiple instances of the same message
- * 
+ *
  * @return Array of messages prepared for output via emit inside hQuery
  */
 utils.buildMessagesOutput = function(messages, combineMultiples) {
@@ -663,11 +663,11 @@ utils.buildMessagesOutput = function(messages, combineMultiples) {
 
 /**
  * Returns a version of the message passed sanitized for inclusion in an emit
- * 
+ *
  * @param message
  *                Message to sanitize if true, combine multiple instances of the
  *                same message
- * 
+ *
  * @return A version of the message passed sanitized for inclusion in an emit
  */
 utils.sanitizeForEmit = function(message) {
@@ -678,10 +678,10 @@ utils.sanitizeForEmit = function(message) {
  * Returns a string conversation of the object passed and recursively prints any
  * subobjects in a manner that will not break emits. Currently works with
  * objects and arrays.
- * 
+ *
  * Lexicon _A_ - Start of array _a_ - End of array _S_ - Array item separator
  * _O_ - Start of object _o_ - End of object
- * 
+ *
  * @param item
  *                Item to be converted to string
  * @param maxLevel
