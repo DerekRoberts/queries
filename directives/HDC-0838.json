@@ -1,10 +1,10 @@
 {
 	"type"         : "QUERY",
-	"name"         : "HDC-0838_DQ-noMeds",
+	"name"         : "HDC-0838_DQ-NoMeds",
 	"title"        : "HDC-0838",
-	"description"  : "DQ-noMeds",
-	"display_name" : "DQ-noMeds",
+	"description"  : "DQ-NoMeds",
+	"display_name" : "DQ-NoMeds",
 	"query_type"   : "RATIO",
-	"map"          : "queries/HDC-0838_DQ-noMeds.js",
+	"map"          : "queries/HDC-0838_DQ-NoMeds.js",
 	"reduce"       : "queries/ReduceRatio.js"
 }

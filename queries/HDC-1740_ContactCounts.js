@@ -8,7 +8,7 @@ function map( patient )
     // Physician ID, category type and other emit fields
     var jsonEmit = {
         doctor  : patient.json.primary_care_provider_id,
-        type    : 'TenYearRanges',
+        type    : 'ContactCount',
         date    : 'Value not provided',
         agesMin : 'Value not provided',
         agesMax : 'Value not provided'
