@@ -548,10 +548,9 @@ utils.info = function(message, errorContainer) {
  * @param combineMultiples
  *                If true, multiple instances of the same message will be
  *                combined and only displayed once
- * @param code - Code value that the container contains information for, if applicable
 */
 utils.emitErrorContainer = function(errorContainer, doctorKey, level,
-	combineMultiples, code) {
+	combineMultiples) {
     if (utils.isUndefinedOrNull(doctorKey)) {
 	// default to null which allows results to be combined via reduction.
 	doctorKey = null;
@@ -590,11 +589,6 @@ utils.emitErrorContainer = function(errorContainer, doctorKey, level,
     // Set Category
     errorEmit.type = "Message";
 
-    if(!utils.isUndefinedOrNull(code)) {
-	// Set code
-	errorEmit.code = code;
-    }
-    
     var doEmit = false;
     // Add any Error messages
     if (errorContainer.error && (levelNumber >= 1)) {
@@ -677,6 +671,16 @@ utils.buildMessagesOutput = function(messages, combineMultiples) {
  * @return A version of the message passed sanitized for inclusion in an emit
  */
 utils.sanitizeForEmit = function(message) {
+    if(!(typeof message === 'string')) {
+	// message is not a string
+	if(typeof message === 'object') {
+	    message  = JSON.stringify(message);
+	} else if (message == undefined){
+	    message = "undefined";
+	} else {
+	    return message;
+	}
+    }
     return message.replace(/[^a-zA-Z\s0-9]/g, "_");
 };
 

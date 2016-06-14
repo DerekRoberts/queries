@@ -579,4 +579,87 @@ medications.noMeds = function(patient, startDate, endDate, errorContainer) {
     return (matchingMeds.length == 0);
 };
 
+/**
+ * Returns a map containing a map for each codeset encountered that contains
+ * entries of each code present and the nubmer of times it was present.
+ *
+ * @param patient
+ *                hQuery patient object
+ * @param date
+ *                Effective date for which data should be examined
+ * @param errorContainer
+ *                ErrorContainer to use for storing any errors or output
+ * @returns a map containing a map for each codeset encountered that contains
+ *          entries of each code present and the nubmer of times it was present.
+ */
+medications.buildCodeMap = function(patient, date, errorContainer) {
+    // Build map of codeset to be returned
+    var codesetMap = {};
+
+    // Check input
+    if (utils.isUndefinedOrNullAndLog(
+	    "Invalid data passed to medications buildCodeMap", utils.invalid,
+	    errorContainer, [ patient, "patient" ], [ date, "date" ])) {
+	return codesetMap;
+    }
+
+    // Get patient medication list
+    var meds = patient.medications();
+
+    if (utils.isUndefinedOrNull(meds) || (meds.length === 0)) {
+	utils.invalid("Patient has no meds", errorContainer);
+	return codesetMap;
+    }
+
+    // Filter meds list to those that are active on the date being examined.
+    // Implemented as a filter so that all meds will be checked and any
+    // data issues found
+    var matchingActiveMeds = meds.filter(function(med) {
+	if (medications.isActiveMed(med, date, errorContainer)) {
+	    // Med is active for the date being examined,
+	    return true;
+	} else {
+	    // Med either is not active for the date being
+	    // examined and is therefore not a match
+	    return false;
+	}
+    });
+
+    matchingActiveMeds.forEach(function(med) {
+	if (!utils.isUndefinedOrNullPath([ med, ".json.codes.whoATC" ])
+		&& (med.json.codes.whoATC.length > 0)) {
+	    // We have at least one ATC code for the med being examined
+
+	    var ATCMap;
+	    if (codesetMap["ATC"] === undefined) {
+		ATCMap = {};
+		codesetMap["ATC"] = ATCMap;
+	    } else {
+		ATCMap = codesetMap["ATC"];
+	    }
+
+	    // Add each code to map
+	    var code;
+	    for (var codeIndex = 0; codeIndex < med.json.codes.whoATC.length; codeIndex++) {
+		code = med.json.codes.whoATC[codeIndex];
+
+		// Get count of any previous entries for this code
+		var previousCount;
+		if (ATCMap[code] === undefined) {
+		    previousCount = 0;
+		} else {
+		    previousCount = ATCMap[code];
+		}
+
+		// Add to Map count
+		ATCMap[code] = previousCount + 1;
+
+	    }
+
+	    // save back to map
+	    codesetMap["ATC"] = ATCMap;
+	}
+    });
+    return codesetMap;
+};
 
