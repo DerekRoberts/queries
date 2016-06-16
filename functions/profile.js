@@ -3,6 +3,10 @@
  *
  */
 
+ // Strict mode
+ "use strict";
+
+
 var profile = profile || {};
 
 /**

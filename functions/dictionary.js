@@ -3,6 +3,10 @@
 *   JavaScript objects for medications, conditions and labs and immunizations..
 */
 
+// Strict mode
+"use strict";
+
+
 var dictionary = dictionary ||{};
 
 // http://www.whocc.no/atc_ddd_index

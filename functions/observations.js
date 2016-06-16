@@ -3,12 +3,16 @@
  *
  */
 
+ // Strict mode
+ "use strict";
+
+
 var observations = observations || {};
 
 /**
  * Returns whether the patient passed has the observation defined by
  * observationInfo before the date passed
- * 
+ *
  * @param patient
  *                hQuery patient object
  * @param date
@@ -29,7 +33,7 @@ observations.hasObservation = function(patient, date, observationInfo,
 /**
  * Returns whether the patient passed has the observation defined by
  * observationInfo in the date range passed
- * 
+ *
  * @param patient
  *                hQuery patient object
  * @param minDate
@@ -53,7 +57,7 @@ observations.hasObservationInDateRange = function(patient, minDate, maxDate,
 /**
  * Returns whether the patient passed has the observation defined by
  * observationInfo in the date range passed
- * 
+ *
  * @param patient
  *                hQuery patient object
  * @param minDate
@@ -186,7 +190,7 @@ observations.hasObservationInDateRangeWithValue = function(patient, minDate,
 /**
  * Returns whether the measurement entry passed is a match for any of the codes
  * defined in observationInfo
- * 
+ *
  * @param measurement
  *                single measurement entry from hQuery patient object
  * @param observationInfo
@@ -194,7 +198,7 @@ observations.hasObservationInDateRangeWithValue = function(patient, minDate,
  *                the observation for which to search
  * @param errorContainer
  *                ErrorContainer to use for storing any errors or output
- * 
+ *
  */
 observations.isCodeMatch = function(measurement, observationInfo,
 	errorContainer) {
@@ -228,7 +232,7 @@ observations.isCodeMatch = function(measurement, observationInfo,
 /**
  * Returns whether the measurement entry passed is within the date range
  * specified
- * 
+ *
  * @param measurement
  *                single observation entry from hQuery patient object
  * @param minDate
@@ -237,7 +241,7 @@ observations.isCodeMatch = function(measurement, observationInfo,
  *                End of date range to examine
  * @param errorContainer
  *                ErrorContainer to use for storing any errors or output
- * 
+ *
  */
 observations.isDateInRange = function(measurement, minDate, maxDate,
 	errorContainer) {
@@ -259,7 +263,7 @@ observations.isDateInRange = function(measurement, minDate, maxDate,
 /**
  * Examines the measurement entry passed and returns whether it contains a value
  * in the range specified
- * 
+ *
  * @param measurement
  *                single measurement entry from hQuery patient object
  * @param valueBottom
@@ -275,7 +279,7 @@ observations.isDateInRange = function(measurement, minDate, maxDate,
  *                measurement to be a match
  * @param errorContainer
  *                ErrorContainer to use for storing any errors or output
- * 
+ *
  */
 observations.isValueInRange = function(measurement, valueBottom, valueTop,
 	valueComplement, valueUnits, errorContainer) {

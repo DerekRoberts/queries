@@ -1,3 +1,7 @@
+// Strict mode
+"use strict";
+
+
 var immunizations = immunizations || {};
 
 /**
@@ -141,7 +145,7 @@ immunizations.isCodeMatch = function(immunization, immunizationInfo, errorContai
 /**
  * Returns whether the measurement entry passed is within the date range
  * specified
- * 
+ *
  * @param immunization
  *                single immunization entry from hQuery patient object
  * @param minDate
@@ -150,11 +154,11 @@ immunizations.isCodeMatch = function(immunization, immunizationInfo, errorContai
  *                End of date range to examine
  * @param errorContainer
  *                ErrorContainer to use for storing any errors or output
- * 
+ *
  */
 immunizations.isDateInRange = function(immunization, minDate, maxDate,
 	errorContainer) {
-    
+
     // check for valid input, if invalid then we can't operate on the
     // immunization, return false.
     if (utils.isUndefinedOrNullAndLog(
@@ -165,7 +169,6 @@ immunizations.isDateInRange = function(immunization, minDate, maxDate,
     }
 
     // return whether immunization date is within range
-    return (((minDate == null) || immunization.json.start_time * 1000 > minDate) 
+    return (((minDate == null) || immunization.json.start_time * 1000 > minDate)
 	    && immunization.json.start_time * 1000 < maxDate);
 };
-

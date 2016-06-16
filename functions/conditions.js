@@ -1,9 +1,13 @@
+// Strict mode
+"use strict";
+
+
 var conditions = conditions || {};
 
 /**
  * Returns whether the patient passed has a condition that matches the codes in
  * the conditionInfo object passed on the date passed
- * 
+ *
  * @param patient
  *                hQuery patient object
  * @param date
@@ -54,7 +58,7 @@ conditions.hasActiveCondition = function(patient, date, conditionInfo,
 /**
  * Returns whether the condition entry passed is a match for any of the codes
  * defined in conditionInfo
- * 
+ *
  * @param condition
  *                single condition entry from hQuery patient object
  * @param conditionInfo
@@ -62,7 +66,7 @@ conditions.hasActiveCondition = function(patient, date, conditionInfo,
  *                condition for which to search
  * @param errorContainer
  *                ErrorContainer to use for storing any errors or output
- * 
+ *
  */
 conditions.isCodeMatch = function(condition, conditionInfo, errorContainer) {
     // Check if it matches one of the codes defined in conditionInfo
@@ -82,7 +86,7 @@ conditions.isCodeMatch = function(condition, conditionInfo, errorContainer) {
 	    // we have a match
 	    return true;
 	}
-    } 
+    }
     if (!utils.isUndefinedOrNullPath([ conditionInfo.SNOMEDCT ], [ condition,
 	    ".json.codes.SNOMEDCT" ])
 	    && (condition.json.codes.SNOMEDCT.length > 0)) {
@@ -95,7 +99,7 @@ conditions.isCodeMatch = function(condition, conditionInfo, errorContainer) {
 	    // we have a match
 	    return true;
 	}
-    } 
+    }
 
     // TODO add other codeset checks
 
@@ -107,12 +111,12 @@ conditions.isCodeMatch = function(condition, conditionInfo, errorContainer) {
 
 /**
  * Returns whether the condition entry passed is coded
- * 
+ *
  * @param condition
  *                single condition entry from hQuery patient object
  * @param errorContainer
  *                ErrorContainer to use for storing any errors or output
- * 
+ *
  */
 conditions.isCoded = function(condition, errorContainer) {
     if (!utils.isUndefinedOrNullPath([ condition, ".json.codes" ])
@@ -131,14 +135,14 @@ conditions.isCoded = function(condition, errorContainer) {
  * Note: The underlying data structure cannot express that a condition is no
  * longer present. Currently a condition is considered to always be active after
  * its start date
- * 
+ *
  * @param condition
  *                single condition entry from hQuery patient object
  * @param date
  *                Effective date for which data should be examined
  * @param errorContainer
  *                ErrorContainer to use for storing any errors or output
- * 
+ *
  */
 conditions.isActive = function(condition, date, errorContainer) {
     // check for valid input, if invalid then we can't operate on the
@@ -164,7 +168,7 @@ conditions.isActive = function(condition, date, errorContainer) {
 	// The start of the condition is defined and occurs before the date to
 	// be examined
 	return true;
-    } 
+    }
 };
 
 /**
@@ -174,7 +178,7 @@ conditions.isActive = function(condition, date, errorContainer) {
  *                hQuery patient object
  * @param date
  *                Effective date for which data should be examined
- * @param coded If true, include only coded entries in count              
+ * @param coded If true, include only coded entries in count
  * @param errorContainer
  *                ErrorContainer to use for storing any errors or output
  */
@@ -214,14 +218,14 @@ conditions.count = function(patient, date, coded, errorContainer) {
 };
 
 /**
- * Whether the patient passed has no condition entries. 
- * Does not mark patient as invalid if the patient has no conditions. 
- * 
+ * Whether the patient passed has no condition entries.
+ * Does not mark patient as invalid if the patient has no conditions.
+ *
  * @param patient
  *                hQuery patient object
  * @param date
  *                Effective date for which data should be examined
- * @param coded If true, include only coded entries in count              
+ * @param coded If true, include only coded entries in count
  * @param errorContainer
  *                ErrorContainer to use for storing any errors or output
  */

@@ -2,6 +2,10 @@
  * Emit functions for queries and error handling
  */
 
+// Strict mode
+"use strict";
+
+
 var emitter = emitter || {};
 
 /**
@@ -138,8 +142,8 @@ emitter.ratioCount = function(patient, query) {
  * Run retroactive ratio code count query and emit results. Separate results
  * will be emitted for every code encountered and will be differentiated by an
  * addition "code" parameter.
- * 
- * 
+ *
+ *
  * @param patient -
  *                hQuery patient object
  * @param query -
@@ -182,7 +186,7 @@ emitter.ratioCodeCount = function(patient, query) {
 
 	if (!(fullCodeMap == undefined)) {
 	    // We have a codeMap to traverse
-	    
+
 	    // Loop through each of the codesets included in the outermost map
 	    var codeSets = Object.keys(fullCodeMap);
 	    for (var codeSetCtr = 0; codeSetCtr < codeSets.length; codeSetCtr++) {
@@ -195,7 +199,7 @@ emitter.ratioCodeCount = function(patient, query) {
 		    // Get code for this iteration of this inner loop
 		    var code = codes[codeCtr];
 
-		    // Obtain the count of occurrences of the current code 
+		    // Obtain the count of occurrences of the current code
 		    var codeCount = fullCodeMap[codeSet][code];
 
 		    // Get numerator and denominator values
@@ -226,7 +230,7 @@ emitter.ratioCodeCount = function(patient, query) {
 
 		}
 	    }
-	} 
+	}
 
 	// Emit errorContainer only once for query
 	utils.emitErrorContainer(errorContainer, jsonEmit.doctor, null, true,

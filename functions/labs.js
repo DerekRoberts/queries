@@ -3,12 +3,16 @@
  *
  */
 
+ // Strict mode
+ "use strict";
+
+
 var labs = labs || {};
 
 /**
  * Returns whether the patient passed has the lab defined by labInfo before the
  * date passed
- * 
+ *
  * @param patient
  *                hQuery patient object
  * @param date
@@ -28,7 +32,7 @@ labs.hasLab = function(patient, date, labInfo, errorContainer) {
 /**
  * Returns whether the patient passed has the lab defined by labInfo in the date
  * range passed
- * 
+ *
  * @param patient
  *                hQuery patient object
  * @param minDate
@@ -51,7 +55,7 @@ labs.hasLabInDateRange = function(patient, minDate, maxDate, labInfo,
 /**
  * Returns whether the patient passed has the lab defined by labInfo in the date
  * range passed
- * 
+ *
  * @param patient
  *                hQuery patient object
  * @param minDate
@@ -182,7 +186,7 @@ labs.hasLabInDateRangeWithValue = function(patient, minDate, maxDate, labInfo,
 /**
  * Returns whether the measurement entry passed is a match for any of the codes
  * defined in labInfo
- * 
+ *
  * @param measurement
  *                single measurement entry from hQuery patient object
  * @param labInfo
@@ -190,7 +194,7 @@ labs.hasLabInDateRangeWithValue = function(patient, minDate, maxDate, labInfo,
  *                for which to search
  * @param errorContainer
  *                ErrorContainer to use for storing any errors or output
- * 
+ *
  */
 labs.isCodeMatch = function(measurement, labInfo, errorContainer) {
     // Check if it matches one of the codes defined in labInfo
@@ -238,7 +242,7 @@ labs.isCodeMatch = function(measurement, labInfo, errorContainer) {
 /**
  * Returns whether the measurement entry passed is within the date range
  * specified
- * 
+ *
  * @param measurement
  *                single lab entry from hQuery patient object
  * @param minDate
@@ -247,7 +251,7 @@ labs.isCodeMatch = function(measurement, labInfo, errorContainer) {
  *                End of date range to examine
  * @param errorContainer
  *                ErrorContainer to use for storing any errors or output
- * 
+ *
  */
 labs.isDateInRange = function(measurement, minDate, maxDate, errorContainer) {
     // check for valid input, if invalid then we can't operate on the
@@ -266,7 +270,7 @@ labs.isDateInRange = function(measurement, minDate, maxDate, errorContainer) {
 /**
  * Examines the measurement entry passed and returns whether it contains a value
  * in the range specified
- * 
+ *
  * @param measurement
  *                single measurement entry from hQuery patient object
  * @param valueBottom
@@ -282,7 +286,7 @@ labs.isDateInRange = function(measurement, minDate, maxDate, errorContainer) {
  *                measurement to be a match
  * @param errorContainer
  *                ErrorContainer to use for storing any errors or output
- * 
+ *
  */
 labs.isValueInRange = function(measurement, valueBottom, valueTop,
 	valueComplement, valueUnits, errorContainer) {

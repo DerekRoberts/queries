@@ -3,6 +3,10 @@
  *
  */
 
+ // Strict mode
+ "use strict";
+
+
 var medications = medications || {};
 
 /**
@@ -141,8 +145,8 @@ medications.isCodeMatch = function(med, medInfo, errorContainer) {
  *
  */
 medications.isCoded = function(med, errorContainer) {
-    
-    
+
+
     if (!utils.isUndefinedOrNullPath([ med,
 	    ".json.codes" ])
 	    && (Object.keys(med.json.codes).length > 0)) {
@@ -205,13 +209,13 @@ medications.isActiveMed = function(med, date, errorContainer) {
     }
 
     return medications.isActiveMedInDateRange(med, date, date, errorContainer);
-    
+
 };
 
 /**
  * Returns whether the medication entry passed was active in the date range
  * passed
- * 
+ *
  * @param med
  *                single medication entry from hQuery patient object
  * @param startDate
@@ -221,7 +225,7 @@ medications.isActiveMed = function(med, date, errorContainer) {
  *                End date for range to examine
  * @param errorContainer
  *                ErrorContainer to use for storing any errors or output
- * 
+ *
  */
 medications.isActiveMedInDateRange = function(med, startDate, endDate,
 	errorContainer) {
@@ -493,7 +497,7 @@ medications.hasActiveMedMaxDaily = function(
  *                Start date for range to examine, if null, check to beginning of available data
  * @param endDate
  *                End date for range to examine
- * @param coded If true, include only coded entries in count              
+ * @param coded If true, include only coded entries in count
  * @param errorContainer
  *                ErrorContainer to use for storing any errors or output
  */
@@ -533,7 +537,7 @@ medications.count = function(patient, startDate, endDate, coded, errorContainer)
 };
 
 /**
- * Whether the patient passed has no medication entries for any medications. 
+ * Whether the patient passed has no medication entries for any medications.
  * Does not mark patient as invalid if the patient has no meds.
  *
  * @param patient
@@ -662,4 +666,3 @@ medications.buildCodeMap = function(patient, date, errorContainer) {
     });
     return codesetMap;
 };
-

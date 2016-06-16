@@ -3,6 +3,10 @@
 *   JavaScript objects for standard values across queries.
 */
 
+// Strict mode
+"use strict";
+
+
 var defaults = defaults ||{
   // Active patient window (seconds)
   active : {

@@ -2,6 +2,11 @@
  * A collection of utility functions that are used throughout the queries and
  * library functions
  */
+
+// Strict mode
+"use strict";
+
+
 var utils = utils || {};
 
 /**
