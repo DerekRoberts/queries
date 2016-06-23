@@ -56,6 +56,51 @@ conditions.hasActiveCondition = function(patient, date, conditionInfo,
 }
 
 /**
+ * Returns the number of matches for the patient passed for a condition that matches the codes in
+ * the conditionInfo object passed on the date passed
+ * 
+ * @param patient
+ *                hQuery patient object
+ * @param date
+ *                Effective date for which data should be examined
+ * @param conditionInfo
+ *                Condition Information object from dictionary that defines the
+ *                condition for which to search
+ * @param errorContainer
+ *                ErrorContainer to use for storing any errors or output
+ */
+conditions.getActiveConditionCount = function(patient, date, conditionInfo,
+	errorContainer) {
+    // Check input
+    if (utils.isUndefinedOrNullAndLog(
+	    "Invalid data passed to conditions conditions.getActiveConditionCount",
+	    utils.invalid, errorContainer, [ patient, "patient", ".json" ], [
+		    conditionInfo, "conditionInfo" ])) {
+	return 0;
+    }
+
+    var conditionEntries = patient.conditions();
+
+    // Filter conditions list to those that match one of the codes defined for
+    // the condition. Implemented as a filter so that all conditions will be
+    // checked and any data issues found
+    var matchingActiveConditions = conditionEntries.filter(function(condition) {
+	if (conditions.isCodeMatch(condition, conditionInfo, errorContainer)
+		&& conditions.isActive(condition, date, errorContainer)) {
+	    // Condition is a code match and active for the date being examined
+	    return true;
+	} else {
+	    // Condition is not a code match or is not active for the date being
+	    // examined and is therefore not a match
+	    return false;
+	}
+    });
+
+    // Return the number of conditions that match
+    return matchingActiveConditions.length;
+}
+
+/**
  * Returns whether the condition entry passed is a match for any of the codes
  * defined in conditionInfo
  *
