@@ -172,3 +172,97 @@ immunizations.isDateInRange = function(immunization, minDate, maxDate,
     return (((minDate == null) || immunization.json.start_time * 1000 > minDate)
 	    && immunization.json.start_time * 1000 < maxDate);
 };
+
+
+/**
+ * Returns a map containing a map for each codeset encountered that contains
+ * entries of each code present and the number of times it was present.
+ *
+ * @param patient
+ *                hQuery patient object
+ * @param minDate
+ *                Start of the effective date range for which data should be
+ *                examined
+ * @param maxDate
+ *                End of the effective date range for which data should be
+ *                examined
+ * @param errorContainer
+ *                ErrorContainer to use for storing any errors or output
+ * @returns a map containing a map for each codeset encountered that contains
+ *          entries of each code present and the nubmer of times it was present.
+ */
+immunizations.buildCodeMap = function(patient, minDate, maxDate, errorContainer) {
+    // Build map of codeset to be returned
+    var codesetMap = {};
+
+    // Check input
+    if (utils.isUndefinedOrNullAndLog(
+	    "Invalid data passed to immunizations.buildCodeMap", utils.invalid,
+	    errorContainer, [ patient, "patient" ])) {
+	return codesetMap;
+    }
+
+    // Get patient immunization list
+    var immunizationEntries = patient.immunizations();
+
+    if (utils.isUndefinedOrNull(immunizationEntries) || (immunizationEntries.length === 0)) {
+	utils.invalid("Patient has no immunizations", errorContainer);
+	return codesetMap;
+    }
+
+    // Filter immunizations list to those that are active on the date being
+    // examined.
+    // Implemented as a filter so that all immunizations will be checked and any
+    // data issues found
+    var matchingActiveMeds = immunizationEntries.filter(function(immunization) {
+	if (immunizations.isDateInRange(immunization, minDate, maxDate,
+		errorContainer)) {
+	    // Med is active for the date being examined,
+	    return true;
+	} else {
+	    // Med either is not active for the date being
+	    // examined and is therefore not a match
+	    return false;
+	}
+    });
+
+    matchingActiveMeds
+	    .forEach(function(immunization) {
+		if (!utils.isUndefinedOrNullPath([ immunization,
+			".json.codes.whoATC" ])
+		&& (immunization.json.codes.whoATC.length > 0)) {
+	    // We have at least one ATC code for the immunization being examined
+
+	    var ATCMap;
+	    if (codesetMap["ATC"] === undefined) {
+		ATCMap = {};
+		codesetMap["ATC"] = ATCMap;
+	    } else {
+		ATCMap = codesetMap["ATC"];
+	    }
+
+	    // Add each code to map
+	    var code;
+	    for (var codeIndex = 0; codeIndex < immunization.json.codes.whoATC.length; codeIndex++) {
+		code = immunization.json.codes.whoATC[codeIndex];
+
+		// Get count of any previous entries for this code
+		var previousCount;
+		if (ATCMap[code] === undefined) {
+		    previousCount = 0;
+		} else {
+		    previousCount = ATCMap[code];
+		}
+
+		// Add to Map count
+		ATCMap[code] = previousCount + 1;
+
+	    }
+
+	    // save back to map
+	    codesetMap["ATC"] = ATCMap;
+	}
+    });
+    return codesetMap;
+};
+
