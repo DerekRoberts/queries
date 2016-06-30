@@ -9,6 +9,23 @@
 var emitter = emitter || {};
 
 /**
+ * Prepares the value passed to be emitted as a entry value
+ * 
+ * @param {(number|boolean)} value The value to be prepared
+   @returns {number}
+ */
+emitter.prepareValueForEmit = function(value) {
+    if(value === true) {
+	return 1.0;
+    } else if(value === false) {
+	return 0.0;
+    } else {
+	return value;
+    }
+}
+
+
+/**
  * Run retroactive ratio query and emit results. Numerator and denominator
  * functions should return true or false for each patient.
  *
@@ -61,13 +78,13 @@ emitter.ratio = function(patient, query) {
 
 	jsonEmit.date = i.getTime().toString();
 	jsonEmit.result = "denominator";
-	emit(JSON.stringify(jsonEmit), denominator);
+	emit(JSON.stringify(jsonEmit), emitter.prepareValueForEmit(denominator));
 
 	jsonEmit.result = "numerator";
-	emit(JSON.stringify(jsonEmit), numerator);
+	emit(JSON.stringify(jsonEmit), emitter.prepareValueForEmit(numerator));
 
 	jsonEmit.result = "invalid";
-	emit(JSON.stringify(jsonEmit), errorContainer.invalid);
+	emit(JSON.stringify(jsonEmit), emitter.prepareValueForEmit(errorContainer.invalid));
 
 	utils.emitErrorContainer(errorContainer, jsonEmit.doctor);
     }
@@ -126,13 +143,13 @@ emitter.ratioCount = function(patient, query) {
 
 	jsonEmit.date = i.getTime().toString();
 	jsonEmit.result = "denominator";
-	emit(JSON.stringify(jsonEmit), denominator);
+	emit(JSON.stringify(jsonEmit), emitter.prepareValueForEmit(denominator));
 
 	jsonEmit.result = "numerator";
-	emit(JSON.stringify(jsonEmit), numerator);
+	emit(JSON.stringify(jsonEmit), emitter.prepareValueForEmit(numerator));
 
 	jsonEmit.result = "invalid";
-	emit(JSON.stringify(jsonEmit), errorContainer.invalid);
+	emit(JSON.stringify(jsonEmit), emitter.prepareValueForEmit(errorContainer.invalid));
 
 	utils.emitErrorContainer(errorContainer, jsonEmit.doctor);
     }
@@ -220,13 +237,13 @@ emitter.ratioCodeCount = function(patient, query) {
 		    jsonEmit.code = codeSet + "_" + code;
 
 		    jsonEmit.result = "denominator";
-		    emit(JSON.stringify(jsonEmit), denominator);
+		    emit(JSON.stringify(jsonEmit), emitter.prepareValueForEmit(denominator));
 
 		    jsonEmit.result = "numerator";
-		    emit(JSON.stringify(jsonEmit), numerator);
+		    emit(JSON.stringify(jsonEmit), emitter.prepareValueForEmit(numerator));
 
 		    jsonEmit.result = "invalid";
-		    emit(JSON.stringify(jsonEmit), errorContainer.invalid);
+		    emit(JSON.stringify(jsonEmit), emitter.prepareValueForEmit(errorContainer.invalid));
 
 		}
 	    }
