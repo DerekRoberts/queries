@@ -1,7 +1,7 @@
 /**
  * Query Title: HDC-0832 DQ-DocumentedGender
  * Query Type:  Ratio
- * Query Description: % of patients with a documented gender
+ * Query Description: % of patients with no documented gender
  */
 function map(patient) {
 
@@ -25,15 +25,15 @@ function map(patient) {
 	/**
 	 * Numerator
 	 * 
-	 * Additional criteria: - gender is documented
+	 * Additional criteria: - gender is not documented
 	 */
 	numerator : function(patient, date, denominator, errorContainer) {
 
 	    var gender = profile.gender.getGender(patient, errorContainer);
 	    
-	    var genderDocumented = (gender != 'undefined');
+	    var genderUndocumented = (gender == 'undefined');
 
-	    return (denominator && genderDocumented);
+	    return (denominator && genderUndocumented);
 	},
 
     };
