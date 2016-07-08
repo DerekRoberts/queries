@@ -98,6 +98,11 @@ dictionary.meds = dictionary.meds || {
 		ATC : [
 			{ codeBeginsWith: "R03BB04", description: "Tiotropium bromide" }
 		]
+	},
+	warfarin : {
+		ATC : [
+			{ codeBeginsWith: "B01AA03", description: "Warfarin Medications" }
+		]
 	}
 };
 
