@@ -10,19 +10,25 @@ function map(patient) {
 	/**
 	 * Denominator
 	 * 
-	 * Total encounter count
+	 * Total encounter count in last year
 	 */
 	denominator : function(patient, date, errorContainer) {
-	    return profile.countEncounters(patient, null, date, errorContainer); 
+	    var minDate = utils.yearsBefore(date, 1);
+	    var maxDate = date;
+	    
+	    return profile.countEncounters(patient, minDate, maxDate, errorContainer); 
 	},
 
 	/**
 	 * Numerator
 	 * 
-	 * Total medication count 
+	 * Total medication count in last year
 	 */
 	numerator : function(patient, date, denominator, errorContainer) {
-	    return medications.count(patient, null, date, false, errorContainer);
+	    var minDate = utils.yearsBefore(date, 1);
+	    var maxDate = date;
+
+	    return medications.count(patient, minDate, maxDate, false, errorContainer);
 
 	}
 
