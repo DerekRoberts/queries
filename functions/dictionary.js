@@ -26,6 +26,11 @@ dictionary.meds = dictionary.meds || {
 			{ codeBeginsWith: "C09C", description: "ANGIOTENSIN II ANTAGONISTS, PLAIN" }
 		]
 	},
+	antidepressant  : {
+		ATC : [
+			{ codeBeginsWith: "NO6A", description: "Antidepressants" }
+		]
+	},
 	antigout  : {
 		ATC : [
 			{ codeBeginsWith: "M04A", description: "Antigout preparations" }
