@@ -31,6 +31,29 @@ dictionary.meds = dictionary.meds || {
 			{ codeBeginsWith: "NO6A", description: "Antidepressants" }
 		]
 	},
+	antibiotic  : {
+		ATC : [
+			{ codeEquals: "J01CF02", description: "cloxacillin" },
+			{ codeEquals: "J01CA01", description: "ampicillin" },
+			{ codeEquals: "J01CA04", description: "amoxicillin" },
+			{ codeEquals: "J01EE01", description: "sulfamethoxazole and trimethoprim" },
+			{ codeEquals: "J01FA09", description: "clarithromycin" },
+			{ codeEquals: "J01FA10", description: "azithromycin" },
+			{ codeEquals: "J01FA01", description: "erythromycin" },
+			{ codeEquals: "J01FF01", description: "clindamycin" },
+			{ codeEquals: "J01AA02", description: "doxycycline" },
+			{ codeEquals: "J01AA07", description: "tetracycline" },
+			{ codeEquals: "J01AA08", description: "minocycline" },
+			{ codeEquals: "J01MA12", description: "levofloxacin" },
+			{ codeEquals: "J01MA14", description: "moxifloxacin" },
+			{ codeEquals: "J01MA02", description: "ciprofloxacin" },
+			{ codeEquals: "J01DB01", description: "cefalexin" },
+			{ codeEquals: "J01DC02", description: "cefuroxime" },
+			{ codeEquals: "J01DC04", description: "cefaclor" },
+			{ codeEquals: "J01DD08", description: "cefixime" },
+			{ codeEquals: "J01XE01", description: "nitrofurantoin" }
+		]
+	},
 	antigout  : {
 		ATC : [
 			{ codeBeginsWith: "M04A", description: "Antigout preparations" }
