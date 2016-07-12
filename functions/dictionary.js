@@ -26,11 +26,6 @@ dictionary.meds = dictionary.meds || {
 			{ codeBeginsWith: "C09C", description: "ANGIOTENSIN II ANTAGONISTS, PLAIN" }
 		]
 	},
-	antidepressant  : {
-		ATC : [
-			{ codeBeginsWith: "NO6A", description: "Antidepressants" }
-		]
-	},
 	antibiotic  : {
 		ATC : [
 			{ codeEquals: "J01CF02", description: "cloxacillin" },
@@ -54,9 +49,19 @@ dictionary.meds = dictionary.meds || {
 			{ codeEquals: "J01XE01", description: "nitrofurantoin" }
 		]
 	},
+	antidepressant  : {
+		ATC : [
+			{ codeBeginsWith: "NO6A", description: "Antidepressants" }
+		]
+	},
 	antigout  : {
 		ATC : [
 			{ codeBeginsWith: "M04A", description: "Antigout preparations" }
+		]
+	},
+	antipsychotic  : {
+		ATC : [
+			{ codeBeginsWith: "N05A", description: "Antipsychotics" }
 		]
 	},
 	betaBlocker  : {
