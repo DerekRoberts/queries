@@ -1,5 +1,5 @@
 /**
- * Query Title: HDC-1996 Antibiotic Use 
+ * Query Title: HDC-1997 Antibiotic Use 
  * Query Type:  Ratio
  * Description: This metric shows the percentage of active patients that have 
  * an active medication for an antibiotic (subset with high microbial resistance).
