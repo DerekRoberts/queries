@@ -51,7 +51,7 @@ dictionary.meds = dictionary.meds || {
 	},
 	antidepressant  : {
 		ATC : [
-			{ codeBeginsWith: "NO6A", description: "Antidepressants" }
+			{ codeBeginsWith: "N06A", description: "Antidepressants" }
 		]
 	},
 	antigout  : {
@@ -216,6 +216,9 @@ dictionary.conditions = dictionary.conditions ||{
 			{ codeBeginsWith: "491", description: "BRONCHITIS ..." },
 			{ codeBeginsWith: "492", description: "EMPHYSEMA ..." },
 			{ codeBeginsWith: "494", description: "BRONCHIECTASIS ..." }
+		],
+		SNOMEDCT : [
+			{ codeEquals: "13645005", description: "Chronic obstructive lung disease (disorder)" }
 		]
 	},
 	congestiveHeartFailure : {
@@ -241,6 +244,9 @@ dictionary.conditions = dictionary.conditions ||{
 	depression : {
 		ICD9     : [
 			{ codeEquals: "311", description: "DEPRESSIVE DISORDER NOT ELSEWHERE CLASSIFIED" }
+		],
+		SNOMEDCT : [
+			{ codeEquals: "35489007", description: "Depressive disorder (disorder)" }
 		]
 	},
 	diabetes : {
@@ -249,7 +255,8 @@ dictionary.conditions = dictionary.conditions ||{
 		],
 		SNOMEDCT : [
 			{ codeEquals: "73211009", description: "Diabetes mellitus (disorder)" },
-			{ codeEquals: "44054006", description: "Diabetes mellitus type 2 (disorder)" }
+			{ codeEquals: "44054006", description: "Diabetes mellitus type 2 (disorder)" },
+			{ codeEquals: "46635009", description: "Diabetes mellitus type 1 (disorder)" }
 		]
 	},
 	diabetesGestational : {
@@ -1415,6 +1422,9 @@ dictionary.conditions = dictionary.conditions ||{
 	osteoarthritis : {
 		ICD9     : [
 			{ codeBeginsWith: "715", description: "OSTEOARTHRITIS ..." }
+		],
+		SNOMEDCT : [
+			{ codeEquals: "396275006", description: "Osteoarthritis (disorder)" }
 		]
 	},
 	painBackLower : {
