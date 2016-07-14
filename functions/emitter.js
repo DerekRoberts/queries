@@ -24,6 +24,17 @@ emitter.prepareValueForEmit = function(value) {
     }
 }
 
+/** The lowest level of errors to be included in the output. 
+ *  Setting to a higher level will reduce the amount of error output.
+ *  Exposed as a variable to allow setting within a query.
+ *  
+ *  Possible values:
+ *   - "info"
+ *   - "warning"
+ *   - "error"
+ *   - "none" 
+ */ 
+emitter.errorOutputLevel = emitter.errorOutputLevel || "info";
 
 /**
  * Run retroactive ratio query and emit results. Numerator and denominator
@@ -86,7 +97,7 @@ emitter.ratio = function(patient, query) {
 	jsonEmit.result = "invalid";
 	emit(JSON.stringify(jsonEmit), emitter.prepareValueForEmit(errorContainer.invalid));
 
-	utils.emitErrorContainer(errorContainer, jsonEmit.doctor);
+	utils.emitErrorContainer(errorContainer, jsonEmit.doctor, emitter.errorOutputLevel);
     }
 };
 
@@ -151,7 +162,7 @@ emitter.ratioCount = function(patient, query) {
 	jsonEmit.result = "invalid";
 	emit(JSON.stringify(jsonEmit), emitter.prepareValueForEmit(errorContainer.invalid));
 
-	utils.emitErrorContainer(errorContainer, jsonEmit.doctor);
+	utils.emitErrorContainer(errorContainer, jsonEmit.doctor, emitter.errorOutputLevel);
     }
 };
 
@@ -250,7 +261,6 @@ emitter.ratioCodeCount = function(patient, query) {
 	}
 
 	// Emit errorContainer only once for query
-	utils.emitErrorContainer(errorContainer, jsonEmit.doctor, null, true,
-		code);
+	utils.emitErrorContainer(errorContainer, jsonEmit.doctor, emitter.errorOutputLevel, true);
     }
 };

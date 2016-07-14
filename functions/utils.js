@@ -569,6 +569,8 @@ utils.emitErrorContainer = function(errorContainer, doctorKey, level,
     } else if (typeof level == "number") {
 	// Use level number passed within range of [0, 3]
 	levelNumber = Math.max(0, Math.min(3, level));
+    } else if (level.toLowerCase().trim() == "none") {
+	levelNumber = 0;
     } else if (level.toLowerCase().trim() == "error") {
 	levelNumber = 1;
     } else if (level.toLowerCase().trim() == "warning") {
