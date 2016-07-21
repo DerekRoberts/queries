@@ -112,6 +112,33 @@ profile.countEncountersByMonth = function(patient, atDate) {
 }
 
 /**
+ * Returns the timestamp in seconds of the most recent encounter for a patient
+ *
+ * @param patient
+ *                hQuery patient object
+ * @param errorContainer
+ *                ErrorContainer to use for storing any errors or output
+  * @return the timestamp in seconds of the most recent encounter for a patient
+ */
+profile.mostRecentEncounter = function(patient, errorContainer ) {
+    var ptEncounters = patient.encounters();
+    var mostRecent = null;
+
+    // Search encounters for most recent
+    ptEncounters.forEach(function(ptEnc) {
+	if (!utils.isUndefinedOrNullPath([ ptEnc, ".json.start_time" ])
+	) {
+	    if((mostRecent === null) || (ptEnc.json.start_time > mostRecent)) {
+		mostRecent = ptEnc.json.start_time;
+	    }
+	}
+    });
+
+    // Return results
+    return mostRecent;
+}
+
+/**
  * Returns whether a patient has a prescription event (start or stop of med) in
  * a specified date range.
  *
