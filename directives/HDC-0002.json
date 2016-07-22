@@ -1,0 +1,10 @@
+{
+	"type"         : "QUERY",
+	"name"         : "HDC-0002_Frailty",
+	"title"        : "HDC-0002",
+	"description"  : "Frailty",
+	"display_name" : "Frailty",
+	"query_type"   : "RATIO",
+	"map"          : "queries/HDC-0002_Frailty.js",
+	"reduce"       : "queries/ReduceRatio.js"
+}

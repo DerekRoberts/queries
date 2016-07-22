@@ -1,0 +1,10 @@
+{
+	"type"         : "QUERY",
+	"name"         : "HDC-1996_AntipsychoticUse",
+	"title"        : "HDC-1996",
+	"description"  : "AntipsychoticUse",
+	"display_name" : "AntipsychoticUse",
+	"query_type"   : "RATIO",
+	"map"          : "queries/HDC-1996_AntipsychoticUse.js",
+	"reduce"       : "queries/ReduceRatio.js"
+}

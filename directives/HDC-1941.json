@@ -1,0 +1,10 @@
+{
+	"type"         : "QUERY",
+	"name"         : "HDC-1941_medicationFrequencyDataQuality",
+	"title"        : "HDC-1941",
+	"description"  : "medicationFrequencyDataQuality",
+	"display_name" : "medicationFrequencyDataQuality",
+	"query_type"   : "STRATIFIED",
+	"map"          : "queries/HDC-1941_medicationFrequencyDataQuality.js",
+	"reduce"       : "queries/ReduceCount.js"
+}

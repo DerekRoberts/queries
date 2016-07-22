@@ -1,0 +1,10 @@
+{
+	"type"         : "QUERY",
+	"name"         : "HDC-1997_AntibioticUse",
+	"title"        : "HDC-1997",
+	"description"  : "AntibioticUse",
+	"display_name" : "AntibioticUse",
+	"query_type"   : "RATIO",
+	"map"          : "queries/HDC-1997_AntibioticUse.js",
+	"reduce"       : "queries/ReduceRatio.js"
+}

@@ -1,0 +1,10 @@
+{
+	"type"         : "QUERY",
+	"name"         : "HDC-1136_Lab-LDLlt2point6wDiabetes",
+	"title"        : "HDC-1136",
+	"description"  : "Lab-LDLlt2point6wDiabetes",
+	"display_name" : "Lab-LDLlt2point6wDiabetes",
+	"query_type"   : "RATIO",
+	"map"          : "queries/HDC-1136_Lab-LDLlt2point6wDiabetes.js",
+	"reduce"       : "queries/ReduceRatio.js"
+}

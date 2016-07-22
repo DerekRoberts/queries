@@ -1,0 +1,10 @@
+{
+	"type"         : "QUERY",
+	"name"         : "HDC-1134_INRMonitoring",
+	"title"        : "HDC-1134",
+	"description"  : "INRMonitoring",
+	"display_name" : "INRMonitoring",
+	"query_type"   : "RATIO",
+	"map"          : "queries/HDC-1134_INRMonitoring.js",
+	"reduce"       : "queries/ReduceRatio.js"
+}

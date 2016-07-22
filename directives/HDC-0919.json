@@ -1,0 +1,10 @@
+{
+	"type"         : "QUERY",
+	"name"         : "HDC-0919_HypertensionAndBPInLastYear",
+	"title"        : "HDC-0919",
+	"description"  : "HypertensionAndBPInLastYear",
+	"display_name" : "HypertensionAndBPInLastYear",
+	"query_type"   : "RATIO",
+	"map"          : "queries/HDC-0919_HypertensionAndBPInLastYear.js",
+	"reduce"       : "queries/ReduceRatio.js"
+}

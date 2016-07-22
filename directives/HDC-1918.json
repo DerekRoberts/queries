@@ -1,0 +1,10 @@
+{
+	"type"         : "QUERY",
+	"name"         : "HDC-1918_ImmunizationClassification",
+	"title"        : "HDC-1918",
+	"description"  : "ImmunizationClassification",
+	"display_name" : "ImmunizationClassification",
+	"query_type"   : "RATIO",
+	"map"          : "queries/HDC-1918_ImmunizationClassification.js",
+	"reduce"       : "queries/ReduceRatio.js"
+}
