@@ -258,8 +258,13 @@ labs.isDateInRange = function(measurement, minDate, maxDate, errorContainer) {
     // measurement, return false.
     if (utils.isUndefinedOrNullAndLog(
 	    "Invalid or incomplete data passed to labs.isDateInRange",
-	    utils.invalid, errorContainer, [ measurement, "measurement",
-		    ".start_time" ], [ maxDate, "maxDate" ])) {
+	    utils.invalid, errorContainer, [ measurement, "measurement"], [ maxDate, "maxDate" ])) {
+	return false;
+    } else if (utils.isUndefinedOrNull(measurement.start_time)) {
+	// Measurement has no start time. ANy result could be wrong 
+	//as we cannot determine if this measurement should be included
+	// Mark patient as invalid
+	utils.invalid("Invalid measurement with no start_date found. Excluding patient.", errorContainer);
 	return false;
     }
 
