@@ -1,9 +1,11 @@
 /**
- * Query Title: HDC-0009 Query Type: Ratio Description: BMI-WC Check, 20+
+ * Query Title: HDC-0009
+ * Query Type:  Ratio
+ * Description: BMI-WC Check, 20+
  * Query Type:  Ratio
  * Description: Of patients 20+,
  *              how many have BMI or WC recorded?
- *              
+ *
  * Duplicate of HDC-0602
  */
 

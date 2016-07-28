@@ -1,0 +1,10 @@
+{
+	"type"         : "QUERY",
+	"name"         : "HDC-9998_template",
+	"title"        : "HDC-9998",
+	"description"  : "template",
+	"display_name" : "template",
+	"query_type"   : "RATIO",
+	"map"          : "queries/HDC-9998_template.js",
+	"reduce"       : "queries/ReduceRatio.js"
+}
