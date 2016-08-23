@@ -18,8 +18,8 @@ function map(patient) {
 	 * Base criteria: - 46+ years old
 	 */
 	denominator : function(patient, date, errorContainer) {
-	    return profile.active(patient, date)
-		    && profile.ages.isMin(patient, date, this.minAge);
+	    return profile.active(patient, date, errorContainer )
+		    && profile.ages.isMin(patient, date, this.minAge, errorContainer);
 	},
 
 	/**

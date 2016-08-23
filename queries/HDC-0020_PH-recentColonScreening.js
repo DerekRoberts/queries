@@ -19,7 +19,7 @@ function map( pt ){
 
     // Denominator logic
     denominator: function( pt, date, err ){
-      return profile.active( pt, date ) && profile.ages.isRange( pt, date, this.minAge, this.maxAge, err );
+      return profile.active( pt, date, err ) && profile.ages.isRange( pt, date, this.minAge, this.maxAge, err );
       },
     // Numerator logic
     numerator: function( pt, date, denominator, err ) {

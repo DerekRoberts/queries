@@ -1,5 +1,5 @@
 /**
- * Query Title: HDC-0056
+ * Query Title: HDC-0058
  * Query Type:  Ratio
  * Initiative:  Polypharmacy
  * Description: Of active patients, 65+, on a statin,
@@ -17,8 +17,8 @@ function map( pt ){
 
     // Active pt? Age?
     denominator: function( pt, date, err ){
-      return profile.active( pt, date ) &&
-        profile.ages.isMin( pt, date, this.minAge ) &&
+      return profile.active( pt, date, err ) &&
+        profile.ages.isMin( pt, date, this.minAge, err ) &&
         medications.hasActiveMed( pt, date, this.medication, err );
       },
     // Active statin?

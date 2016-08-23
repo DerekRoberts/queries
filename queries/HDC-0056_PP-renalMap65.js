@@ -17,8 +17,8 @@ function map( pt ){
 
     // Active pt? Age?
     denominator: function( pt, date, err ){
-      return profile.active( pt, date ) &&
-        profile.ages.isMin( pt, date, this.minAge ) &&
+      return profile.active( pt, date, err ) &&
+        profile.ages.isMin( pt, date, this.minAge, err ) &&
         conditions.hasActiveCondition( pt, date, this.condition, err );
     },
     // Active statin?
