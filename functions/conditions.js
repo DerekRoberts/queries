@@ -23,7 +23,7 @@ conditions.hasActiveCondition = function(patient, date, conditionInfo,
     // Check input
     if (utils.isUndefinedOrNullAndLog(
 	    "Invalid data passed to conditions conditions.hasConditionCode",
-	    utils.invalid, errorContainer, [ patient, "patient", ".json" ], [
+	    utils.error, errorContainer, [ patient, "patient", ".json" ], [
 		    conditionInfo, "conditionInfo" ])) {
 	return false;
     }
@@ -74,7 +74,7 @@ conditions.getActiveConditionCount = function(patient, date, conditionInfo,
     // Check input
     if (utils.isUndefinedOrNullAndLog(
 	    "Invalid data passed to conditions conditions.getActiveConditionCount",
-	    utils.invalid, errorContainer, [ patient, "patient", ".json" ], [
+	    utils.error, errorContainer, [ patient, "patient", ".json" ], [
 		    conditionInfo, "conditionInfo" ])) {
 	return 0;
     }
@@ -230,7 +230,7 @@ conditions.isActive = function(condition, date, errorContainer) {
 conditions.count = function(patient, date, coded, errorContainer) {
     // Check input
     if (utils.isUndefinedOrNullAndLog(
-	    "Invalid data passed to conditions.count", utils.invalid,
+	    "Invalid data passed to conditions.count", utils.error,
 	    errorContainer, [ patient, "patient" ], [ date, "date" ])) {
 	return 0;
     }
@@ -239,7 +239,8 @@ conditions.count = function(patient, date, coded, errorContainer) {
     var conds = patient.conditions();
 
     if (utils.isUndefinedOrNull(conds) || (conds.length === 0)) {
-	return utils.invalid("Patient has no conditions", errorContainer);
+	utils.warning("Patient has no conditions", errorContainer);
+	return 0;
     }
 
     // Filter conditions list to those that match the parameter values. Implemented as
@@ -277,7 +278,7 @@ conditions.count = function(patient, date, coded, errorContainer) {
 conditions.noConditions = function(patient, date, coded, errorContainer) {
     // Check input
     if (utils.isUndefinedOrNullAndLog(
-	    "Invalid data passed to conditions.noConditions", utils.invalid,
+	    "Invalid data passed to conditions.noConditions", utils.error,
 	    errorContainer, [ patient, "patient" ], [ date, "date" ])) {
 	return false;
     }

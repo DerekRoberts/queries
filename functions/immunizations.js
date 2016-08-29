@@ -163,7 +163,7 @@ immunizations.isDateInRange = function(immunization, minDate, maxDate,
     // immunization, return false.
     if (utils.isUndefinedOrNullAndLog(
 	    "Invalid or incomplete data passed to immunizations.isDateInRange",
-	    utils.invalid, errorContainer, [ immunization, "immunization",
+	    utils.error, errorContainer, [ immunization, "immunization",
 		    ".json.start_time" ], [ maxDate, "maxDate" ])) {
 	return false;
     }
@@ -197,7 +197,7 @@ immunizations.buildCodeMap = function(patient, minDate, maxDate, errorContainer)
 
     // Check input
     if (utils.isUndefinedOrNullAndLog(
-	    "Invalid data passed to immunizations.buildCodeMap", utils.invalid,
+	    "Invalid data passed to immunizations.buildCodeMap", utils.error,
 	    errorContainer, [ patient, "patient" ])) {
 	return codesetMap;
     }
@@ -206,7 +206,7 @@ immunizations.buildCodeMap = function(patient, minDate, maxDate, errorContainer)
     var immunizationEntries = patient.immunizations();
 
     if (utils.isUndefinedOrNull(immunizationEntries) || (immunizationEntries.length === 0)) {
-	utils.invalid("Patient has no immunizations", errorContainer);
+	utils.warning("Patient has no immunizations", errorContainer);
 	return codesetMap;
     }
 

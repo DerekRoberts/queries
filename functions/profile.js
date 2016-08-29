@@ -201,7 +201,7 @@ profile.activeMedication = function(patient, atDate, activeWindow) {
 profile.active = function(patient, atDate, errorContainer) {
     // Check input
     if (utils.isUndefinedOrNullAndLog(
-	    "Invalid or incomplete data in profile.active", utils.invalid,
+	    "Invalid or incomplete data in profile.active", utils.error,
 	    errorContainer, [ patient, "patient", ".json" ],
 	    [ atDate, "atDate" ])) {
 	return false;
@@ -232,7 +232,7 @@ profile.active = function(patient, atDate, errorContainer) {
 profile.activeEver = function(patient, atDate, errorContainer) {
     // Check input
     if (utils.isUndefinedOrNullAndLog(
-	    "Invalid or incomplete data in profile.active", utils.invalid,
+	    "Invalid or incomplete data in profile.active", utils.error,
 	    errorContainer, [ patient, "patient", ".json" ],
 	    [ atDate, "atDate" ])) {
 	return false;
@@ -262,7 +262,7 @@ profile.gender = profile.gender || {};
 profile.gender.getGender = function(patient, errorContainer) {
     // Check input
     if (utils.isUndefinedOrNullAndLog("Invalid or incomplete patient object",
-	    utils.invalid, errorContainer, [ patient, "patient", ".json" ])) {
+	    utils.error, errorContainer, [ patient, "patient", ".json" ])) {
 	return false;
     }
 
@@ -348,14 +348,14 @@ profile.ages.isRange = function(patient, atDate, ageMin, ageMax, errorContainer)
     // Check input
     if (utils.isUndefinedOrNullAndLog(
 	    "Invalid or incomplete data in profile.ages.isRange()",
-	    utils.invalid, errorContainer, [ patient, "patient" ], [ atDate,
+	    utils.error, errorContainer, [ patient, "patient" ], [ atDate,
 		    "atDate" ], [ ageMin, "ageMin" ], [ ageMax, "ageMax" ])) {
 	return false;
     }
 
     var ageNow = patient.age(atDate);
     if (utils.isUndefinedOrNull(ageNow)) {
-	return utils.invalid("Invalid or incomplete patient.age",
+	return utils.error("Invalid or incomplete patient.age",
 		errorContainer);
     }
     return ((ageMin <= ageNow) && (ageNow <= ageMax));
@@ -407,7 +407,7 @@ profile.ages.isMin = function(patient, atDate, ageMin, errorContainer) {
 profile.ages.getBirthdate = function(patient, errorContainer) {
     if (utils.isUndefinedOrNullAndLog(
 	    "Invalid or incomplete data in profile.ages.getBirthdate()",
-	    utils.invalid, errorContainer, [ patient, "patient", ".json" ])) {
+	    utils.error, errorContainer, [ patient, "patient", ".json" ])) {
 	return null;
     }
 

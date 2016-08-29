@@ -90,7 +90,7 @@ labs.hasLabInDateRangeWithValue = function(patient, minDate, maxDate, labInfo,
 
     // Check input
     if (utils.isUndefinedOrNullAndLog(
-	    "Invalid or incomplete data passed to labs.hasLab", utils.invalid,
+	    "Invalid or incomplete data passed to labs.hasLab", utils.error,
 	    errorContainer, [ patient, "patient", ".json" ], [ labInfo,
 		    "labInfo" ], [ valueComplement, "valueComplement" ], [
 		    valueOnlyMostRecent, "valueOnlyMostRecent" ])) {
@@ -113,7 +113,8 @@ labs.hasLabInDateRangeWithValue = function(patient, minDate, maxDate, labInfo,
     var measurements = patient.json.results;
 
     if (utils.isUndefinedOrNull(measurements) || (measurements.length === 0)) {
-	return utils.invalid("Patient has no lab results", errorContainer);
+	utils.warning("Patient has no lab results", errorContainer);
+	return false;
     }
 
     // Filter measurements list to those that match one of the codes defined for
@@ -258,13 +259,13 @@ labs.isDateInRange = function(measurement, minDate, maxDate, errorContainer) {
     // measurement, return false.
     if (utils.isUndefinedOrNullAndLog(
 	    "Invalid or incomplete data passed to labs.isDateInRange",
-	    utils.invalid, errorContainer, [ measurement, "measurement"], [ maxDate, "maxDate" ])) {
+	    utils.error, errorContainer, [ measurement, "measurement"], [ maxDate, "maxDate" ])) {
 	return false;
     } else if (utils.isUndefinedOrNull(measurement.start_time)) {
-	// Measurement has no start time. ANy result could be wrong 
+	// Measurement has no start time. Any result could be wrong 
 	//as we cannot determine if this measurement should be included
 	// Mark patient as invalid
-	utils.invalid("Invalid measurement with no start_date found. Excluding patient.", errorContainer);
+	utils.warning("Invalid measurement with no start_date found", errorContainer);
 	return false;
     }
 

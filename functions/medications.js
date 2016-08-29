@@ -53,7 +53,7 @@ medications.hasActiveMedRange = function(patient, date, medInfo, doseMin,
     // Check input
     if (utils.isUndefinedOrNullAndLog(
 	    "Invalid data passed to medications hasActiveMedRange",
-	    utils.invalid, errorContainer, [ patient, "patient" ], [ date,
+	    utils.error, errorContainer, [ patient, "patient" ], [ date,
 		    "date" ], [ medInfo, "medInfo" ], [ doseMin, "doseMin" ], [
 		    doseMax, "doseMax" ])) {
 	return false;
@@ -63,7 +63,8 @@ medications.hasActiveMedRange = function(patient, date, medInfo, doseMin,
     var meds = patient.medications();
 
     if (utils.isUndefinedOrNull(meds) || (meds.length === 0)) {
-	return utils.invalid("Patient has no meds", errorContainer);
+	utils.warning("Patient has no meds", errorContainer);
+	return false;
     }
 
     // Filter meds list to those that match one of the codes defined for the
@@ -299,7 +300,7 @@ medications.isActiveMedInDateRange = function(med, startDate, endDate,
 medications.activeMedMin = function(patient, date, minCount, errorContainer) {
     // Check input
     if (utils.isUndefinedOrNullAndLog(
-	    "Invalid data passed to medications activeMedMin", utils.invalid,
+	    "Invalid data passed to medications activeMedMin", utils.error,
 	    errorContainer, [ patient, "patient" ], [ date, "date" ], [
 		    minCount, "minCount" ])) {
 	return false;
@@ -346,7 +347,7 @@ medications.hasActiveMedRangeDaily = function( patient, date, medInfo, dailyMin,
     // Check input
     if (utils.isUndefinedOrNullAndLog(
 	    "Invalid data passed to medications hasActiveMedRangeDaily",
-	    utils.invalid, errorContainer, [ patient, "patient" ], [ date,
+	    utils.error, errorContainer, [ patient, "patient" ], [ date,
 		    "date" ], [ medInfo, "medInfo" ], [ dailyMin, "dailyMin" ], [
 		    dailyMax, "dailyMax" ])) {
 	return false;
@@ -356,7 +357,8 @@ medications.hasActiveMedRangeDaily = function( patient, date, medInfo, dailyMin,
     var meds = patient.medications();
 
     if (utils.isUndefinedOrNull(meds) || (meds.length === 0)) {
-	return utils.invalid("Patient has no meds", errorContainer);
+	utils.warning("Patient has no meds", errorContainer);
+	return false;
     }
 
     // Filter meds list to those that match one of the codes defined for the
@@ -504,7 +506,7 @@ medications.hasActiveMedMaxDaily = function(
 medications.count = function(patient, startDate, endDate, coded, errorContainer) {
     // Check input
     if (utils.isUndefinedOrNullAndLog(
-	    "Invalid data passed to medications.count", utils.invalid,
+	    "Invalid data passed to medications.count", utils.error,
 	    errorContainer, [ patient, "patient" ], [ endDate, "endDate" ])) {
 	return 0;
     }
@@ -513,7 +515,8 @@ medications.count = function(patient, startDate, endDate, coded, errorContainer)
     var meds = patient.medications();
 
     if (utils.isUndefinedOrNull(meds) || (meds.length === 0)) {
-	return utils.invalid("Patient has no meds", errorContainer);
+	utils.warning("Patient has no meds", errorContainer);
+	return 0;
     }
 
     // Filter meds list to those that match the parameter values. Implemented as
@@ -538,7 +541,6 @@ medications.count = function(patient, startDate, endDate, coded, errorContainer)
 
 /**
  * Whether the patient passed has no medication entries for any medications.
- * Does not mark patient as invalid if the patient has no meds.
  *
  * @param patient
  *                hQuery patient object
@@ -552,7 +554,7 @@ medications.count = function(patient, startDate, endDate, coded, errorContainer)
 medications.noMeds = function(patient, startDate, endDate, errorContainer) {
     // Check input
     if (utils.isUndefinedOrNullAndLog(
-	    "Invalid data passed to medications.count", utils.invalid,
+	    "Invalid data passed to medications.count", utils.error,
 	    errorContainer, [ patient, "patient" ], [ endDate, "endDate" ])) {
 	return false;
     }
@@ -602,7 +604,7 @@ medications.buildCodeMap = function(patient, date, errorContainer) {
 
     // Check input
     if (utils.isUndefinedOrNullAndLog(
-	    "Invalid data passed to medications buildCodeMap", utils.invalid,
+	    "Invalid data passed to medications buildCodeMap", utils.error,
 	    errorContainer, [ patient, "patient" ], [ date, "date" ])) {
 	return codesetMap;
     }
@@ -611,7 +613,7 @@ medications.buildCodeMap = function(patient, date, errorContainer) {
     var meds = patient.medications();
 
     if (utils.isUndefinedOrNull(meds) || (meds.length === 0)) {
-	utils.invalid("Patient has no meds", errorContainer);
+	utils.warning("Patient has no meds", errorContainer);
 	return codesetMap;
     }
 

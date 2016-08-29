@@ -94,7 +94,7 @@ observations.hasObservationInDateRangeWithValue = function(patient, minDate,
     if (utils
 	    .isUndefinedOrNullAndLog(
 		    "Invalid or incomplete data passed to observations.hasObservation:",
-		    utils.invalid, errorContainer, [ patient, "patient",
+		    utils.error, errorContainer, [ patient, "patient",
 			    ".json" ], [ observationInfo, "observationInfo" ],
 		    [ valueComplement, "valueComplement" ], [
 			    valueOnlyMostRecent, "valueOnlyMostRecent" ])) {
@@ -116,7 +116,8 @@ observations.hasObservationInDateRangeWithValue = function(patient, minDate,
     var measurements = patient.vitalSigns();
 
     if (utils.isUndefinedOrNull(measurements) || (measurements.length === 0)) {
-	return utils.invalid("Patient has no observations", errorContainer);
+	utils.warning("Patient has no observations", errorContainer);
+	return false;
     }
 
     // Filter measurements list to those that match one of the codes defined for
@@ -249,7 +250,7 @@ observations.isDateInRange = function(measurement, minDate, maxDate,
     // measurement, return false.
     if (utils.isUndefinedOrNullAndLog(
 	    "Invalid or incomplete data passed to observations.isDateInRange:",
-	    utils.invalid, errorContainer, [ measurement, "measurement",
+	    utils.error, errorContainer, [ measurement, "measurement",
 		    ".json.start_time" ], [ minDate, "minDate" ], [ maxDate,
 		    "maxDate" ])) {
 	return false;
