@@ -2,7 +2,7 @@
  * Query Title: HDC-1997 Antibiotic Use 
  * Query Type:  Ratio
  * Description: This metric shows the percentage of active patients that have 
- * an active medication for an antibiotic (subset with high microbial resistance).
+ * a medication for an antibiotic (subset with high microbial resistance) in the last year.
  */
 function map( patient ){
 
@@ -23,10 +23,13 @@ function map( patient ){
 	/**
 	 * Numerator
 	 *
-	 * Additional criteria: antibiotic medication
+	 * Additional criteria: antibiotic medication in last year
 	 */
         numerator: function( patient, date, denominator, errorContainer ) {
-            var antibiotic = medications.hasActiveMed( patient, date, 
+	    var minDate = utils.yearsBefore(date, 1);
+	    var maxDate = date;
+            
+            var antibiotic = medications.hasActiveMedInDateRange( patient, minDate, maxDate, 
         	    this.antibiotic, errorContainer );
             
             return (denominator && antibiotic) 

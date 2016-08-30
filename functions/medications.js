@@ -31,6 +31,31 @@ medications.hasActiveMed = function(patient, date, medInfo, errorContainer) {
 };
 
 /**
+ * Returns whether the patient passed has the medication defined by medInfo in
+ * the date range passed
+ *
+ * @param patient
+ *                hQuery patient object
+ * @param minDate
+ *                Start of the effective date range for which data should be
+ *                examined
+ * @param maxDate
+ *                End of the effective date range for which data should be
+ *                examined
+ * @param medInfo
+ *                Medication Information object from dictionary that defines the
+ *                medication for which to search
+ * @param errorContainer
+ *                ErrorContainer to use for storing any errors or output
+ */
+medications.hasActiveMedInDateRange = function(patient, minDate, maxDate, medInfo, errorContainer) {
+    // Check for dose in default range
+    var doseMin = defaults.doses.min, doseMax = defaults.doses.max;
+    return medications.hasActiveMedRangeInDateRange(patient, minDate, maxDate, medInfo, doseMin,
+	    doseMax, errorContainer);
+};
+
+/**
  * Returns whether the patient passed has the medication defined by medInfo on
  * the date passed with a dose in the range passed
  *
@@ -50,11 +75,41 @@ medications.hasActiveMed = function(patient, date, medInfo, errorContainer) {
  */
 medications.hasActiveMedRange = function(patient, date, medInfo, doseMin,
 	doseMax, errorContainer) {
+    // Call date range version with the date passed as both the start and end of the date range
+    return medications.hasActiveMedRangeInDateRange(patient, date, date, medInfo, 
+	    doseMin, doseMax, errorContainer)
+}
+
+/**
+ * Returns whether the patient passed has the medication defined by medInfo on
+ * the date passed with a dose in the range passed
+ *
+ * @param patient
+ *                hQuery patient object
+ * @param minDate
+ *                Start of the effective date range for which data should be
+ *                examined
+ * @param maxDate
+ *                End of the effective date range for which data should be
+ *                examined
+ * @param medInfo
+ *                Medication Information object from dictionary that defines the
+ *                medication for which to search
+ * @param doseMin
+ *                Minimum valid dose
+ * @param doseMax
+ *                Maximum valid dose
+ * @param errorContainer
+ *                ErrorContainer to use for storing any errors or output
+ */
+medications.hasActiveMedRangeInDateRange = function(patient, minDate, maxDate, medInfo, doseMin,
+	doseMax, errorContainer) {
     // Check input
     if (utils.isUndefinedOrNullAndLog(
 	    "Invalid data passed to medications hasActiveMedRange",
-	    utils.error, errorContainer, [ patient, "patient" ], [ date,
-		    "date" ], [ medInfo, "medInfo" ], [ doseMin, "doseMin" ], [
+	    utils.error, errorContainer, [ patient, "patient" ], [ minDate,
+		    "minDate" ],  [ maxDate,  "maxDate" ],
+		    [ medInfo, "medInfo" ], [ doseMin, "doseMin" ], [
 		    doseMax, "doseMax" ])) {
 	return false;
     }
@@ -72,14 +127,14 @@ medications.hasActiveMedRange = function(patient, date, medInfo, doseMin,
     // data issues found
     var matchingActiveMeds = meds.filter(function(med) {
 	if (medications.isCodeMatch(med, medInfo, errorContainer)
-		&& medications.isActiveMed(med, date, errorContainer)
+		&& medications.isActiveMedInDateRange(med, minDate, maxDate, errorContainer)
 		&& medications.isDoseInRange(med, doseMin, doseMax,
 			errorContainer)) {
-	    // Med is a code match, active for the date being examined, and has
+	    // Med is a code match, active in the date range being examined, and has
 	    // a dose in the required range.
 	    return true;
 	} else {
-	    // Med either is not a code match, is not active for the date being
+	    // Med either is not a code match, is not active in the date range being
 	    // examined, or does not have a valid dose in the required range and
 	    // is therefore not a match
 	    return false;
