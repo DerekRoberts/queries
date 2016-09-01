@@ -2,6 +2,7 @@
 * Query Title: HDC-1740
 * Query Type:  Pyramid/count
 * Description: Count/encounter profile
+* The number of encounters for a patient in the previous 3 months, by age category and gender. 
 */
 function map( patient )
 {
@@ -21,7 +22,9 @@ function map( patient )
         ageOpts = agesMin.length - 1,
         indexGdrs,
         indexAges,
-        retroAge;
+        retroAge,
+        minDate,
+        maxDate;
 
     // Store gender (can't change)
     switch( profile.gender.getGender( patient ).toString().toUpperCase() ){
@@ -70,8 +73,14 @@ function map( patient )
             // ...reserve the final spot for unspecified age
             indexAges = ageOpts;
         }
+        
+        // Calcuate date range over which to sum encounters
+        // Set to 3 previous months
+	    minDate = utils.monthsBefore(i, 3);
+	    maxDate = i;
+        
         // Store in mask
-        mask[ indexAges ][ indexGdrs ] = profile.countEncountersByMonth( patient, i );
+        mask[ indexAges ][ indexGdrs ] = profile.countEncounters(patient, minDate, maxDate);
 
         // Output mask, arranged by g=gender and a=age
         for( var a = 0; a < agesMin.length; a++ )
