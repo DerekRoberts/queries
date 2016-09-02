@@ -36,7 +36,7 @@ function map( patient ){
         * Numerator
         *
         * Additional criteria:
-        * - count of active medications
+        *  - count of active medications
         */
         numerator: function( patient, date, denominator, err ) {
             return denominator &&

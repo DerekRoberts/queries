@@ -1,28 +1,46 @@
 /**
- * Query Title: HDC-1927
- * Query Type:  Ratio
- * Initiative:  Med Use
- * Description: This metric shows the percentage of active patients, 65 and
- *              over, have an active medication for a natural opium alkaloid.
- */
+* Query Title: HDC-1927
+* Query Type:  Ratio
+* Initiative:  Med Use
+* Description: Of active patients, 65+ and over,
+*              how many have an active natural opium alkaloid (medication)?
+*/
 function map( patient ){
 
-  // Query logic
-  var query = {
+    // Query logic
+    var query = {
 
-    // Med codes and age restraints
-    code   : dictionary.meds.naturalOpiumAlkaloid,
-    minAge : 65,
+        /**
+        * Minimum age
+        */
+        minAge : 65,
 
-    // Active patient? Age?
-    denominator: function( patient, date, errorContainer ){
-      return profile.active( patient, date ) && profile.ages.isMin( patient, date, this.minAge );
-    },
-    // Active statin?
-    numerator: function( patient, date, denominator, errorContainer ) {
-      return denominator && medications.hasActiveMed( patient, date, this.code, errorContainer );
-    }
-  };
-  // Emit results based on query above
-  emitter.ratio( patient, query );
+        /**
+        * Medication - natural optium alkaloid
+        */
+        code   : dictionary.meds.naturalOpiumAlkaloid,
+
+        /**
+        * Denominator
+        *
+        * Base criteria:
+        *  - active patient
+        *  - age constraint
+        */
+        denominator: function( patient, date, errorContainer ){
+            return profile.active( patient, date ) && profile.ages.isMin( patient, date, this.minAge );
+        },
+
+        /**
+        * Numerator
+        *
+        * Additional criteria:
+        *  - active medication - natural optium alkaloid
+        */
+        numerator: function( patient, date, denominator, errorContainer ) {
+            return denominator && medications.hasActiveMed( patient, date, this.code, errorContainer );
+        }
+    };
+    // Emit results based on query above
+    emitter.ratio( patient, query );
 }
