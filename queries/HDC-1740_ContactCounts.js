@@ -2,7 +2,7 @@
 * Query Title: HDC-1740
 * Query Type:  Pyramid/count
 * Description: Count/encounter profile
-* The number of encounters for a patient in the previous 3 months, by age category and gender. 
+* The number of encounters for a patient in the last 3 years, by age category and gender.
 */
 function map( patient )
 {
@@ -75,8 +75,8 @@ function map( patient )
         }
         
         // Calcuate date range over which to sum encounters
-        // Set to 3 previous months
-	    minDate = utils.monthsBefore(i, 3);
+        // Set to 3 years before query date
+	    minDate = utils.yearsBefore(i, 3);
 	    maxDate = i;
         
         // Store in mask
