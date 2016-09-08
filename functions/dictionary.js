@@ -100,6 +100,11 @@ dictionary.meds = dictionary.meds || {
 			{ codeBeginsWith: "H03AA", description: "Thyroid hormones" }
 		]
 	},
+	metformin : {
+		ATC : [
+				{ codeEquals: "A10BA02", description: "Metformin" }
+			]
+		}, 
 	opioidNatural : {
 		ATC : [
 			{ codeBeginsWith: "N02AA", description: "Natural opium alkaloids" }
