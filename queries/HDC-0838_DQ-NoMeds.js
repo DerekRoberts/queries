@@ -20,10 +20,10 @@ function map(patient) {
 	/**
 	 * Numerator
 	 *
-	 * Additional criteria: no medication entries
+	 * Additional criteria: no active medication entries on query date
 	 */
 	numerator : function(patient, date, denominator, errorContainer) {
-	    var noMeds = medications.noMeds(patient, null, date, errorContainer);
+	    var noMeds = medications.noMeds(patient, date, date, errorContainer);
 
 	    return (denominator && noMeds);
 	},
