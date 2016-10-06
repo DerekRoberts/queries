@@ -364,6 +364,11 @@ medications.activeMedMin = function(patient, date, minCount, errorContainer) {
     // Get patient medication list
     var meds = patient.medications();
 
+    if (utils.isUndefinedOrNull(meds) || (meds.length === 0)) {
+    	utils.warning("Patient has no meds", errorContainer);
+    	return (0 >= minCount);
+    }
+
     // Filter down to active meds
     var activeMeds = meds.filter(function(med) {
 	if (medications.isActiveMed(med, date, errorContainer)) {
