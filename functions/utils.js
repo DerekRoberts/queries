@@ -446,114 +446,114 @@ utils.before = function(date, years, months) {
 /**
  * Mark current patient as being excluded from the query due to invalid data.
  * This is also recorded as an Error-level problem
- *
+ * 
  * @param message -
- *                message to store with query results
+ *            message to store with query results
  * @param errorContainer -
- *                ErrorContainer object to store error in
- *
+ *            ErrorContainer object to store error in
+ * 
  * @return false - function intended to be called as a return
  */
 utils.invalid = function(message, errorContainer) {
-    if (utils.isUndefinedOrNull(errorContainer)) {
-	// We do not have a proper error container in which to store the error
-	// Emit string and conspicuous number
-	emit(utils.sanitizeForEmit("Invalid: " + message), -1);
+	if (utils.isUndefinedOrNull(errorContainer)) {
+		// We do not have a proper error container in which to store the error
+		// Emit string and conspicuous number
+		emit(utils.sanitizeForEmit("Invalid: " + message), -1);
+	} else {
+		// Ensure invalid and error flags are set
+		errorContainer.invalid = true;
+		errorContainer.error = true;
+		errorContainer.errorMessages.push(message);
+	}
 	return false;
-    } else {
-	// Ensure invalid and error flags are set
-	errorContainer.invalid = true;
-	errorContainer.error = true;
-	errorContainer.errorMessages.push(message);
-    }
 };
 
 /**
  * Record an Error-level problem
- *
+ * 
  * @param message -
- *                message to store with query results
+ *            message to store with query results
  * @param errorContainer -
- *                ErrorContainer object to store error in
- *
+ *            ErrorContainer object to store error in
+ * 
  * @return false - function intended to be called as a return
  */
 utils.error = function(message, errorContainer) {
-    if (utils.isUndefinedOrNull(errorContainer)) {
-	// We do not have a proper error container in which to store the error
-	// Emit string and conspicuous number
-	emit(utils.sanitizeForEmit("Error: " + message), -1);
+	if (utils.isUndefinedOrNull(errorContainer)) {
+		// We do not have a proper error container in which to store the error
+		// Emit string and conspicuous number
+		emit(utils.sanitizeForEmit("Error: " + message), -1);
+	} else {
+		// Ensure error flag is set
+		errorContainer.error = true;
+		errorContainer.errorMessages.push(message);
+	}
 	return false;
-    } else {
-	// Ensure error flag is set
-	errorContainer.error = true;
-	errorContainer.errorMessages.push(message);
-    }
 };
 
 /**
  * Record an Warning-level problem
- *
+ * 
  * @param message -
- *                message to store with query results
+ *            message to store with query results
  * @param errorContainer -
- *                ErrorContainer object to store warning in
- *
+ *            ErrorContainer object to store warning in
+ * 
  * @return false - function intended to be called as a return
  */
 utils.warning = function(message, errorContainer) {
-    if (utils.isUndefinedOrNull(errorContainer)) {
-	// We do not have a proper error container in which to store the error
-	// Emit string and conspicuous number
-	emit(utils.sanitizeForEmit("Warning: " + message), -1);
+	if (utils.isUndefinedOrNull(errorContainer)) {
+		// We do not have a proper error container in which to store the error
+		// Emit string and conspicuous number
+		emit(utils.sanitizeForEmit("Warning: " + message), -1);
+	} else {
+		// Ensure warning flag is set
+		errorContainer.warning = true;
+		errorContainer.warningMessages.push(message);
+	}
 	return false;
-    } else {
-	// Ensure warning flag is set
-	errorContainer.warning = true;
-	errorContainer.warningMessages.push(message);
-    }
 };
 
 /**
  * Record an Information-level event
- *
+ * 
  * @param message -
- *                message to store with query results
+ *            message to store with query results
  * @param errorContainer -
- *                ErrorContainer object to store information message in
- *
+ *            ErrorContainer object to store information message in
+ * 
  * @return false - function intended to be called as a return
  */
 utils.info = function(message, errorContainer) {
-    if (utils.isUndefinedOrNull(errorContainer)) {
-	// We do not have a proper error container in which to store the error
-	// Emit string and conspicuous number
-	emit(utils.sanitizeForEmit("Info: " + message), -1);
+	if (utils.isUndefinedOrNull(errorContainer)) {
+		// We do not have a proper error container in which to store the error
+		// Emit string and conspicuous number
+		emit(utils.sanitizeForEmit("Info: " + message), -1);
+	} else {
+		// Ensure info flag is set
+		errorContainer.info = true;
+		errorContainer.infoMessages.push(message);
+	}
 	return false;
-    } else {
-	// Ensure info flag is set
-	errorContainer.info = true;
-	errorContainer.infoMessages.push(message);
-    }
 };
 
 /**
  * Emit the contents of the error container passed based on the other parameters
- *
+ * 
  * @param errorContainer
- *                ErrorContainer to emit
+ *            ErrorContainer to emit
  * @param doctorKey
- *                Unique key for doctor so that output from multiple doctors
- *                will not be combined via reduction. Defaults to null which
- *                allows results to be combined via reduction.
+ *            Unique key for doctor so that output from multiple doctors will
+ *            not be combined via reduction. Defaults to null which allows
+ *            results to be combined via reduction.
  * @param level
- *                The level of output to emit. "info", "warning", or "error".
- *                Higher levels will result in more output. Defaults to "info"
- *                if not specified which will emit all information available
+ *            The level of output to emit. "info", "warning", or "error". Higher
+ *            levels will result in more output. Defaults to "info" if not
+ *            specified which will emit all information available
  * @param combineMultiples
- *                If true, multiple instances of the same message will be
- *                combined and only displayed once
-*/
+ *            If true, multiple instances of the same message will be combined
+ *            and only displayed once
+ */
 utils.emitErrorContainer = function(errorContainer, doctorKey, level,
 	combineMultiples) {
     if (utils.isUndefinedOrNull(doctorKey)) {
