@@ -3,7 +3,7 @@
  * Query Type:  Ratio
  * Query Description: Count active patients with no date of birth
  * 
- * NOT a duplicate of HDC-0834 DQ-UndocumentedBirthdate as this query only includes active patients.
+ * Duplicate of HDC-0834 DQ-UndocumentedBirthdate 
  */
 function map(patient) {
 
