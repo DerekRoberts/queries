@@ -3,25 +3,21 @@
  * Query Type:  Ratio
  * Query Description: Count active patients with no date of birth
  * 
- * NOT a duplicate of HDC-0004 Undocumented Birthdate as this query include non-active patients.
+ * Duplicate of HDC-0004 Undocumented Birthdate 
  */
 function map(patient) {
 
     // Query logic
     var query = {
 
-        /**
+	/**
 	 * Denominator
-	 * 
-	 * Base criteria: Was an active patient at some point before the query date.
-	 * This is necessary for retroactive queries as always returning true will 
-	 * include patients in the denominator before they joined the practice or
-	 * possibly before they were born. 
+	 *
+	 * Base criteria: just active patient
 	 */
 	denominator : function(patient, date, errorContainer) {
-	    var activeEver = profile.activeEver(patient, date);
-	    
-	    return activeEver;
+	    return profile.active(patient, date);
+
 	},
 
 	/**
