@@ -1217,17 +1217,6 @@ dictionary.conditions = dictionary.conditions ||{
                         { codeEquals: "278.00", description: "" },
 		]
 	},
-	frailtyIndex_weightProblems: {
-		ICD9     : [
-                        { codeEquals: "783.3", description: "" },
-                        { codeEquals: "783.1", description: "" },
-                        { codeEquals: "783.21", description: "" },
-                        { codeEquals: "799.4", description: "" },
-                        { codeEquals: "278.00", description: "" },
-                        { codeEquals: "278.03", description: "" },
-                        { codeEquals: "278.00", description: "" },
-		]
-	},
 	frailtyIndex_thyroidDisorders: {
 		ICD9     : [
                         { codeEquals: "242.81", description: "" },
