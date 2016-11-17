@@ -323,7 +323,7 @@ dictionary.conditions = dictionary.conditions ||{
 	},
 	endOfLifeSimplified : {
 		ICD9     : [
-			{ codeEquals: "V66.7", description: "ENCOUNTER FOR PALLIATIVE CARE" }
+			{ codeBeginsWith: "V66", description: "Convalescence and palliative care" }
 		]
 	},
 	frailty : {
