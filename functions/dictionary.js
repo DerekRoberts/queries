@@ -1452,6 +1452,11 @@ dictionary.conditions = dictionary.conditions ||{
 			{ codeEquals: "V66.7", description: "ENCOUNTER FOR PALLIATIVE CARE" }
 		]
 	},
+	parkinsons : {
+		ICD9     : [
+			{ codeBeginsWith: "332", description: "Parkinson's disease" }
+		]
+	},
 	rheumatoid : {
 		ICD9     : [
 			{ codeEquals: "714.0", description: "RHEUMATOID ARTHRITIS" }
