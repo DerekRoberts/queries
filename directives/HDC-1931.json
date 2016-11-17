@@ -1,0 +1,10 @@
+{
+	"type"         : "QUERY",
+	"name"         : "HDC-1931_MU-Digoxin",
+	"title"        : "HDC-1931",
+	"description"  : "MU-Digoxin",
+	"display_name" : "MU-Digoxin",
+	"query_type"   : "RATIO",
+	"map"          : "queries/HDC-1931_MU-Digoxin.js",
+	"reduce"       : "queries/ReduceRatio.js"
+}

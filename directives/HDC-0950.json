@@ -1,0 +1,10 @@
+{
+	"type"         : "QUERY",
+	"name"         : "HDC-0950_PH-endOfLife",
+	"title"        : "HDC-0950",
+	"description"  : "PH-endOfLife",
+	"display_name" : "PH-endOfLife",
+	"query_type"   : "RATIO",
+	"map"          : "queries/HDC-0950_PH-endOfLife.js",
+	"reduce"       : "queries/ReduceRatio.js"
+}

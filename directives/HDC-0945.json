@@ -1,0 +1,10 @@
+{
+	"type"         : "QUERY",
+	"name"         : "HDC-0945_PH-frailty",
+	"title"        : "HDC-0945",
+	"description"  : "PH-frailty",
+	"display_name" : "PH-frailty",
+	"query_type"   : "RATIO",
+	"map"          : "queries/HDC-0945_PH-frailty.js",
+	"reduce"       : "queries/ReduceRatio.js"
+}

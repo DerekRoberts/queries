@@ -1,0 +1,10 @@
+{
+	"type"         : "QUERY",
+	"name"         : "HDC-1950_MU-Digoxin65+",
+	"title"        : "HDC-1950",
+	"description"  : "MU-Digoxin65+",
+	"display_name" : "MU-Digoxin65+",
+	"query_type"   : "RATIO",
+	"map"          : "queries/HDC-1950_MU-Digoxin65+.js",
+	"reduce"       : "queries/ReduceRatio.js"
+}

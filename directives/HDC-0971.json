@@ -1,0 +1,10 @@
+{
+	"type"         : "QUERY",
+	"name"         : "HDC-0971_PH-dependenceDrugs",
+	"title"        : "HDC-0971",
+	"description"  : "PH-dependenceDrugs",
+	"display_name" : "PH-dependenceDrugs",
+	"query_type"   : "RATIO",
+	"map"          : "queries/HDC-0971_PH-dependenceDrugs.js",
+	"reduce"       : "queries/ReduceRatio.js"
+}

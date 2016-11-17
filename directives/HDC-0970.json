@@ -1,0 +1,10 @@
+{
+	"type"         : "QUERY",
+	"name"         : "HDC-0970_PH-dependenceAlcohol",
+	"title"        : "HDC-0970",
+	"description"  : "PH-dependenceAlcohol",
+	"display_name" : "PH-dependenceAlcohol",
+	"query_type"   : "RATIO",
+	"map"          : "queries/HDC-0970_PH-dependenceAlcohol.js",
+	"reduce"       : "queries/ReduceRatio.js"
+}

@@ -1,0 +1,10 @@
+{
+	"type"         : "QUERY",
+	"name"         : "HDC-0952_PH-parkinsons",
+	"title"        : "HDC-0952",
+	"description"  : "PH-parkinsons",
+	"display_name" : "PH-parkinsons",
+	"query_type"   : "RATIO",
+	"map"          : "queries/HDC-0952_PH-parkinsons.js",
+	"reduce"       : "queries/ReduceRatio.js"
+}

@@ -1,0 +1,10 @@
+{
+	"type"         : "QUERY",
+	"name"         : "HDC-0947_PH-dementia",
+	"title"        : "HDC-0947",
+	"description"  : "PH-dementia",
+	"display_name" : "PH-dementia",
+	"query_type"   : "RATIO",
+	"map"          : "queries/HDC-0947_PH-dementia.js",
+	"reduce"       : "queries/ReduceRatio.js"
+}
