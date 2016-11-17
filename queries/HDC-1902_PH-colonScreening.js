@@ -12,8 +12,8 @@ function map( pt ){
   var query = {
 
     // Base variables
-    minAge : 0,
-    maxAge : 174.999,
+    minAge : 50,
+    maxAge : 74.999,
     lab    : dictionary.labs.sigmoidoscopyOrColonoscopy,
 
     // Denominator logic
