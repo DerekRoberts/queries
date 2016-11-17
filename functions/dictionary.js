@@ -231,6 +231,11 @@ dictionary.conditions = dictionary.conditions ||{
 			{ codeBeginsWith: "428", description: "HEART FAILURE ..." }
 		]
 	},
+	dementia : {
+		ICD9     : [
+			{ codeBeginsWith: "290", description: "Dementias" }
+		]
+	},
 	dependenceAlcohol : {
 		ICD9     : [
 			{ codeBeginsWith: "303", description: "ALCOHOL DEPENDENCE ..." }
