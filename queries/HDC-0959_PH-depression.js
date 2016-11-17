@@ -2,7 +2,7 @@
 * Query Title: HDC-0959
 * Query Type:  Ratio
 * Initiative:  Population Health
-* Description: Percentage of adults (20+) with depression
+* Description: Percentage of adults with depression
 */
 function map( patient ){
 
@@ -10,12 +10,11 @@ function map( patient ){
   var query = {
 
     // Variables
-    ageMin  : 20,
     codeSet : dictionary.conditions.depression,
 
     // Active patient? Thing?
     denominator: function( patient, date ){
-      return profile.active( patient, date ) && profile.ages.isMin( patient, date, this.ageMin );
+      return profile.active( patient, date );
     },
     // Other things?
     numerator: function( patient, date, denominator, errorContainer ) {
