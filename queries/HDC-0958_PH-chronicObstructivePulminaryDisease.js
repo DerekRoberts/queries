@@ -2,8 +2,7 @@
 * Query Title: HDC-0958
 * Query Type:  Ratio
 * Initiative:  Population Health
-* Description: Percentage of adults (20+) with chronic obstructive pulminary
-*              disease
+* Description: Percentage of adults with chronic obstructive pulminary disease
 */
 function map( patient ){
 
@@ -11,12 +10,11 @@ function map( patient ){
   var query = {
 
     // Variables
-    ageMin  : 20,
     codeSet : dictionary.conditions.COPD,
 
     // Active patient? Thing?
     denominator: function( patient, date ){
-      return profile.active( patient, date ) && profile.ages.isMin( patient, date, this.ageMin );
+      return profile.active( patient, date );
     },
     // Other things?
     numerator: function( patient, date, denominator, errorContainer ) {
