@@ -92,7 +92,7 @@ dictionary.meds = dictionary.meds || {
 	},
 	opioid : {
 		ATC : [
-			{ codeBeginsWith: "N02A", description: "Natural opium alkaloids" }
+			{ codeBeginsWith: "N02A", description: "Opium alkaloids" }
 		]
 	},
 	levothyroxine : {
