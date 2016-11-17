@@ -104,7 +104,7 @@ dictionary.meds = dictionary.meds || {
 		ATC : [
 				{ codeEquals: "A10BA02", description: "Metformin" }
 			]
-		}, 
+		},
 	opioidNatural : {
 		ATC : [
 			{ codeBeginsWith: "N02AA", description: "Natural opium alkaloids" }
@@ -321,12 +321,17 @@ dictionary.conditions = dictionary.conditions ||{
 			{ codeBeginsWith: "491", description: "BRONCHITIS ..." }
 		]
 	},
+	endOfLifeSimplified : {
+		ICD9     : [
+			{ codeEquals: "V66.7", description: "ENCOUNTER FOR PALLIATIVE CARE" }
+		]
+	},
 	frailty : {
 		ICD9     : [
 			{ codeBeginsWith: "V15", description: "ALLERGIES, IMMUNITY, TRAUMA AND MORE ..." }
 		]
 	},
-	
+
 	frailtyIndex_generalComplaints : {
 		ICD9     : [
                         { codeEquals: "780.96", description: "" },
@@ -587,7 +592,7 @@ dictionary.conditions = dictionary.conditions ||{
                         { codeEquals: "365.65", description: "" },
                         { codeBeginsWith: "365.1", description: "" },
                         { codeBeginsWith: "365.2", description: "" }
-		            
+
 		]
 	},
 	frailtyIndex_cataract : {
@@ -603,7 +608,7 @@ dictionary.conditions = dictionary.conditions ||{
                         { codeEquals: "366.46", description: "" },
                         { codeEquals: "366.5", description: "" },
                         { codeEquals: "366.8", description: "" },
-                        { codeEquals: "366.9", description: "" }		            
+                        { codeEquals: "366.9", description: "" }
 		]
 	},
 	frailtyIndex_hearingImpairment : {
@@ -619,7 +624,7 @@ dictionary.conditions = dictionary.conditions ||{
                         { codeEquals: "389.20", description: "" },
                         { codeEquals: "389.7", description: "" },
                         { codeEquals: "389.8", description: "" },
-                        { codeEquals: "389.9", description: "" }		            
+                        { codeEquals: "389.9", description: "" }
 		]
 	},
 	frailtyIndex_respiratoryProblems : {
@@ -647,7 +652,7 @@ dictionary.conditions = dictionary.conditions ||{
                         { codeEquals: "483.1", description: "" },
                         { codeEquals: "483.8", description: "" },
                         { codeEquals: "485", description: "" },
-                        { codeEquals: "486", description: "" }		            
+                        { codeEquals: "486", description: "" }
 		]
 	},
 	frailtyIndex_anginaPectoris : {
@@ -656,7 +661,7 @@ dictionary.conditions = dictionary.conditions ||{
                         { codeEquals: "413.1", description: "" },
                         { codeEquals: "413.9", description: "" },
                         { codeEquals: "411.81", description: "" },
-                        { codeEquals: "411.89", description: "" }		            
+                        { codeEquals: "411.89", description: "" }
 		]
 	},
 	frailtyIndex_myocardialDisease : {
@@ -683,7 +688,7 @@ dictionary.conditions = dictionary.conditions ||{
                         { codeEquals: "414.11", description: "" },
                         { codeEquals: "414.12", description: "" },
                         { codeEquals: "414.8", description: "" },
-                        { codeEquals: "414.9", description: "" }		            
+                        { codeEquals: "414.9", description: "" }
 		]
 	},
 	frailtyIndex_dizziness : {
@@ -1169,7 +1174,7 @@ dictionary.conditions = dictionary.conditions ||{
                         { codeEquals: "492.8", description: "" },
                         { codeEquals: "491.20", description: "" },
                         { codeEquals: "493.20", description: "" },
-                        { codeEquals: "496", description: "" }		            
+                        { codeEquals: "496", description: "" }
 		]
 	},
 	frailtyIndex_skinProblems: {
@@ -1196,7 +1201,7 @@ dictionary.conditions = dictionary.conditions ||{
                         { codeEquals: "799.4", description: "" },
                         { codeEquals: "278.00", description: "" },
                         { codeEquals: "278.03", description: "" },
-                        { codeEquals: "278.00", description: "" },		            
+                        { codeEquals: "278.00", description: "" },
 		]
 	},
 	frailtyIndex_weightProblems: {
@@ -1207,7 +1212,7 @@ dictionary.conditions = dictionary.conditions ||{
                         { codeEquals: "799.4", description: "" },
                         { codeEquals: "278.00", description: "" },
                         { codeEquals: "278.03", description: "" },
-                        { codeEquals: "278.00", description: "" },		            
+                        { codeEquals: "278.00", description: "" },
 		]
 	},
 	frailtyIndex_thyroidDisorders: {
@@ -1224,7 +1229,7 @@ dictionary.conditions = dictionary.conditions ||{
                         { codeBeginsWith: "242.1", description: "" },
                         { codeBeginsWith: "242.2", description: "" },
                         { codeBeginsWith: "242.3", description: "" },
-                        { codeBeginsWith: "242.9", description: "" }		            
+                        { codeBeginsWith: "242.9", description: "" }
 		]
 	},
 	frailtyIndex_diabetesMellitus: {
@@ -1233,7 +1238,7 @@ dictionary.conditions = dictionary.conditions ||{
                         { codeEquals: "250.02", description: "" },
                         { codeEquals: "250.80", description: "" },
                         { codeEquals: "250.30", description: "" },
-                        { codeEquals: "250.12", description: "" }		            
+                        { codeEquals: "250.12", description: "" }
 		]
 	},
 	frailtyIndex_urinaryDisease: {
@@ -1284,7 +1289,7 @@ dictionary.conditions = dictionary.conditions ||{
                         { codeEquals: "599.9", description: "" },
                         { codeEquals: "788.99", description: "" },
                         { codeBeginsWith: "593.7", description: "" },
-                        { codeBeginsWith: "588.8", description: "" }	            
+                        { codeBeginsWith: "588.8", description: "" }
 		]
 	},
 	frailtyIndex_prostrateProblems: {
@@ -1292,7 +1297,7 @@ dictionary.conditions = dictionary.conditions ||{
                         { codeEquals: "233.4", description: "" },
                         { codeEquals: "185", description: "" },
                         { codeBeginsWith: "600.0", description: "" },
-                        { codeBeginsWith: "600.1", description: "" }		            
+                        { codeBeginsWith: "600.1", description: "" }
 		]
 	},
 	frailtyIndex_socialProblems: {
