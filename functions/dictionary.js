@@ -179,11 +179,7 @@ dictionary.meds = dictionary.meds || {
 dictionary.conditions = dictionary.conditions ||{
 	anxiety : {
 		ICD9     : [
-			{ codeBeginsWith: "300.0",  description: "Anxiety wildcard" },
-			{ codeEquals:     "300.00", description: "Anxiety, atypical" },
-			{ codeEquals:     "300.01", description: "Anxiety, panic type" },
-			{ codeEquals:     "300.02", description: "Anxiety, general" },
-			{ codeEquals:     "300.09", description: "Anxiety, other" }
+			{ codeBeginsWith: "300",  description: "Neurotic disorders" }
 		]
 	},
 	asthma : {
