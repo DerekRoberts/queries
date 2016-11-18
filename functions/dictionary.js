@@ -69,6 +69,12 @@ dictionary.meds = dictionary.meds || {
 			{ codeBeginsWith: "N05A", description: "Antipsychotics" }
 		]
 	},
+	benzodiazepine : {
+		ATC : [
+			{ codeBeginsWith: "N03AE", description: "Benzodiazepine derivatives" },
+			{ codeBeginsWith: "N05BA", description: "Benzodiazepine derivatives" }
+		]
+	},
 	betaBlocker  : {
 		ATC : [
 			{ codeBeginsWith: "C07AB", description: "Beta blocking agents, selective" },
