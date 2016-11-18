@@ -249,7 +249,7 @@ dictionary.conditions = dictionary.conditions ||{
 	},
 	dementia : {
 		ICD9     : [
-			{ codeBeginsWith: "290", description: "Dementias" }
+			{ codeBeginsWith: "331", description: "Other cerebral degenerations" }
 		]
 	},
 	dependenceAlcohol : {
