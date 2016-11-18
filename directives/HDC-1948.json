@@ -1,0 +1,10 @@
+{
+	"type"         : "QUERY",
+	"name"         : "HDC-1948_MU-benzodiazepineAndOpioid",
+	"title"        : "HDC-1948",
+	"description"  : "MU-benzodiazepineAndOpioid",
+	"display_name" : "MU-benzodiazepineAndOpioid",
+	"query_type"   : "RATIO",
+	"map"          : "queries/HDC-1948_MU-benzodiazepineAndOpioid.js",
+	"reduce"       : "queries/ReduceRatio.js"
+}

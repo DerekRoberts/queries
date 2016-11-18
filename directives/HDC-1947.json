@@ -1,0 +1,10 @@
+{
+	"type"         : "QUERY",
+	"name"         : "HDC-1947_MU-benzodiazepineAndOpioid65+",
+	"title"        : "HDC-1947",
+	"description"  : "MU-benzodiazepineAndOpioid65+",
+	"display_name" : "MU-benzodiazepineAndOpioid65+",
+	"query_type"   : "RATIO",
+	"map"          : "queries/HDC-1947_MU-benzodiazepineAndOpioid65+.js",
+	"reduce"       : "queries/ReduceRatio.js"
+}

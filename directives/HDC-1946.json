@@ -1,0 +1,10 @@
+{
+	"type"         : "QUERY",
+	"name"         : "HDC-1946_MU-benzodiazepine",
+	"title"        : "HDC-1946",
+	"description"  : "MU-benzodiazepine",
+	"display_name" : "MU-benzodiazepine",
+	"query_type"   : "RATIO",
+	"map"          : "queries/HDC-1946_MU-benzodiazepine.js",
+	"reduce"       : "queries/ReduceRatio.js"
+}
