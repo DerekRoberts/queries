@@ -1,0 +1,10 @@
+{
+	"type"         : "QUERY",
+	"name"         : "HDC-1944_MU-NSAID",
+	"title"        : "HDC-1944",
+	"description"  : "MU-NSAID",
+	"display_name" : "MU-NSAID",
+	"query_type"   : "RATIO",
+	"map"          : "queries/HDC-1944_MU-NSAID.js",
+	"reduce"       : "queries/ReduceRatio.js"
+}

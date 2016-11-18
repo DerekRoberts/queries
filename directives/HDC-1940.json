@@ -1,0 +1,10 @@
+{
+	"type"         : "QUERY",
+	"name"         : "HDC-1940_MU-Antidepressants65+",
+	"title"        : "HDC-1940",
+	"description"  : "MU-Antidepressants65+",
+	"display_name" : "MU-Antidepressants65+",
+	"query_type"   : "RATIO",
+	"map"          : "queries/HDC-1940_MU-Antidepressants65+.js",
+	"reduce"       : "queries/ReduceRatio.js"
+}

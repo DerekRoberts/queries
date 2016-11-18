@@ -1,0 +1,10 @@
+{
+	"type"         : "QUERY",
+	"name"         : "HDC-1942_MU-Antipsychotics65+",
+	"title"        : "HDC-1942",
+	"description"  : "MU-Antipsychotics65+",
+	"display_name" : "MU-Antipsychotics65+",
+	"query_type"   : "RATIO",
+	"map"          : "queries/HDC-1942_MU-Antipsychotics65+.js",
+	"reduce"       : "queries/ReduceRatio.js"
+}
