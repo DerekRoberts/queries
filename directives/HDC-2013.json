@@ -1,0 +1,10 @@
+{
+	"type"         : "QUERY",
+	"name"         : "HDC-2013_AntibioticBreakdownClarithromycin",
+	"title"        : "HDC-2013",
+	"description"  : "AntibioticBreakdownClarithromycin",
+	"display_name" : "AntibioticBreakdownClarithromycin",
+	"query_type"   : "RATIO",
+	"map"          : "queries/HDC-2013_AntibioticBreakdownClarithromycin.js",
+	"reduce"       : "queries/ReduceRatio.js"
+}

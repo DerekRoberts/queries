@@ -1,0 +1,10 @@
+{
+	"type"         : "QUERY",
+	"name"         : "HDC-2012_AntibioticBreakdownErythromycin",
+	"title"        : "HDC-2012",
+	"description"  : "AntibioticBreakdownErythromycin",
+	"display_name" : "AntibioticBreakdownErythromycin",
+	"query_type"   : "RATIO",
+	"map"          : "queries/HDC-2012_AntibioticBreakdownErythromycin.js",
+	"reduce"       : "queries/ReduceRatio.js"
+}

@@ -1,0 +1,10 @@
+{
+	"type"         : "QUERY",
+	"name"         : "HDC-2002_AntibioticBreakdownTetracycline",
+	"title"        : "HDC-2002",
+	"description"  : "AntibioticBreakdownTetracycline",
+	"display_name" : "AntibioticBreakdownTetracycline",
+	"query_type"   : "RATIO",
+	"map"          : "queries/HDC-2002_AntibioticBreakdownTetracycline.js",
+	"reduce"       : "queries/ReduceRatio.js"
+}

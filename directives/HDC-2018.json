@@ -1,0 +1,10 @@
+{
+	"type"         : "QUERY",
+	"name"         : "HDC-2018_AntibioticBreakdownMoxifloxacin",
+	"title"        : "HDC-2018",
+	"description"  : "AntibioticBreakdownMoxifloxacin",
+	"display_name" : "AntibioticBreakdownMoxifloxacin",
+	"query_type"   : "RATIO",
+	"map"          : "queries/HDC-2018_AntibioticBreakdownMoxifloxacin.js",
+	"reduce"       : "queries/ReduceRatio.js"
+}

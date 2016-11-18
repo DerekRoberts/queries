@@ -1,0 +1,10 @@
+{
+	"type"         : "QUERY",
+	"name"         : "HDC-2006_AntibioticBreakdownCloxacillin",
+	"title"        : "HDC-2006",
+	"description"  : "AntibioticBreakdownCloxacillin",
+	"display_name" : "AntibioticBreakdownCloxacillin",
+	"query_type"   : "RATIO",
+	"map"          : "queries/HDC-2006_AntibioticBreakdownCloxacillin.js",
+	"reduce"       : "queries/ReduceRatio.js"
+}

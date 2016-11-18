@@ -1,0 +1,10 @@
+{
+	"type"         : "QUERY",
+	"name"         : "HDC-2017_AntibioticBreakdownLevofloxacin",
+	"title"        : "HDC-2017",
+	"description"  : "AntibioticBreakdownLevofloxacin",
+	"display_name" : "AntibioticBreakdownLevofloxacin",
+	"query_type"   : "RATIO",
+	"map"          : "queries/HDC-2017_AntibioticBreakdownLevofloxacin.js",
+	"reduce"       : "queries/ReduceRatio.js"
+}

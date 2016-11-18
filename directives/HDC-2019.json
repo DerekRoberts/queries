@@ -1,0 +1,10 @@
+{
+	"type"         : "QUERY",
+	"name"         : "HDC-2019_AntibioticBreakdownNitrofurantoin",
+	"title"        : "HDC-2019",
+	"description"  : "AntibioticBreakdownNitrofurantoin",
+	"display_name" : "AntibioticBreakdownNitrofurantoin",
+	"query_type"   : "RATIO",
+	"map"          : "queries/HDC-2019_AntibioticBreakdownNitrofurantoin.js",
+	"reduce"       : "queries/ReduceRatio.js"
+}

@@ -1,0 +1,10 @@
+{
+	"type"         : "QUERY",
+	"name"         : "HDC-2010_AntibioticBreakdownCefixime",
+	"title"        : "HDC-2010",
+	"description"  : "AntibioticBreakdownCefixime",
+	"display_name" : "AntibioticBreakdownCefixime",
+	"query_type"   : "RATIO",
+	"map"          : "queries/HDC-2010_AntibioticBreakdownCefixime.js",
+	"reduce"       : "queries/ReduceRatio.js"
+}

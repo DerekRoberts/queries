@@ -1,0 +1,10 @@
+{
+	"type"         : "QUERY",
+	"name"         : "HDC-2001_AntibioticBreakdownDoxycycline",
+	"title"        : "HDC-2001",
+	"description"  : "AntibioticBreakdownDoxycycline",
+	"display_name" : "AntibioticBreakdownDoxycycline",
+	"query_type"   : "RATIO",
+	"map"          : "queries/HDC-2001_AntibioticBreakdownDoxycycline.js",
+	"reduce"       : "queries/ReduceRatio.js"
+}

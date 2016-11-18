@@ -1,0 +1,10 @@
+{
+	"type"         : "QUERY",
+	"name"         : "HDC-2007_AntibioticBreakdownCefalexin",
+	"title"        : "HDC-2007",
+	"description"  : "AntibioticBreakdownCefalexin",
+	"display_name" : "AntibioticBreakdownCefalexin",
+	"query_type"   : "RATIO",
+	"map"          : "queries/HDC-2007_AntibioticBreakdownCefalexin.js",
+	"reduce"       : "queries/ReduceRatio.js"
+}

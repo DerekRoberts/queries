@@ -1,0 +1,10 @@
+{
+	"type"         : "QUERY",
+	"name"         : "HDC-2015_AntibioticBreakdownClindamycin",
+	"title"        : "HDC-2015",
+	"description"  : "AntibioticBreakdownClindamycin",
+	"display_name" : "AntibioticBreakdownClindamycin",
+	"query_type"   : "RATIO",
+	"map"          : "queries/HDC-2015_AntibioticBreakdownClindamycin.js",
+	"reduce"       : "queries/ReduceRatio.js"
+}

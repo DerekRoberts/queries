@@ -1,0 +1,10 @@
+{
+	"type"         : "QUERY",
+	"name"         : "HDC-2009_AntibioticBreakdownCefaclor",
+	"title"        : "HDC-2009",
+	"description"  : "AntibioticBreakdownCefaclor",
+	"display_name" : "AntibioticBreakdownCefaclor",
+	"query_type"   : "RATIO",
+	"map"          : "queries/HDC-2009_AntibioticBreakdownCefaclor.js",
+	"reduce"       : "queries/ReduceRatio.js"
+}

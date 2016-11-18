@@ -1,0 +1,10 @@
+{
+	"type"         : "QUERY",
+	"name"         : "HDC-2003_AntibioticBreakdownMinocycline",
+	"title"        : "HDC-2003",
+	"description"  : "AntibioticBreakdownMinocycline",
+	"display_name" : "AntibioticBreakdownMinocycline",
+	"query_type"   : "RATIO",
+	"map"          : "queries/HDC-2003_AntibioticBreakdownMinocycline.js",
+	"reduce"       : "queries/ReduceRatio.js"
+}

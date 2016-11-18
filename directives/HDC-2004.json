@@ -1,0 +1,10 @@
+{
+	"type"         : "QUERY",
+	"name"         : "HDC-2004_AntibioticBreakdownAmpicillin",
+	"title"        : "HDC-2004",
+	"description"  : "AntibioticBreakdownAmpicillin",
+	"display_name" : "AntibioticBreakdownAmpicillin",
+	"query_type"   : "RATIO",
+	"map"          : "queries/HDC-2004_AntibioticBreakdownAmpicillin.js",
+	"reduce"       : "queries/ReduceRatio.js"
+}

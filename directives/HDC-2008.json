@@ -1,0 +1,10 @@
+{
+	"type"         : "QUERY",
+	"name"         : "HDC-2008_AntibioticBreakdownCefuroxime",
+	"title"        : "HDC-2008",
+	"description"  : "AntibioticBreakdownCefuroxime",
+	"display_name" : "AntibioticBreakdownCefuroxime",
+	"query_type"   : "RATIO",
+	"map"          : "queries/HDC-2008_AntibioticBreakdownCefuroxime.js",
+	"reduce"       : "queries/ReduceRatio.js"
+}
