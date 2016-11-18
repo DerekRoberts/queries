@@ -28,24 +28,119 @@ dictionary.meds = dictionary.meds || {
 	},
 	antibiotic  : {
 		ATC : [
-			{ codeEquals: "J01CF02", description: "cloxacillin" },
-			{ codeEquals: "J01CA01", description: "ampicillin" },
-			{ codeEquals: "J01CA04", description: "amoxicillin" },
-			{ codeEquals: "J01EE01", description: "sulfamethoxazole and trimethoprim" },
-			{ codeEquals: "J01FA09", description: "clarithromycin" },
-			{ codeEquals: "J01FA10", description: "azithromycin" },
-			{ codeEquals: "J01FA01", description: "erythromycin" },
-			{ codeEquals: "J01FF01", description: "clindamycin" },
 			{ codeEquals: "J01AA02", description: "doxycycline" },
 			{ codeEquals: "J01AA07", description: "tetracycline" },
 			{ codeEquals: "J01AA08", description: "minocycline" },
-			{ codeEquals: "J01MA12", description: "levofloxacin" },
-			{ codeEquals: "J01MA14", description: "moxifloxacin" },
-			{ codeEquals: "J01MA02", description: "ciprofloxacin" },
+			{ codeEquals: "J01CA01", description: "ampicillin" },
+			{ codeEquals: "J01CA04", description: "amoxicillin" },
+			{ codeEquals: "J01CF02", description: "cloxacillin" },
 			{ codeEquals: "J01DB01", description: "cefalexin" },
 			{ codeEquals: "J01DC02", description: "cefuroxime" },
 			{ codeEquals: "J01DC04", description: "cefaclor" },
 			{ codeEquals: "J01DD08", description: "cefixime" },
+			{ codeEquals: "J01EE01", description: "sulfamethoxazole and trimethoprim" },
+			{ codeEquals: "J01FA01", description: "erythromycin" },
+			{ codeEquals: "J01FA09", description: "clarithromycin" },
+			{ codeEquals: "J01FA10", description: "azithromycin" },
+			{ codeEquals: "J01FF01", description: "clindamycin" },
+			{ codeEquals: "J01MA02", description: "ciprofloxacin" },
+			{ codeEquals: "J01MA12", description: "levofloxacin" },
+			{ codeEquals: "J01MA14", description: "moxifloxacin" },
+			{ codeEquals: "J01XE01", description: "nitrofurantoin" }
+		]
+	},
+	antibioticDoxycycline : {
+		ATC : [
+			{ codeEquals: "J01AA02", description: "doxycycline" }
+		]
+	},
+	antibioticTetracycline : {
+		ATC : [
+			{ codeEquals: "J01AA07", description: "tetracycline" }
+		]
+	},
+	antibioticMinocycline : {
+		ATC : [
+			{ codeEquals: "J01AA08", description: "minocycline" }
+		]
+	},
+	antibioticAmpicillin : {
+		ATC : [
+			{ codeEquals: "J01CA01", description: "ampicillin" }
+		]
+	},
+	antibioticAmoxicillin : {
+		ATC : [
+			{ codeEquals: "J01CA04", description: "amoxicillin" }
+		]
+	},
+	antibioticCloxacillin : {
+		ATC : [
+			{ codeEquals: "J01CF02", description: "cloxacillin" }
+		]
+	},
+	antibioticCefalexin : {
+		ATC : [
+			{ codeEquals: "J01DB01", description: "cefalexin" }
+		]
+	},
+	antibioticCefuroxime : {
+		ATC : [
+			{ codeEquals: "J01DC02", description: "cefuroxime" }
+		]
+	},
+	antibioticCefaclor : {
+		ATC : [
+			{ codeEquals: "J01DC04", description: "cefaclor" }
+		]
+	},
+	antibioticCefixime : {
+		ATC : [
+			{ codeEquals: "J01DD08", description: "cefixime" }
+		]
+	},
+	antibioticSulfonamideTrimethoprim : {
+		ATC : [
+			{ codeEquals: "J01EE01", description: "sulfamethoxazole and trimethoprim" }
+		]
+	},
+	antibioticErythromycin : {
+		ATC : [
+			{ codeEquals: "J01FA01", description: "erythromycin" }
+		]
+	},
+	antibioticClarithromycin : {
+		ATC : [
+			{ codeEquals: "J01FA09", description: "clarithromycin" }
+		]
+	},
+	antibioticAzithromycin : {
+		ATC : [
+			{ codeEquals: "J01FA10", description: "azithromycin" }
+		]
+	},
+	antibioticClindamycin : {
+		ATC : [
+			{ codeEquals: "J01FF01", description: "clindamycin" }
+		]
+	},
+	antibioticCiprofloxacin : {
+		ATC : [
+			{ codeEquals: "J01MA02", description: "ciprofloxacin" }
+		]
+	},
+	antibioticLevofloxacin : {
+		ATC : [
+			{ codeEquals: "J01MA12", description: "levofloxacin" }
+		]
+	},
+	antibioticMoxifloxacin : {
+		ATC : [
+			{ codeEquals: "J01MA14", description: "moxifloxacin" }
+		]
+	},
+	antibioticNitrofurantoin : {
+		ATC : [
 			{ codeEquals: "J01XE01", description: "nitrofurantoin" }
 		]
 	},
