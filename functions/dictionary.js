@@ -59,6 +59,11 @@ dictionary.meds = dictionary.meds || {
 			{ codeBeginsWith: "M04A", description: "Antigout preparations" }
 		]
 	},
+	antiinflammatory  : {
+		ATC : [
+			{ codeBeginsWith: "M01A", description: "ANTIINFLAMMATORY AND ANTIRHEUMATIC PRODUCTS, NON-STEROIDS" }
+		]
+	},
 	antipsychotic  : {
 		ATC : [
 			{ codeBeginsWith: "N05A", description: "Antipsychotics" }
