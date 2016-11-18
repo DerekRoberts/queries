@@ -1,8 +1,8 @@
 /**
- * Query Title: HDC-1945
+ * Query Title: HDC-1946
  * Query Type:  Ratio
  * Initiative:  Med Use
- * Description: Percentage of active patients, 65+, receiving bendodiazepine
+ * Description: Percentage of active patients receiving bendodiazepine
  */
 function map( patient ){
 
@@ -11,11 +11,10 @@ function map( patient ){
 
     // Variables
     codeSet : dictionary.meds.benzodiazepine,
-	minAge  : 65,
 
     // Active patient? Thing?
     denominator: function( patient, date ){
-      return profile.active( patient, date ) && profile.ages.isMin( patient, date, this.minAge );
+      return profile.active( patient, date );
     },
     // Other things?
     numerator: function( patient, date, denominator, errorContainer ) {
