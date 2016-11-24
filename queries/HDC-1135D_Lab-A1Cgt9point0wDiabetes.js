@@ -26,14 +26,13 @@ function map(patient) {
 	/**
 	 * Numerator
 	 *
-	 * Additional criteria: - HGBA1C recorded ---> in last 6 months with value >= 9.0%
+	 * Additional criteria: - HGBA1C recorded ---> last value at any time had value >= 9.0%
 	 */
 	numerator : function(patient, date, denominator, errorContainer) {
-	    var minDate = utils.monthsBefore(date, 6);
 	    var maxDate = date;
 
-	    var hemoglobinA1C = labs.hasLabInDateRangeWithValue(patient, minDate,
-		    maxDate, this.hemoglobinA1C, this.minValue, null, false, "%", false,  errorContainer);
+	    var hemoglobinA1C = labs.hasLabInDateRangeWithValue(patient, null,
+		    maxDate, this.hemoglobinA1C, this.minValue, null, false, "%", true,  errorContainer);
 
 	    return (denominator && hemoglobinA1C);
 	},
