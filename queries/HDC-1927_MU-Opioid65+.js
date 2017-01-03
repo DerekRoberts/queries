@@ -1,5 +1,5 @@
 /**
- * Query Title: HDC-1951
+ * Query Title: HDC-1927
  * Query Type:  Ratio
  * Initiative:  Med Use
  * Description: Percentage of active patients, 65+, receiving an opioid
