@@ -1,0 +1,10 @@
+{
+	"type"         : "QUERY",
+	"name"         : "HDC-1952_MU-Hydromorphine",
+	"title"        : "HDC-1952",
+	"description"  : "MU-Hydromorphine",
+	"display_name" : "MU-Hydromorphine",
+	"query_type"   : "RATIO",
+	"map"          : "queries/HDC-1952_MU-Hydromorphine.js",
+	"reduce"       : "queries/ReduceRatio.js"
+}

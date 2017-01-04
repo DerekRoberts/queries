@@ -1,0 +1,10 @@
+{
+	"type"         : "QUERY",
+	"name"         : "HDC-1955_MU-OxycodoneCombinations",
+	"title"        : "HDC-1955",
+	"description"  : "MU-OxycodoneCombinations",
+	"display_name" : "MU-OxycodoneCombinations",
+	"query_type"   : "RATIO",
+	"map"          : "queries/HDC-1955_MU-OxycodoneCombinations.js",
+	"reduce"       : "queries/ReduceRatio.js"
+}

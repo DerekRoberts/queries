@@ -1,0 +1,10 @@
+{
+	"type"         : "QUERY",
+	"name"         : "HDC-1951_MU-Morphine",
+	"title"        : "HDC-1951",
+	"description"  : "MU-Morphine",
+	"display_name" : "MU-Morphine",
+	"query_type"   : "RATIO",
+	"map"          : "queries/HDC-1951_MU-Morphine.js",
+	"reduce"       : "queries/ReduceRatio.js"
+}

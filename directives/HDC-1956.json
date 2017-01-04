@@ -1,0 +1,10 @@
+{
+	"type"         : "QUERY",
+	"name"         : "HDC-1956_MU-DihydrocodeineCombinations",
+	"title"        : "HDC-1956",
+	"description"  : "MU-DihydrocodeineCombinations",
+	"display_name" : "MU-DihydrocodeineCombinations",
+	"query_type"   : "RATIO",
+	"map"          : "queries/HDC-1956_MU-DihydrocodeineCombinations.js",
+	"reduce"       : "queries/ReduceRatio.js"
+}

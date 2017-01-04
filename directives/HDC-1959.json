@@ -1,0 +1,10 @@
+{
+	"type"         : "QUERY",
+	"name"         : "HDC-1959_MU-Fentanyl",
+	"title"        : "HDC-1959",
+	"description"  : "MU-Fentanyl",
+	"display_name" : "MU-Fentanyl",
+	"query_type"   : "RATIO",
+	"map"          : "queries/HDC-1959_MU-Fentanyl.js",
+	"reduce"       : "queries/ReduceRatio.js"
+}

@@ -1,0 +1,10 @@
+{
+	"type"         : "QUERY",
+	"name"         : "HDC-1957_MU-CodeineCombinationsExcludingPsycholeptics",
+	"title"        : "HDC-1957",
+	"description"  : "MU-CodeineCombinationsExcludingPsycholeptics",
+	"display_name" : "MU-CodeineCombinationsExcludingPsycholeptics",
+	"query_type"   : "RATIO",
+	"map"          : "queries/HDC-1957_MU-CodeineCombinationsExcludingPsycholeptics.js",
+	"reduce"       : "queries/ReduceRatio.js"
+}

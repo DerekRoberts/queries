@@ -1,0 +1,10 @@
+{
+	"type"         : "QUERY",
+	"name"         : "HDC-1953_MU-Dihydrocodeine",
+	"title"        : "HDC-1953",
+	"description"  : "MU-Dihydrocodeine",
+	"display_name" : "MU-Dihydrocodeine",
+	"query_type"   : "RATIO",
+	"map"          : "queries/HDC-1953_MU-Dihydrocodeine.js",
+	"reduce"       : "queries/ReduceRatio.js"
+}

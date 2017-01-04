@@ -1,0 +1,10 @@
+{
+	"type"         : "QUERY",
+	"name"         : "HDC-1960_MU-MethadoneCombinationsExcludingPsycholeptics",
+	"title"        : "HDC-1960",
+	"description"  : "MU-MethadoneCombinationsExcludingPsycholeptics",
+	"display_name" : "MU-MethadoneCombinationsExcludingPsycholeptics",
+	"query_type"   : "RATIO",
+	"map"          : "queries/HDC-1960_MU-MethadoneCombinationsExcludingPsycholeptics.js",
+	"reduce"       : "queries/ReduceRatio.js"
+}

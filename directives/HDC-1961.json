@@ -1,0 +1,10 @@
+{
+	"type"         : "QUERY",
+	"name"         : "HDC-1961_MU-Tramadol",
+	"title"        : "HDC-1961",
+	"description"  : "MU-Tramadol",
+	"display_name" : "MU-Tramadol",
+	"query_type"   : "RATIO",
+	"map"          : "queries/HDC-1961_MU-Tramadol.js",
+	"reduce"       : "queries/ReduceRatio.js"
+}
