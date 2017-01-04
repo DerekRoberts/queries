@@ -185,6 +185,31 @@ dictionary.meds = dictionary.meds || {
 			{ codeBeginsWith: "A10BA", description: "Biguanides"}
 		]
 	},
+	biguanide : {
+		ATC : [
+			{ codeBeginsWith: "A10BA", description: "Biguanides"}
+		]
+	},
+	codeineCombinationsExcludingPsycholeptics : {
+		ATC : [
+			{ codeEquals: "N02AA79", description: "Codeine, combinations excl. psycholeptics" }
+		]
+	},
+	codeineCombinationsWithPsycholeptics : {
+		ATC : [
+			{ codeEquals: "N02AA59", description: "Codeine, combinations with psycholeptics " }
+		]
+	},
+	dihydrocodeine : {
+		ATC : [
+			{ codeEquals: "N02AA08", description: "Dihydrocodeine" }
+		]
+	},
+	dihydrocodeineCombinations : {
+		ATC : [
+			{ codeEquals: "N02AA58", description: "Dihydrocodeine, combinations" }
+		]
+	},
 	dihydropyridineCalciumChannelBlocker : {
 		ATC : [
 			{ codeBeginsWith: "C08CA", description: "Dihydropyridine derivatives" },
@@ -196,9 +221,14 @@ dictionary.meds = dictionary.meds || {
 			{ codeBeginsWith: "C01AA", description: "Digitalis glycosides" }
 		]
 	},
-	opioid : {
+	fentanyl : {
 		ATC : [
-			{ codeBeginsWith: "N02A", description: "Opium alkaloids" }
+			{ codeEquals: "N02AB03", description: "Fentanyl" }
+		]
+	},
+	hydromorphine : {
+		ATC : [
+			{ codeEquals: "N02AA03", description: "Hydromorphine" }
 		]
 	},
 	levothyroxine : {
@@ -211,11 +241,54 @@ dictionary.meds = dictionary.meds || {
 				{ codeEquals: "A10BA02", description: "Metformin" }
 			]
 		},
+	methadoneCombinationsExcludingPsycholeptics : {
+		ATC : [
+				{ codeEquals: "N02AC52", description: "Methadone combinations excl.psycholeptics" }
+			]
+		},
+
+	morphine : {
+		ATC : [
+				{ codeEquals: "N02AA01", description: "Morphine" }
+			]
+		},		
+	morphineCombinations : {
+		ATC : [
+				{ codeEquals: "N02AA51", description: "Morphine, combinations" }
+			]
+		},		
+	opioid : {
+		ATC : [
+			{ codeBeginsWith: "N02A", description: "Opium alkaloids" }
+		]
+	},
 	opioidNatural : {
 		ATC : [
 			{ codeBeginsWith: "N02AA", description: "Natural opium alkaloids" }
 		]
 	},
+	otherOpioids : {
+		ATC : [
+			{ codeBeginsWith: "N02A", description: "Opium alkaloids" },
+			{ excludeCodeEquals: "N02AA01", description: "Morphine" },
+			{ excludeCodeEquals: "N02AA03", description: "Hydromorphine" },
+			{ excludeCodeEquals: "N02AA08", description: "Dihydrocodeine" },
+			{ excludeCodeEquals: "N02AA51", description: "Morphine, combinations" },
+			{ excludeCodeEquals: "N02AA55", description: "Oxycodone, combinations" },
+			{ excludeCodeEquals: "N02AA58", description: "Dihydrocodeine, combinations" },
+			{ excludeCodeEquals: "N02AA79", description: "Codeine, combinations excl. psycholeptics" },
+			{ excludeCodeEquals: "N02AA59", description: "Codeine, combinations with psycholeptics " },
+			{ excludeCodeEquals: "N02AB03", description: "Fentanyl" },
+			{ excludeCodeEquals: "N02AC52", description: "Methadone combinations excl.psycholeptics" },
+			{ excludeCodeEquals: "N02AX02", description: "Tramadol" },
+			{ excludeCodeEquals: "N02AX52", description: "Tramadol, combinations" }
+		]
+	},
+	oxycodoneCombinations : {
+		ATC : [
+				{ codeEquals: "N02AA55", description: "Oxycodone, combinations" }
+			]
+		},		
 	PPI : {
 		ATC : [
 			{ codeBeginsWith: "A02BC", description: "Proton pump inhibitors" }
@@ -241,6 +314,16 @@ dictionary.meds = dictionary.meds || {
 	tiotropium : {
 		ATC : [
 			{ codeBeginsWith: "R03BB04", description: "Tiotropium bromide" }
+		]
+	},
+	tramadol : {
+		ATC : [
+			{ codeEquals: "N02AX02", description: "Tramadol" }
+		]
+	},
+	tramadolCombinations : {
+		ATC : [
+			{ codeEquals: "N02AX52", description: "Tramadol, combinations" }
 		]
 	},
 	warfarin : {
