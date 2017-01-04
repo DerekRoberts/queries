@@ -337,48 +337,84 @@ utils.isUndefinedOrNullAndLog = function(baseMessage, logFunction,
  *         passed.
  */
 utils.matchCodeSet = function(codes, codeSet, errorContainer) {
-    if (utils.isUndefinedOrNull(codes, codeSet) || (codes.length == 0)
-	    || (codeSet.length == 0)) {
-	// codes or codeset is undefined or empty, no match possible
-	return utils.error(
-		"Undefined or empty codeset passed into utils.matchCodeSet",
-		errorContainer);
-    }
-
-    // Check each code against all entries in codeset
-    var code;
-    for (var codeIndex = 0; codeIndex < codes.length; codeIndex++) {
-	code = codes[codeIndex];
-
-	for (var codeSetIndex = 0; codeSetIndex < codeSet.length; codeSetIndex++) {
-	    if (!utils.isUndefinedOrNull(codeSet[codeSetIndex].codeEquals)
-		    && (codeSet[codeSetIndex].codeEquals.length > 0)) {
-		// CodeSet entry has a equality definition
-		if (code === codeSet[codeSetIndex].codeEquals) {
-		    // we have a match
-		    return true;
-		}
-	    }
-
-	    if (!utils.isUndefinedOrNull(codeSet[codeSetIndex].codeBeginsWith)
-		    && (codeSet[codeSetIndex].codeBeginsWith.length > 0)) {
-		// CodeSet entry has a begins with definition
-		if (code.startsWith(codeSet[codeSetIndex].codeBeginsWith)) {
-		    // we have a match
-		    return true;
-		}
-	    }
+	if (utils.isUndefinedOrNull(codes, codeSet) || (codes.length == 0)
+	        || (codeSet.length == 0)) {
+		// codes or codeset is undefined or empty, no match possible
+		return utils.error(
+		        "Undefined or empty codeset passed into utils.matchCodeSet",
+		        errorContainer);
 	}
-    }
 
-    // No match was found
-    return false;
+	// Set up exclusion testing function
+	var isExcluded = function(code, codeSet, errorContainer) {
+		for (var codeSetIndex = 0; codeSetIndex < codeSet.length; codeSetIndex++) {
+			if (!utils
+			        .isUndefinedOrNull(codeSet[codeSetIndex].excludeCodeEquals)
+			        && (codeSet[codeSetIndex].excludeCodeEquals.length > 0)) {
+				// CodeSet entry has an exclusion equality definition
+				if (code === codeSet[codeSetIndex].excludeCodeEquals) {
+					// we have a match. Code is excluded
+					return true;
+				}
+			}
 
+			if (!utils.isUndefinedOrNull(codeSet[codeSetIndex].excludeCodeBeginsWith)
+			        && (codeSet[codeSetIndex].excludeCodeBeginsWith.length > 0)) {
+				// CodeSet entry has an exclusion begins with definition
+				if (code.startsWith(codeSet[codeSetIndex].excludeCodeBeginsWith)) {
+					// we have a match. Code is excluded
+					return true;
+				}
+			}
+		}
+
+		// No match was found. Code is not explicitly excluded
+		return false;
+	};
+
+	// Check each code against all entries in codeset
+	var code;
+	for (var codeIndex = 0; codeIndex < codes.length; codeIndex++) {
+		code = codes[codeIndex];
+
+		for (var codeSetIndex = 0; codeSetIndex < codeSet.length; codeSetIndex++) {
+			if (!utils.isUndefinedOrNull(codeSet[codeSetIndex].codeEquals)
+			        && (codeSet[codeSetIndex].codeEquals.length > 0)) {
+				// CodeSet entry has a equality definition
+				if (code === codeSet[codeSetIndex].codeEquals) {
+					// we have an initial match
+					// Test if it is explicitly excluded
+					if(!isExcluded(code, codeSet, errorContainer)) {
+						// Code is not explicitly excluded. We have a full match
+						return true;
+					}
+				}
+			}
+
+			if (!utils.isUndefinedOrNull(codeSet[codeSetIndex].codeBeginsWith)
+			        && (codeSet[codeSetIndex].codeBeginsWith.length > 0)) {
+				// CodeSet entry has a begins with definition
+				if (code.startsWith(codeSet[codeSetIndex].codeBeginsWith)) {
+					// we have an initial match
+					// Test if it is explicitly excluded
+					if(!isExcluded(code, codeSet, errorContainer)) {
+						// Code is not explicitly excluded. We have a full match
+						return true;
+					}
+				}
+			}
+		}
+	}
+	// No match was found
+	return false;
 };
+
+
+
 
 /**
  * Returns A date that is the number of years before the date passed.
- *
+ * 
  * Any time component in the original date is ignored.
  */
 utils.yearsBefore = function(date, years) {
