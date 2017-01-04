@@ -43,7 +43,7 @@ do
 			echo '    "title"       : "'${NAME}'",'
 			echo '    "type"        : "ratio",'
 			echo '    "description" : "'${DESC}'",'
-			echo '    "xml_path"    : "ReportingCategories.PDC_'${NAME}'"'
+			echo '    "XMLPath"    : "ReportingCategories.PDC_'${NAME}'"'
 			echo '  },'
 		) >> ${QUERY_JSON}
 	else
@@ -76,7 +76,7 @@ do
 			echo '      "60" : "SixtyToSixtyNine",'
 			echo '      "70" : "SeventyToSeventyNine",'
 			echo '      "80" : "EightyToEightyNine",'
-			echo '      "90" : "NinetyToNinetyNineAndOlder",'
+			echo '      "90" : "NinetyToOneHundredAndOlder",'
 			echo '      "UN" : "UnspecifiedAge"'
 			echo '    }'
 			echo '  },'
