@@ -43,7 +43,7 @@ do
 			echo '    "title"       : "'${NAME}'",'
 			echo '    "type"        : "ratio",'
 			echo '    "description" : "'${DESC}'",'
-			echo '    "XMLPath"    : "ReportingCategories.PDC_'${NAME}'"'
+			echo '    "XMLPath"    : "ReportingCategories.'${NAME}'"'
 			echo '  },'
 		) >> ${QUERY_JSON}
 	else
