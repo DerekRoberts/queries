@@ -1,10 +1,10 @@
 {
 	"type"         : "QUERY",
-	"name"         : "HDC-1927_MU-NaturalOpiumAlkaloid65+",
+	"name"         : "HDC-1927_MU-Opioid65+",
 	"title"        : "HDC-1927",
-	"description"  : "MU-NaturalOpiumAlkaloid65+",
-	"display_name" : "MU-NaturalOpiumAlkaloid65+",
+	"description"  : "MU-Opioid65+",
+	"display_name" : "MU-Opioid65+",
 	"query_type"   : "RATIO",
-	"map"          : "queries/HDC-1927_MU-NaturalOpiumAlkaloid65+.js",
+	"map"          : "queries/HDC-1927_MU-Opioid65+.js",
 	"reduce"       : "queries/ReduceRatio.js"
 }

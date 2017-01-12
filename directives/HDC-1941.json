@@ -4,7 +4,7 @@
 	"title"        : "HDC-1941",
 	"description"  : "medicationFrequencyDataQuality",
 	"display_name" : "medicationFrequencyDataQuality",
-	"query_type"   : "STRATIFIED",
+	"query_type"   : "RATIO",
 	"map"          : "queries/HDC-1941_medicationFrequencyDataQuality.js",
-	"reduce"       : "queries/ReduceCount.js"
+	"reduce"       : "queries/ReduceRatio.js"
 }
