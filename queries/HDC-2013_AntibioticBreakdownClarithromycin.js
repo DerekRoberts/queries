@@ -1,37 +1,40 @@
 /**
- * Query Title: HDC-2013
+ * Query Title: HDC-2013 Clarithromycin Use in Past Year - All Ages
  * Query Type:  Ratio
- * Initiative:  Antibiotic Breakdown
- * Description: Clarithromycin over all antibiotics, back one year
+ * Domain: Medication Prescribing
+ * Sub Domain: Medication Use - Antibiotics
+ * Description: This measure shows the percentage of active patients with an active medication for Clarithromycin in the last year.
  */
 function map( patient ){
 
   // Query logic
   var query = {
 
-    // Variables
-    medDenom : dictionary.meds.antibiotic,
-    medNum   : dictionary.meds.antibioticClarithromycin,
-    backYrs  : 1,
+    /**
+	 * Definition of Clarithromycin medication from dictionary
+	 */
+	clarithromycin   : dictionary.meds.antibioticClarithromycin,
 
-    // Active patient? Thing?
-    denominator: function( patient, date, errorContainer ){
-      var minDate = utils.yearsBefore( date, this.backYrs );
-      var maxDate = date;
-
-      return medications.hasActiveMedInDateRange( patient, minDate, maxDate,
-        this.medDenom, errorContainer );
+    /**
+	 * Denominator:
+	 * Count of total number of active patients documented in the EMR.
+	 */
+    denominator : function(patient, date, errorContainer) {
+	    return profile.active(patient, date);
     },
 
-    // Other things?
+    /**
+	 * Numerator:
+	 * Count of the number of active patients that have had a medication for Clarithromycin in the last year.
+	 */
     numerator: function( patient, date, denominator, errorContainer ) {
-      var minDate = utils.yearsBefore( date, this.backYrs );
+      var minDate = utils.yearsBefore( date, 1 );
       var maxDate = date;
 
-      var oneAntibiotic = medications.hasActiveMedInDateRange( patient, minDate,
-        maxDate, this.medNum, errorContainer );
+      var onAntibiotic = medications.hasActiveMedInDateRange( patient, minDate,
+        maxDate, this.clarithromycin, errorContainer );
 
-      return oneAntibiotic && denominator;
+      return onAntibiotic && denominator;
     }
   };
 
