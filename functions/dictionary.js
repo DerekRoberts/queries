@@ -49,6 +49,32 @@ dictionary.meds = dictionary.meds || {
 			{ codeEquals: "J01XE01", description: "nitrofurantoin" }
 		]
 	},
+	antibioticOther  : {
+		ATC : [
+		    { codeBeginsWith: "J01", description: "Antibiotics" },
+			{ excludeCodeEquals: "J01FA09", description: "clarithromycin" },
+			{ excludeCodeEquals: "J01FA10", description: "azithromycin" },
+			{ excludeCodeEquals: "J01FA01", description: "erythromycin" },
+			{ excludeCodeEquals: "J01FF01", description: "clindamycin" },
+			{ excludeCodeEquals: "J01CF02", description: "cloxacillin" },
+			{ excludeCodeEquals: "J01CA01", description: "ampicillin" },
+			{ excludeCodeEquals: "J01CA04", description: "amoxicillin" },
+			{ excludeCodeEquals: "J01MA12", description: "levofloxacin" },
+			{ excludeCodeEquals: "J01MA14", description: "moxifloxacin" },
+			{ excludeCodeEquals: "J01MA02", description: "ciprofloxacin" },
+			{ excludeCodeEquals: "J01AA02", description: "doxycycline" },
+			{ excludeCodeEquals: "J01AA07", description: "tetracycline" },
+			{ excludeCodeEquals: "J01AA08", description: "minocycline" },
+			{ excludeCodeEquals: "J01EE01", description: "sulfamethoxazole and trimethoprim" },
+			{ excludeCodeEquals: "J01XE01", description: "nitrofurantoin" },
+			{ excludeCodeEquals: "J01DB01", description: "cefalexin" },
+			{ excludeCodeEquals: "J01DC02", description: "cefuroxime" },
+			{ excludeCodeEquals: "J01DC04", description: "cefaclor" },
+			{ excludeCodeEquals: "J01DD08", description: "cefixime" },
+			{ excludeCodeEquals: "J01CE02", description: "phenoxymethylpenicillin" },
+			{ excludeCodeEquals: "J01CE10", description: "benzathine phenoxymethylpenicillin" }
+		]
+	},
 	antibioticDoxycycline : {
 		ATC : [
 			{ codeEquals: "J01AA02", description: "doxycycline" }
