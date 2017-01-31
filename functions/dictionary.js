@@ -170,6 +170,12 @@ dictionary.meds = dictionary.meds || {
 			{ codeEquals: "J01XE01", description: "nitrofurantoin" }
 		]
 	},
+	antibioticPenicillinV : {
+		ATC : [
+			{ codeEquals: "J01CE02", description: "phenoxymethylpenicillin" },
+			{ codeEquals: "J01CE10", description: "benzathine phenoxymethylpenicillin" }
+		]
+	},
 	antidepressant  : {
 		ATC : [
 			{ codeBeginsWith: "N06A", description: "Antidepressants" }
