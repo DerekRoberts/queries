@@ -30,10 +30,19 @@ function map(patient) {
 	/**
 	 * Denominator
 	 * 
-	 * Not currently used. Always returns 0.
+	 * The unix timestamp of when the latest patient encounter was recorded
+	 * for a practitioner. Stored as the negative value in order to work
+	 * with the same reduce function as the numerator
 	 */
 	denominator : function(patient, date, errorContainer) {
-	    return 0;
+		var mostRecent = profile.mostRecentEncounter(patient,
+			    errorContainer);
+		    if (mostRecent === null) {
+		    	// none was found
+		    	return null;
+		    } else {
+		    	return (-1.0) * mostRecent;
+		    }
 	},
 
 	/**
@@ -46,14 +55,14 @@ function map(patient) {
 	    var mostRecent = profile.mostRecentEncounter(patient,
 		    errorContainer);
 	    if (mostRecent === null) {
-		// none was found
-		return null;
+	    	// none was found
+	    	return null;
 	    } else {
-		// calculate age in days
-		var currentTimestamp = Date.now() / 1000;
-		var ageDays = (currentTimestamp - mostRecent) / 60 / 60 / 24;
+	    	// calculate age in days
+	    	var currentTimestamp = Date.now() / 1000.0;
+	    	var ageDays = Math.ceil((currentTimestamp - mostRecent) / 60.0 / 60.0 / 24.0);
 
-		return ageDays;
+	    	return ageDays;
 	    }
 	}
 
