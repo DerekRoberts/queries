@@ -1642,8 +1642,7 @@ dictionary.conditions = dictionary.conditions ||{
 	},
 	obesity :{
 		ICD9     : [
-			// NOTE: Shouldn't this be 278.?
-			{ codeEquals: "^298.0", description: "DEPRESSIVE TYPE PSYCHOSIS" }
+			{ codeBeginsWith: "278.0", description: "Overweight and obesity" }
 		],
 		SNOMEDCT : [
 			{ codeEquals: "414916001", description: "Obesity" }
