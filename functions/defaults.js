@@ -22,10 +22,10 @@ var defaults = defaults ||{
   dates: {
     start : function(){
       // Remember months are zero indexed, but days aren't!
-      return new Date( 2016, 4, 1 );
+    	return new Date( 2014, 4, 1 );
     },
     end   : function(){
-      return new Date();
+    	return new Date();
     }
   },
   // Min and max bounds for medication queries without bounds
