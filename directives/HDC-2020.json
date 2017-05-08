@@ -1,0 +1,10 @@
+{
+	"type"         : "QUERY",
+	"name"         : "HDC-2020_AntibioticBreakdownPenicillinV",
+	"title"        : "HDC-2020",
+	"description"  : "AntibioticBreakdownPenicillinV",
+	"display_name" : "AntibioticBreakdownPenicillinV",
+	"query_type"   : "RATIO",
+	"map"          : "queries/HDC-2020_AntibioticBreakdownPenicillinV.js",
+	"reduce"       : "queries/ReduceRatio.js"
+}

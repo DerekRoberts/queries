@@ -1,0 +1,10 @@
+{
+	"type"         : "QUERY",
+	"name"         : "HDC-2021_AntibioticBreakdownOther",
+	"title"        : "HDC-2021",
+	"description"  : "AntibioticBreakdownOther",
+	"display_name" : "AntibioticBreakdownOther",
+	"query_type"   : "RATIO",
+	"map"          : "queries/HDC-2021_AntibioticBreakdownOther.js",
+	"reduce"       : "queries/ReduceRatio.js"
+}
